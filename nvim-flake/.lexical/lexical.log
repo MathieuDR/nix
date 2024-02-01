@@ -81,3 +81,64 @@ Type: :worker
 01:14:41.594 [info] Starting project at uri 
 01:14:41.609 [info] Lexical Initialized
 01:14:41.612 [info] opened file:///mnt/hostshare/nvim-flake/stuff.exs
+01:27:55.885 [error] GenServer LXical.Server terminating
+** (FunctionClauseError) no function clause matching in IO.chardata_to_string/1
+    (elixir 1.15.7) lib/io.ex:671: IO.chardata_to_string(nil)
+    (elixir 1.15.7) lib/path.ex:383: Path.basename/1
+    (lx_lexical_shared 0.0.1) lib/lexical/project.ex:61: LXical.Project.name/1
+    (lx_lexical_shared 0.0.1) lib/lexical/project.ex:81: LXical.Project.node_name/1
+    (lx_remote_control 0.3.0) lib/lexical/remote_control.ex:48: LXical.RemoteControl.call/4
+    (lx_server 0.3.0) lib/lexical/server/state.ex:165: LXical.Server.State.apply/2
+    (lx_server 0.3.0) lib/lexical/server.ex:153: LXical.Server.apply_to_state/2
+    (lx_server 0.3.0) lib/lexical/server.ex:125: LXical.Server.handle_message/2
+Last message: {:"$gen_cast", {:protocol_message, %LXical.Protocol.Notifications.DidChange{lsp: %LXical.Protocol.Notifications.DidChange.LSP{jsonrpc: "2.0", method: "textDocument/didChange", content_changes: [#Protocol.Types.TextDocument.ContentChangeEvent.TextDocumentContentChangeEvent<[range: #Protocol.Types.Range<[end: #Protocol.Types.Position<[character: 0, line: 0]>, start: #Protocol.Types.Position<[character: 0, line: 0]>]>, range_length: 0, text: "t"]>], text_document: #Protocol.Types.TextDocument.Versioned.Identifier<[uri: "file:///mnt/hostshare/nvim-flake/stuff.exs", version: 5]>}, document: nil, jsonrpc: "2.0", method: "textDocument/didChange", content_changes: nil, text_document: nil}}}
+State: %LXical.Server.State{configuration: %LXical.Server.Configuration{project: %LXical.Project{root_uri: nil, mix_exs_uri: nil, mix_project?: false, mix_env: nil, mix_target: nil, env_variables: %{}, project_module: nil, entropy: 63488, project_config: []}, support: %LXical.Server.Configuration.Support{code_action_dynamic_registration: false, hierarchical_symbols: true, snippet: true, deprecated: true, tags: #Protocol.Types.Completion.ClientCapabilities.TagSupport<[value_set: [:deprecated]]>, signature_help: #Protocol.Types.SignatureHelp.ClientCapabilities<[dynamic_registration: false, signature_information: #Protocol.Types.SignatureHelp.ClientCapabilities.SignatureInformation<[active_parameter_support: true, documentation_format: [:markdown, :plain_text], parameter_information: #Protocol.Types.SignatureHelp.ClientCapabilities.ParameterInformation<[label_offset_support: true]>]>]>, work_done_progress: true}, client_name: "Neovim", additional_watched_extensions: nil, dialyzer_enabled?: false}, initialized?: true, shutdown_received?: false, in_flight_requests: %{}}
+01:27:55.939 [error] Process LXical.Server (#PID<0.141.0>) terminating
+** (FunctionClauseError) no function clause matching in IO.chardata_to_string/1
+    (elixir 1.15.7) lib/io.ex:671: IO.chardata_to_string(nil)
+    (elixir 1.15.7) lib/path.ex:383: Path.basename/1
+    (lx_lexical_shared 0.0.1) lib/lexical/project.ex:61: LXical.Project.name/1
+    (lx_lexical_shared 0.0.1) lib/lexical/project.ex:81: LXical.Project.node_name/1
+    (lx_remote_control 0.3.0) lib/lexical/remote_control.ex:48: LXical.RemoteControl.call/4
+    (lx_server 0.3.0) lib/lexical/server/state.ex:165: LXical.Server.State.apply/2
+    (lx_server 0.3.0) lib/lexical/server.ex:153: LXical.Server.apply_to_state/2
+    (lx_server 0.3.0) lib/lexical/server.ex:125: LXical.Server.handle_message/2
+Initial Call: LXical.Server.init/1
+Ancestors: [LXical.Server.Supervisor, #PID<0.138.0>]
+Message Queue Length: 1
+Messages: ["$gen_cast": {:protocol_message, %LXical.Protocol.Requests.Completion{lsp: %LXical.Protocol.Requests.Completion.LSP{id: 2, jsonrpc: "2.0", method: "textDocument/completion", context: #Protocol.Types.Completion.Context<[trigger_kind: :invoked]>, partial_result_token: nil, position: #Protocol.Types.Position<[character: 1, line: 0]>, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///mnt/hostshare/nvim-flake/stuff.exs"]>, work_done_token: nil}, document: nil, position: nil, id: 2, jsonrpc: "2.0", method: "textDocument/completion", context: nil, partial_result_token: nil, text_document: nil, work_done_token: nil}}]
+Links: [#PID<0.139.0>]
+Dictionary: [rand_seed: {%{bits: 58, jump: #Function<3.34006561/1 in :rand.exsplus_jump>, next: #Function<0.34006561/1 in :rand.exsss_next>, type: :exsss, uniform: #Function<1.34006561/1 in :rand.exsss_uniform>, uniform_n: #Function<2.34006561/2 in :rand.exsss_uniform>}, [32298032174879095 | 119681663039075188]}]
+Trapping Exits: false
+Status: :running
+Heap Size: 6772
+Stack Size: 28
+Reductions: 22537
+01:27:55.946 [error] Child LXical.Server of Supervisor LXical.Server.Supervisor terminated
+** (exit) an exception was raised:
+    ** (FunctionClauseError) no function clause matching in IO.chardata_to_string/1
+        (elixir 1.15.7) lib/io.ex:671: IO.chardata_to_string(nil)
+        (elixir 1.15.7) lib/path.ex:383: Path.basename/1
+        (lx_lexical_shared 0.0.1) lib/lexical/project.ex:61: LXical.Project.name/1
+        (lx_lexical_shared 0.0.1) lib/lexical/project.ex:81: LXical.Project.node_name/1
+        (lx_remote_control 0.3.0) lib/lexical/remote_control.ex:48: LXical.RemoteControl.call/4
+        (lx_server 0.3.0) lib/lexical/server/state.ex:165: LXical.Server.State.apply/2
+        (lx_server 0.3.0) lib/lexical/server.ex:153: LXical.Server.apply_to_state/2
+        (lx_server 0.3.0) lib/lexical/server.ex:125: LXical.Server.handle_message/2
+Pid: #PID<0.141.0>
+Start Call: LXical.Server.start_link([])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+01:27:55.947 [info] Child LXical.Server of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.146.0>
+Start Call: LXical.Server.start_link([])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+01:27:56.440 [error] Received textDocument/didChange before server was initialized
+01:27:56.443 [error] Failed to handle Elixir.LXical.Protocol.Notifications.DidChange, {{:error, :not_initialized}, %LXical.Server.State{configuration: nil, initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+01:27:56.443 [error] Could not handle message LXical.Protocol.Notifications.DidChange :ok
+01:28:00.862 [error] Received shutdown before server was initialized
+01:28:00.864 [error] Failed to handle Elixir.LXical.Protocol.Requests.Shutdown, {{:error, :not_initialized}, %LXical.Server.State{configuration: nil, initialized?: false, shutdown_received?: false, in_flight_requests: %{}}}
+01:28:00.864 [error] Could not handle message LXical.Protocol.Requests.Shutdown :ok
