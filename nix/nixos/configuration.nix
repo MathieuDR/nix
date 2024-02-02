@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -20,11 +21,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 1;
-  
+
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Setting nix experimental features on
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -71,7 +72,7 @@
   # Enable sound.
   sound.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = { 
+  services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -96,24 +97,23 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
-    # neovim
     kitty
-    #kitty-themes
     gedit
 
     #Hyprland stuff
-    (pkgs.waybar.overrideAttrs (oldAttrs: { 
-      mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
     dunst
     libnotify
     swww
     rofi-wayland
-    
+
     neofetch
     ncdu
     vim
     wget
+    git
   ];
 
   # Thunar

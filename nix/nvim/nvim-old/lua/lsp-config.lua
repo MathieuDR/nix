@@ -18,7 +18,7 @@ local on_attach = function(_, bufnr)
 	nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 	nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 	nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-	nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+	nmap('<leader>ws', require('telescope.builtin ]').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
 	-- See `:help K` for why this keymap
 	nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -50,52 +50,52 @@ local configs = require("lspconfig.configs")
 
 local lexical_config = {
 	filetypes = { "elixir", "eelixir", "heex", "surface" },
- 	cmd = { "/home/mathieu/Development/Sources/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
- 	settings = {},
- }
+	cmd = { "/home/mathieu/Development/Sources/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
+	settings = {},
+}
 
- if not configs.lexical then
- 	configs.lexical = {
- 		default_config = {
- 			filetypes = lexical_config.filetypes,
- 			cmd = lexical_config.cmd,
- 			root_dir = function(fname)
- 				return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
- 			end,
- 			-- optional settings
- 			settings = lexical_config.settings,
- 		},
- 	}
- end
+if not configs.lexical then
+	configs.lexical = {
+		default_config = {
+			filetypes = lexical_config.filetypes,
+			cmd = lexical_config.cmd,
+			root_dir = function(fname)
+				return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+			end,
+			-- optional settings
+			settings = lexical_config.settings,
+		},
+	}
+end
 
- lspconfig.lexical.setup({
- 	on_attach = on_attach
- })
+lspconfig.lexical.setup({
+	on_attach = on_attach
+})
 
 -- Mason
 
 
- local servers = {
- 	html = { filetypes = { 'html' } }
- }
+local servers = {
+	html = { filetypes = { 'html' } }
+}
 
- local capabilities = vim.lsp.protocol.make_client_capabilities()
- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
- -- Ensure the servers above are installed
- local mason_lspconfig = require 'mason-lspconfig'
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
 
- mason_lspconfig.setup {
- 	ensure_installed = vim.tbl_keys(servers),
- }
+mason_lspconfig.setup {
+	ensure_installed = vim.tbl_keys(servers),
+}
 
- mason_lspconfig.setup_handlers {
- 	function(server_name)
- 		require('lspconfig')[server_name].setup {
- 			capabilities = capabilities,
- 			on_attach = on_attach,
- 			settings = servers[server_name],
- 			filetypes = (servers[server_name] or {}).filetypes,
- 		}
- 	end
- }
+mason_lspconfig.setup_handlers {
+	function(server_name)
+		require('lspconfig')[server_name].setup {
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = servers[server_name],
+			filetypes = (servers[server_name] or {}).filetypes,
+		}
+	end
+}
