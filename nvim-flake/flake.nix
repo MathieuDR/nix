@@ -28,7 +28,7 @@
           lexicalPackage = lexical.packages.${system}.default;
           nvim = nixvim'.makeNixvimWithModule {
             inherit pkgs;
-            module = import ./nixvim-config.nix { inherit lexicalPackage; };
+            module = import ./config { inherit lexicalPackage; };
           };
         in
         {
