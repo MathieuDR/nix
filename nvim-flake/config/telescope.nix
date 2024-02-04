@@ -6,7 +6,7 @@
     };
   };
 
-  confip.keymaps = [
+  config.keymaps = [
     # LSP
     # Might want to put this on attach with buffer
     {
@@ -54,10 +54,14 @@
     {
       mode = "n";
       key = "<leader>/";
-      action.__raw = "require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-				windblend = 10,
-				previewer = false,
-			})";
+      action.__raw = ''
+        function()
+        	require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        		windblend = 10,
+        		previewer = false,
+        	})
+        end
+      '';
       options = {
         desc = "[/] Fuzzily search in current buffer";
       };
@@ -89,9 +93,9 @@
     {
       mode = "n";
       key = "<leader>sw";
-      action.__raw = "require('telescope.builtin').[S]earch current [W]ord";
+      action.__raw = "require('telescope.builtin').grep_string";
       options = {
-        desc = "[?] Find recently opened files";
+        desc = "[S]earch current [W]ord";
       };
     }
     {
