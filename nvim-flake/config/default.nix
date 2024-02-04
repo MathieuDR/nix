@@ -5,5 +5,8 @@
     ./helpers.nix
     (import ./lsp.nix { inherit lexicalPackage; })
     ./git.nix
+    ./telescope.nix
+    # ./trouble.nix
+    # ./lualine.nix
   ];
 }
