@@ -17,32 +17,6 @@ return {
 		opts = {}
 	},
 
-
-
-	{
-		-- Set lualine as statusline
-		'nvim-lualine/lualine.nvim',
-		-- See `:help lualine.txt`
-		opts = {
-			options = {
-				icons_enabled = false,
-				theme = 'onedark',
-				component_separators = '|',
-				section_separators = '',
-			},
-			inactive_sections = {
-				lualine_a = { get_current_window },
-				lualine_b = {},
-				lualine_c = { 'filename' },
-				lualine_x = { 'location' },
-				lualine_y = {},
-				lualine_z = {}
-			},
-		},
-	},
-
-
-
 	{
 		-- Add indentation guides even on blank lines
 		'lukas-reineke/indent-blankline.nvim',

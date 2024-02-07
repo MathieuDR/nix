@@ -7,6 +7,6 @@
     ./git.nix
     ./telescope.nix
     ./trouble.nix
-    ./lualine.nix
+    ./layout.nix
   ];
 }
