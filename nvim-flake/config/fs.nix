@@ -12,4 +12,14 @@
       };
     };
   };
+  config.keymaps = [
+    {
+      mode = "n";
+      key = "-";
+      action = ":Neotree reveal toggle=true position=current<CR>";
+      options = {
+        desc = "Toggle Neotree";
+      };
+    }
+  ];
 }
