@@ -35,11 +35,10 @@
           lualine_z = [ "" ];
         };
       };
-    };
-
-    indent-blankline = {
-      enable = true;
-      indent.char = "┆";
+      indent-blankline = {
+        enable = true;
+        indent.char = "┆";
+      };
     };
   };
 }
