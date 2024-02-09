@@ -9,6 +9,8 @@
     ./no-config-plugins.nix
     ./telescope.nix
     ./trouble.nix
+    ./whichkey.nix
+    ./keymaps.nix
     ./layout.nix
   ];
 }
