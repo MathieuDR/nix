@@ -2,6 +2,67 @@
 {
   config = {
     plugins = {
+      ## Treesitter
+      treesitter = {
+        enable = true;
+        ensureInstalled = [ "bash" "bibtex" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "dot" "eex" "elixir" "erlang" "fish" "fsh" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "latex" "lua" "nix" "regex" "ruby" "scss" "sql" "terraform" "typescript" "vimdoc" "vim" "xml" "yaml" "markdown" "markdown_inline" ];
+        indent = true;
+        incrementalSelection = {
+          enable = true;
+          keymaps = {
+            initSelection = "<c-space>";
+            nodeDecremental = "<M-space>";
+            nodeIncremental = "<c-space>";
+            scopeIncremental = "<c-s>";
+          };
+        };
+      };
+
+      treesitter-textobjects = {
+        enable = true;
+        select = {
+          enable = true;
+          lookahead = true;
+          keymaps = {
+            "aa" = "@parameter.outer";
+            "ia" = "@parameter.inner";
+            "af" = "@function.outer";
+            "if" = "@function.inner";
+            "ac" = "@class.outer";
+            "ic" = "@class.inner";
+          };
+        };
+        move = {
+          enable = true;
+          setJumps = true;
+          gotoNextStart = {
+            "]m" = "@function.outer";
+            "]]" = "@class.outer";
+          };
+          gotoNextEnd = {
+            "]M" = "@function.outer";
+            "][" = "@class.outer";
+          };
+          gotoPreviousStart = {
+            "[m" = "@function.outer";
+            "[[" = "@class.outer";
+          };
+          gotoPreviousEnd = {
+            "[M" = "@function.outer";
+            "[]" = "@class.outer";
+          };
+        };
+        swap = {
+          enable = true;
+          swapNext = {
+            "<leader>a" = "@parameter.inner";
+          };
+          swapPrevious = {
+            "<leader>A" = "@parameter.inner";
+          };
+        };
+      };
+
       ## Auto complete
       nvim-cmp = {
         enable = true;

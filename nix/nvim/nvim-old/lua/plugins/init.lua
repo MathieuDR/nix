@@ -9,14 +9,6 @@ return {
 	-- Git related plugins
 	'tpope/vim-rhubarb',
 
-
-
-
-	{
-		'folke/which-key.nvim',
-		opts = {}
-	},
-
 	-- Screenshot
 	{
 		"0oAstro/silicon.lua",
