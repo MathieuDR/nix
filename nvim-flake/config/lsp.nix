@@ -63,6 +63,9 @@
         };
       };
 
+
+      treesitter-context.enable = true;
+
       ## Auto complete
       nvim-cmp = {
         enable = true;
