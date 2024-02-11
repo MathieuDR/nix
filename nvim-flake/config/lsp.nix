@@ -130,7 +130,9 @@
 
       friendly-snippets.enable = true;
 
-      # LSP
+      ### LSP
+      fidget.enable = true;
+
       lsp = {
         enable = true;
         servers = {
