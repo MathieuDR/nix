@@ -114,6 +114,8 @@
     vim
     wget
     git
+
+    alejandra
   ];
 
   # Thunar
