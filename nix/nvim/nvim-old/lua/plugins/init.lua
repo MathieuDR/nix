@@ -1,14 +1,8 @@
 -- Get current window
 --
 
-local get_current_window = function()
-	return vim.api.nvim_win_get_number(0)
-end
 
 return {
-	-- Git related plugins
-	'tpope/vim-rhubarb',
-
 	-- Screenshot
 	{
 		"0oAstro/silicon.lua",
