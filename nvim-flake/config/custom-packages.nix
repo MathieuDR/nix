@@ -9,9 +9,7 @@
     ];
 
     extraConfigLuaPost = ''
-            			require("vim-easy-align").setup({})
             			require("executor").setup({})
-            			require("vim-markdown").setup({})
             			require("nvim-surround").setup({})
 
       						vim.g.vim_markdown_conceal = 0
@@ -43,6 +41,32 @@
         options = {
           desc = "[S]earch [I]con";
           noremap = true;
+        };
+      }
+
+      # Executor
+      {
+        mode = "n";
+        key = "<leader>rr";
+        action = ":ExecutorRun<CR>";
+        options = {
+          desc = "[R]un executor";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>rd";
+        action = ":ExecutorToggleDetail<CR>";
+        options = {
+          desc = "[R]un [D]etails";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>rs";
+        action = ":ExecutorSetCommand<CR>";
+        options = {
+          desc = "[R]un [S]et command";
         };
       }
     ];
