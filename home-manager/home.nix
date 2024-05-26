@@ -43,15 +43,6 @@
       keepassxc
       discord
       betterdiscordctl
-
-      #Hyprland stuff
-      (pkgs.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      }))
-      dunst
-      libnotify
-      swww
-      rofi-wayland
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
