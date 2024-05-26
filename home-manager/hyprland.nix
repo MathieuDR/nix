@@ -6,7 +6,7 @@ let
     
     sleep 1
     
-    ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
+    ${pkgs.swww}/bin/swww img ${./wallpapers/firewatch.jpg} &
     
     floorp
     kitty
@@ -20,9 +20,14 @@ in
       exec-once = ''${startupScript}/bin/start'';
     };
 
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-    ];
+    extraConfig = ''
+      exec-once = floorp
+      exec-once = kitty
+    '';
+
+    #plugins = [
+    #  inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+    #];
   };
 
   home = {
