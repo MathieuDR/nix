@@ -57,7 +57,7 @@
       #Common programs
       floorp
       keepassxc
-      spicetify
+      spicetify-cli
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

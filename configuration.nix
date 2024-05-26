@@ -18,9 +18,37 @@
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
   #boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 1;
+  boot = {
+    #kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+    #extraModulePackages = [config.boot.kernelPackages.nvidiaPackages];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 1;
+    };
+  };
+
+  #GPU stuff
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "nvidia-x11"
+    "nvidia-settings"
+  ];
+
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      open = false;
+      nvidiaSettings = true;    
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  };
 
   networking = {
     hostName ="nixos"; 
@@ -65,6 +93,7 @@
   # Configure keymap in X11
   services.xserver = {
     enable = false;
+    videoDrivers = ["nvidia"]; # enables nvidia drivers in xorg and wayland
     xkb.layout = "us";
     xkb.variant = "intl";
   };
