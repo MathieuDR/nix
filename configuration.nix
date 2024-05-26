@@ -22,10 +22,20 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 1;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking = {
+    hostName ="nixos"; 
+    wireless = {
+      enable = true;
+      environmentFile = "";
+      networks = {
+        @SSID_HOME@.psk = @PASS_HOME@
+      };
+    }; 
+  };
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  #networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+
 
   # Setting nix experimental features on
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -99,15 +109,6 @@
     home-manager
     kitty
     gedit
-
-    #Hyprland stuff
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    }))
-    dunst
-    libnotify
-    swww
-    rofi-wayland
 
     neofetch
     ncdu

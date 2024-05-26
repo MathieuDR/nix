@@ -8,13 +8,10 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
-    settings = { };
+  imports = [
+    ./home-manager/imports.nix
+  ];
 
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-    ];
-  };
 
   home = {
     # Home Manager needs a bit of information about you and the paths it should
@@ -35,14 +32,31 @@
     # The home.packages option allows you to install Nix packages into your
     # environment.
     packages = with pkgs; [
+      #Fonts
       (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      floorp
-      obsidian
-      slack
+
+      #Dev env
       vscode
-      keepassxc
-      discord
+      
+      #cli
+      gh
+      fzf
+      zoxide
+      jq
+      ripgrep
+
+      #Productive programs
+      obsidian
+
+      #Social programs
+      slack
       betterdiscordctl
+      #discord
+
+      #Common programs
+      floorp
+      keepassxc
+      spicetify
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

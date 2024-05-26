@@ -21,10 +21,10 @@
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        "nixos" = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./base/configuration.nix
+            ./configuration.nix
           ];
         };
       };
@@ -34,7 +34,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            ./home-manager/home.nix
+            ./home.nix
           ];
         };
       };
