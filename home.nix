@@ -9,7 +9,7 @@
   };
 
   imports = [
-    ./home-manager/imports.nix
+    ./home-manager
   ];
   
   home = {
