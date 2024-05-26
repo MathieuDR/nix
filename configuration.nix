@@ -26,9 +26,9 @@
     hostName ="nixos"; 
     wireless = {
       enable = true;
-      environmentFile = "";
+      environmentFile = "/etc/secrets/wifi-secrets.env";
       networks = {
-        @SSID_HOME@.psk = @PASS_HOME@
+        BeeConnected.psk = "@PASS_HOME@";
       };
     }; 
   };
@@ -66,7 +66,7 @@
   services.xserver = {
     enable = false;
     xkb.layout = "us";
-    xkbVariant = "intl";
+    xkb.variant = "intl";
   };
 
 
