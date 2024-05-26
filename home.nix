@@ -44,6 +44,7 @@
       zoxide
       jq
       ripgrep
+      tree
 
       #Productive programs
       obsidian
