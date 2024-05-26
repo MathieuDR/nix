@@ -8,8 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    #nix-colors.url = "github:misterio77/nix-colors";
+    catppuccin.url = "github:catppuccin/nix";
+
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -33,8 +35,13 @@
       homeConfigurations = {
         "Thieu@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = { 
+            inherit inputs outputs; 
+	    #inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme; #Compatibility for hyprland
+            #inherit nix-colors;
+          };
           modules = [
+            inputs.catppuccin.homeManagerModules.catppuccin
             ./home.nix
           ];
         };

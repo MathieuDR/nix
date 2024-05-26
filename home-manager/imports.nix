@@ -1,5 +1,6 @@
 {
-	imports = [
-		./hyprland.nix
-	];
+  imports = [
+    ./theming.nix
+    ./hyprland.nix
+  ];
 }
