@@ -21,6 +21,11 @@
   boot = {
     #kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
     #extraModulePackages = [config.boot.kernelPackages.nvidiaPackages];
+    kernelPackages = pkgs.linuxPackages_zen;
+    #kernelParams = [
+      #"nvidia-drm.modset=1"
+      #"initcall_blacklist=simpledrm_platform_driver_init"
+    #];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
