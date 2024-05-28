@@ -73,10 +73,10 @@ in
 	"$mainMod SHIFT, h, movewindow, l"
 	"$mainMod SHIFT, l, movewindow, r"
 
-        "$mainMod_CTRL, up, workspace, e+1"
-        "$mainMod_CTRL, down, workspace, e-1"
-        "$mainMod_CTRL_SHIFT, up, movetoworkspace, +1"
-        "$mainMod CTRL SHIFT, down, movetoworkspace, -1"
+        "$mainMod_CTRL, up, workspace, r+1"
+        "$mainMod_CTRL, down, workspace, r-1"
+        "$mainMod_CTRL_SHIFT, up, movetoworkspace, r+1"
+        "$mainMod CTRL SHIFT, down, movetoworkspace, r-1"
       ];
         #++ map (d: "$mainMod, ${d}, movefocus, ${d}")["right" "up" "left" "down"];
         #++ map (d: "$mainMod CTRL, ${d}, movewindow, ${d}")["right" "up" "left" "down"];
