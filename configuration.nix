@@ -138,7 +138,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
-    kitty
     gedit
 
     neofetch

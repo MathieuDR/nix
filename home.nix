@@ -38,6 +38,7 @@
       vscode
       
       #cli
+      #kitty
       gh
       fzf
       zoxide
@@ -51,13 +52,14 @@
       #Social programs
       slack
       betterdiscordctl
-      #discord
+      discord
 
       #Common programs
       floorp
       keepassxc
       spicetify-cli
     ];
+
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
@@ -95,5 +97,8 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    kitty.enable = true;
+  };
 }
