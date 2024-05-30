@@ -10,7 +10,8 @@ let
     ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
     
     floorp &
-    kitty
+    kitty &
+    discord
   '';
 in
 {
@@ -30,8 +31,9 @@ in
 
       decoration = {
         rounding = 7;
-        inactive_opacity = 0.9;
-        fullscreen_opacity = 0.4;
+        active_opacity = 0.97;
+        inactive_opacity = 0.88;
+        fullscreen_opacity = 0.97;
         drop_shadow = true;
       };
       
@@ -55,32 +57,43 @@ in
       "$mainMod" = "SUPER";
       
       bind = [
+        # program shortcuts
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
 
-
+        # exiting window / hyprland
         "$mainMod, q, killactive,"
         "$mainMod SHIFT, Q, exit,"
 
+        # windows
+        "$mainMod, y, togglefloating, active"
 	"$mainMod, j, movefocus, d"
 	"$mainMod, k, movefocus, u"
 	"$mainMod, h, movefocus, l"
 	"$mainMod, l, movefocus, r"
+
+	"$mainMod CTRL, j, swapwindow, d"
+	"$mainMod CTRL, k, swapwindow, u"
+	"$mainMod CTRL, h, swapwindow, l"
+	"$mainMod CTRL, l, swapwindow, r"
 
 	"$mainMod SHIFT, j, movewindow, d"
 	"$mainMod SHIFT, k, movewindow, u"
 	"$mainMod SHIFT, h, movewindow, l"
 	"$mainMod SHIFT, l, movewindow, r"
 
-        "$mainMod_CTRL, up, workspace, r+1"
-        "$mainMod_CTRL, down, workspace, r-1"
-        "$mainMod_CTRL_SHIFT, up, movetoworkspace, r+1"
-        "$mainMod CTRL SHIFT, down, movetoworkspace, r-1"
+        # workspaces
+        "$mainMod_CTRL, down, workspace, r+1"
+        "$mainMod_CTRL, up, workspace, r-1"
+        "$mainMod_SHIFT, down, movetoworkspace, r+1"
+        "$mainMod_SHIFT, up, movetoworkspace, r-1"
       ];
-        #++ map (d: "$mainMod, ${d}, movefocus, ${d}")["right" "up" "left" "down"];
-        #++ map (d: "$mainMod CTRL, ${d}, movewindow, ${d}")["right" "up" "left" "down"];
 
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod CTRL, mouse:272, resizewindow"
+      ];
       
       animations = {
         enabled = true;
