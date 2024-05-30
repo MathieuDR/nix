@@ -38,7 +38,6 @@
       vscode
       
       #cli
-      #kitty
       gh
       fzf
       zoxide
@@ -57,6 +56,7 @@
       #Common programs
       floorp
       keepassxc
+      spotify
       spicetify-cli
     ];
 

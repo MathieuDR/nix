@@ -59,6 +59,7 @@ in
         disable_splash_rendering = true;
         force_default_wallpaper = 0;
         enable_swallow = false; # we probably want to enable this later
+        #focus_on_activate = false;
         #middle_click_paste = false; # Somehow doesn't work
       };
 
@@ -69,7 +70,9 @@ in
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
-	"$mainMod, u, exec, rofi -show drun"
+	"$mainMod, SLASH, exec, rofi -modes combi -show combi -combi-modes window,drun"
+	"$mainMod SHIFT, SLASH, exec, rofi -show drun"
+	"$mainMod CTRL, SLASH, exec, rofi -show window"
 
         # exiting window / hyprland
         "$mainMod, q, killactive,"
@@ -122,7 +125,7 @@ in
           "border, 1, 1, liner"
           "borderangle, 1, 30, liner, loop"
           "fade, 1, 10, default"
-          "workspaces, 1, 4, winIn, slidevert"
+          "workspaces, 1, 6, winIn, slidevert"
         ];
       };
     };
