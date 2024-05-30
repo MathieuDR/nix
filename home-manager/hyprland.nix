@@ -69,7 +69,7 @@ in
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
-	"$mainMod, /, exec, rofi -show drun"
+	"$mainMod, u, exec, rofi -show drun"
 
         # exiting window / hyprland
         "$mainMod, q, killactive,"
@@ -122,7 +122,7 @@ in
           "border, 1, 1, liner"
           "borderangle, 1, 30, liner, loop"
           "fade, 1, 10, default"
-          "workspaces, 1, 8, wind, slidevert"
+          "workspaces, 1, 4, winIn, slidevert"
         ];
       };
     };
@@ -142,5 +142,9 @@ in
       swww
       rofi-wayland
     ];
+  };
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
   };
 }
