@@ -29,6 +29,14 @@ in
         border_size = 2;
       };
 
+      monitor = [
+        # Left screen 
+        "DP-1, 2560x1440, -2560x0, 1"
+        # Main screen
+        #"DP-2, 2560x1440@164.84, 0x0, 1"
+        "DP-2, 2560x1440@165, 0x0, 1"
+      ];
+
       decoration = {
         rounding = 7;
         active_opacity = 0.97;
@@ -61,6 +69,7 @@ in
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
+	"$mainMod, /, exec, rofi -show drun"
 
         # exiting window / hyprland
         "$mainMod, q, killactive,"
