@@ -31,10 +31,10 @@ in
 
       monitor = [
         # Left screen 
-        "DP-1, 2560x1440, -2560x0, 1"
+        "DP-1, 2560x1440, 0x0, 1"
         # Main screen
         #"DP-2, 2560x1440@164.84, 0x0, 1"
-        "DP-2, 2560x1440@165, 0x0, 1"
+        "DP-2, 2560x1440@165, 2560x0, 1"
       ];
 
       decoration = {
@@ -102,6 +102,23 @@ in
         "$mainMod_SHIFT, up, movetoworkspace, r-1"
       ];
 
+      # Locked
+      bindl = [
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioStop, exec, playerctl play-pause"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioNext, exec, playerctl next"
+      ];
+
+      #locked & repeating
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.25 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ];
+
+      #mouse
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod CTRL, mouse:272, resizewindow"
@@ -144,6 +161,7 @@ in
       libnotify
       swww
       rofi-wayland
+      playerctl
     ];
   };
   programs.rofi = {
