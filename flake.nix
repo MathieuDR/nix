@@ -16,9 +16,15 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+
+    #Personal NIXVIM
+    yvim = {
+      url = "github:mathieudr/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, yvim, ... } @ inputs:
     let
       inherit (self) outputs;
     in

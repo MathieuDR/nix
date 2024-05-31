@@ -36,6 +36,7 @@
 
       #Dev env
       vscode
+      (inputs.yvim.packages.x86_64-linux.default)
       
       #cli
       gh
@@ -59,6 +60,7 @@
       spotify
       spicetify-cli
     ];
+
 
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -95,6 +97,10 @@
       # EDITOR = "nvim";
     };
   };
+
+  #TEMP: discord fix
+  xdg.desktopEntries.discord.exec = "discord --in-progress-gu --use-gl=desktop";
+  xdg.desktopEntries.discord.name = "Discord";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

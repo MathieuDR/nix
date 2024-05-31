@@ -95,6 +95,8 @@
     xwayland.enable = true;
   };
 
+  services.displayManager.sddm.wayland.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     enable = false;
@@ -108,14 +110,8 @@
   services.gvfs.enable = true; 
   services.udisks2.enable = true;
 
-  #services.xserver = {
-  #  xkb.layout = "us";
-  #  xkbVariant = "intl";
-  #}
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+   services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -127,10 +123,6 @@
     pulse.enable = true;
     jack.enable = true;
   };
-  #hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.Thieu = {
@@ -139,7 +131,6 @@
   };
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
     gedit
@@ -171,7 +162,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
