@@ -45,13 +45,14 @@ in {
 					];
 					drawer = {
 						children-class = "group-power";
+						transition-left-to-right = false;
 					};
 				};
 				"group/info" = {
 					orientation = "horizontal";
 					drawer = {
-						transition-left-to-right = false;
 						children-class = "group-info";
+						transition-left-to-right = false;
 					};
 					modules = [
           "memory"
