@@ -35,19 +35,8 @@ in {
 					"group/info"
           "wireplumber"
           "network"
-					"group/power"
+					"custom/power"
         ];
-				"group/power" = {
-					orientation = "horizontal";
-					modules = [
-						"custom/shutdown"
-						"custom/reboot"
-					];
-					drawer = {
-						children-class = "group-power";
-						transition-left-to-right = false;
-					};
-				};
 				"group/info" = {
 					orientation = "horizontal";
 					drawer = {
@@ -60,15 +49,10 @@ in {
           "disk"
 					];
 				};
-				"custom/shutdown" = {
+				"custom/power" = {
 					format = " ";
 					tooltip = false;
-					"on-click" = "shutdown 0";
-				};
-				"custom/reboot" = {
-					format = "󰜉 ";
-					tooltip = false;
-					"on-click" = "reboot";
+					"on-click" = "echo -e \"shutdown\nreboot\nexit Hyprland\" | rofi -dmenu";
 				};
         clock = {
           calendar = {
