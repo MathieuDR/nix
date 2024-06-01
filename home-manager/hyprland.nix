@@ -27,13 +27,13 @@ in {
         gaps_in = 5;
         gaps_out = 5;
         border_size = 2;
-				col.inactive_border = "$surface1";
-				col.active_border = "$mauve";
+				"col.inactive_border" = "$surface1";
+				"col.active_border" = "$mauve";
       };
 
 			group = {
-				col.border_inactive = "$surface1";
-				col.border_active = "$mauve";
+				"col.border_inactive" = "$surface1";
+				"col.border_active" = "$mauve";
 			};
 
       monitor = [

@@ -38,7 +38,7 @@ in {
 					"group/power"
         ];
 				"group/power" = {
-					orientation = "orthogonal";
+					orientation = "horizontal";
 					modules = [
 						"custom/shutdown"
 						"custom/reboot"
@@ -134,7 +134,6 @@ in {
           font-family: ${wtheme.font};
           font-weight: ${wtheme.font_weight};
           opacity: ${wtheme.opacity};
-					position: relative;
       }
 
       window#waybar {
@@ -145,10 +144,6 @@ in {
           font-size: ${wtheme.font_size};
           color: ${wtheme.text_color};
       }
-
-			/*.group-power {
-				position: absolute;
-			}*/
 
       #cpu {
           padding-left: 15px;
