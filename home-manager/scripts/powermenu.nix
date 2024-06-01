@@ -5,22 +5,22 @@ pkgs.writeShellScriptBin "powermenu" ''
   logout='Log out'
   quit='Quit Hyprland'
 
-  options="$shutdown\n$reboot\n$logout\n$quit"
+  options="$shutdown\n$reboot\n$quit"
 
-  opt=$(echo -e $options | ${pkgs.rofi}/bin/rofi -dmenu -p "Power menu")
+  opt=$(echo -e $options | ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p "Power menu")
 
   case $opt in
   	$quit)
-  		run_cmd echo "quit!"
+  		hyperctl dispatch exit
   	;;
   	$logout)
-  		run_cmd echo "logout!"
+  		echo "woopsie, not implemented"
   	;;
   	$reboot)
-  		run_cmd echo "reboot!"
+  		poweroff --reboot
   	;;
   	$shutdown)
-  		run_cmd echo "shutdown!"
+  		poweroff -p
   	;;
   esac
 ''

@@ -5,8 +5,7 @@
     font_weight = "bold";
     opacity = "0.90";
     text_color = "#cdd6f4";
-    secondary_accent = "89b4fa";
-    tertiary_accent = "f5f5f5";
+    accent = "89b4fa";
     background = "11111B";
   };
 in {
@@ -52,7 +51,7 @@ in {
 				"custom/power" = {
 					format = " ";
 					tooltip = false;
-					"on-click" = "echo -e \"shutdown\nreboot\nexit Hyprland\" | rofi -dmenu";
+					"on-click" = "powermenu";
 				};
         clock = {
           calendar = {
@@ -118,17 +117,26 @@ in {
           min-height: 0px;
           font-family: ${wtheme.font};
           font-weight: ${wtheme.font_weight};
-          opacity: ${wtheme.opacity};
       }
 
       window#waybar {
           background: none;
+					border-bottom: 1px solid @crust;
       }
 
-      .group-info, #window, #wireplumber, #network, #cpu, #memory, #disk, #clock, .group-power, #custom-shutdown, #custom-reboot {
+      .group-info, #window, #wireplumber, #network, #cpu, #memory, #disk, #clock, .group-power, custom-power{
           font-size: ${wtheme.font_size};
-          color: ${wtheme.text_color};
+          color: @text;
       }
+
+			#custom-power{
+				padding-left: 2px;
+				padding-right: 8px;
+			}
+
+			#custom-power:hover {
+				color: @mauve;
+			}
 
       #cpu {
           padding-left: 15px;

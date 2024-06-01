@@ -83,7 +83,7 @@ in {
 
         # exiting window / hyprland
         "$mainMod, q, killactive,"
-        "$mainMod SHIFT, Q, exit,"
+        "$mainMod SHIFT, Q, exec, powermenu"
 
         # windows
         "$mainMod, y, togglefloating, active"
