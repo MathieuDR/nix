@@ -121,7 +121,6 @@ in {
 
       window#waybar {
           background: none;
-					border-bottom: 1px solid @crust;
       }
 
       .group-info, #window, #wireplumber, #network, #cpu, #memory, #disk, #clock, .group-power, custom-power{
@@ -134,7 +133,7 @@ in {
 				padding-right: 8px;
 			}
 
-			#custom-power:hover {
+			#custom-power:hover, #network:hover, #cpu:hover, #memory:hover, #disk:hover, #clock:hover, #wireplumber:hover, #window:hover {
 				color: @mauve;
 			}
 
