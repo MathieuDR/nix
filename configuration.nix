@@ -140,6 +140,7 @@
     vim
     wget
     git
+		htop
 
     alejandra
   ];

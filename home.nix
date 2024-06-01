@@ -56,6 +56,7 @@
 
       #Common programs
       floorp
+			firefox
       keepassxc
       spotify
       spicetify-cli
