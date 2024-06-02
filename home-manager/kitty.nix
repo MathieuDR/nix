@@ -11,7 +11,7 @@
       tab_powerline_style = "slanted";
       enable_audio_bell = false;
       scrollback_lines = 10000;
-			disable_ligatures = "never";
+      disable_ligatures = "never";
     };
   };
 }

@@ -1,6 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -11,7 +15,7 @@
   imports = [
     ./home-manager
   ];
-  
+
   home = {
     username = "Thieu";
     homeDirectory = "/home/Thieu";
@@ -19,14 +23,14 @@
 
     packages = with pkgs; [
       #Fonts
-      (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
       #Dev env
       vscode
       (inputs.yvim.packages.x86_64-linux.default)
-      
+
       #cli
-			yq
+      yq
       tree
 
       #Productive programs
@@ -39,23 +43,23 @@
 
       #Common programs
       floorp
-			firefox
+      firefox
       keepassxc
       spotify
       spicetify-cli
     ];
 
-		activation = {
-			dirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
-				run mkdir -p "./development/sources"
-				run mkdir -p "./development/sources/sevenmind"
-				run mkdir -p "./notes"
-				run mkdir -p "./secrets/keepass"
-			'';
-		};
+    activation = {
+      dirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        run mkdir -p "./development/sources"
+        run mkdir -p "./development/sources/sevenmind"
+        run mkdir -p "./notes"
+        run mkdir -p "./secrets/keepass"
+      '';
+    };
 
     file = {
-			".config/.ysomic.omp.json".source = ./home-manager/dotfiles/.ysomic.omp.json;
+      ".config/.ysomic.omp.json".source = ./home-manager/dotfiles/.ysomic.omp.json;
     };
 
     # Home Manager can also manage your environment variables through
@@ -64,9 +68,9 @@
     };
   };
 
-	services = {
-		copyq.enable = true;
-	};
+  services = {
+    copyq.enable = true;
+  };
 
   #TEMP: discord fix
   xdg.desktopEntries.discord.exec = "discord --in-progress-gu --use-gl=desktop";

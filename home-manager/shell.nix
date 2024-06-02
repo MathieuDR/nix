@@ -8,7 +8,7 @@
 
     oh-my-posh = {
       enable = true;
-			enableBashIntegration = true;
+      enableBashIntegration = true;
       #settings = config.home.file.".config/.ysomic.omp.json".source;
     };
 

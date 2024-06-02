@@ -1,15 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, inputs, ... }:
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
@@ -23,8 +25,8 @@
     #extraModulePackages = [config.boot.kernelPackages.nvidiaPackages];
     kernelPackages = pkgs.linuxPackages_zen;
     #kernelParams = [
-      #"nvidia-drm.modset=1"
-      #"initcall_blacklist=simpledrm_platform_driver_init"
+    #"nvidia-drm.modset=1"
+    #"initcall_blacklist=simpledrm_platform_driver_init"
     #];
     loader = {
       systemd-boot.enable = true;
@@ -34,10 +36,11 @@
   };
 
   #GPU stuff
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
 
   hardware = {
     opengl = {
@@ -50,28 +53,27 @@
       modesetting.enable = true;
       powerManagement.enable = false;
       open = false;
-      nvidiaSettings = true;    
+      nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
 
   networking = {
-    hostName ="nixos"; 
+    hostName = "nixos";
     wireless = {
       enable = true;
       environmentFile = "/etc/secrets/wifi-secrets.env";
       networks = {
         BeeConnected.psk = "@PASS_HOME@";
       };
-    }; 
+    };
   };
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   #networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-
   # Setting nix experimental features on
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -107,11 +109,11 @@
 
   # Automounting usb
   services.devmon.enable = true;
-  services.gvfs.enable = true; 
+  services.gvfs.enable = true;
   services.udisks2.enable = true;
 
   # Enable CUPS to print documents.
-   services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -127,7 +129,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.Thieu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -140,7 +142,7 @@
     vim
     wget
     git
-		htop
+    htop
 
     alejandra
   ];
@@ -194,4 +196,3 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
 }
-

@@ -1,9 +1,13 @@
-{ config, pkgs, lib, inputs, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   accent = "mauve";
   flavor = "mocha";
-in
-{
+in {
   catppuccin = {
     enable = true;
     accent = accent;
@@ -13,7 +17,7 @@ in
   gtk = {
     enable = true;
     font = {
-      name ="JetBrainsMono"; 
+      name = "JetBrainsMono";
     };
 
     catppuccin = {
