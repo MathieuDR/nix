@@ -26,11 +26,7 @@
       (inputs.yvim.packages.x86_64-linux.default)
       
       #cli
-      gh
-      fzf
-      zoxide
-      jq
-      ripgrep
+			yq
       tree
 
       #Productive programs
@@ -59,6 +55,7 @@
 		};
 
     file = {
+			".config/.ysomic.omp.json" = "./home-manager/dotfiles/.ysomic.omp.json";
       # # Building this configuration will create a copy of 'dotfiles/screenrc' in
       # # the Nix store. Activating the configuration will then make '~/.screenrc' a
       # # symlink to the Nix store copy.
@@ -90,6 +87,10 @@
       EDITOR = "nvim";
     };
   };
+
+	services = {
+		copyq.enable = true;
+	};
 
   #TEMP: discord fix
   xdg.desktopEntries.discord.exec = "discord --in-progress-gu --use-gl=desktop";

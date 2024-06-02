@@ -1,0 +1,76 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+
+        {
+          "foreground": "#FFE082",
+          "style": "plain",
+          "template": "@{{ .UserName }} \u279c",
+          "type": "session"
+        },
+        {
+          "foreground": "#56B6C2",
+          "properties": {
+            "style": "agnoster_short",
+            "max_depth": 2
+          },
+          "style": "plain",
+          "template": " {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "foreground": "#7FD5EA",
+          "style": "powerline",
+          "template": "(\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}) ",
+          "type": "python"
+        },
+        {
+          "type": "dotnet",
+          "style": "powerline",
+          "foreground": "#9e7eff",
+          "template": "(\uE77F {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
+        },
+        {
+          "foreground": "#56B6C2",
+          "properties": {
+            "fetch_status": true,
+            "branch_icon": ""
+          },
+          "style": "plain",
+          "template": "<#E8CC97>git(</>{{ .HEAD }}{{ .BranchStatus }}<#E8CC97>) </>",
+
+          "type": "git"
+        },
+        {
+          "type": "exit",
+          "style": "plain",
+          "foreground": "#87e85a",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#ba454b{{ end }}"
+          ],
+          "template": "{{ if gt .Code 0 }}\uf00d {{ .Meaning }}{{ else }}\uf42e{{ end }} ",
+          "properties": {
+            "always_enabled": true
+          }
+        },
+        {
+          "foreground": "#FFAB91",
+          "properties": {
+            "always_enabled": false,
+            "style": "austin",
+            "threshold": 500
+          },
+          "style": "powerline",
+          "template": "{{ .FormattedMs }}",
+          "type": "executiontime"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 3
+}
