@@ -5,7 +5,7 @@
     ./waybar.nix
     ./shell.nix
     ./kitty.nix
-    ./steam.nix
+    ./games.nix
     ./scripts
   ];
 }
