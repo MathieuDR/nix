@@ -9,7 +9,7 @@
 
     floorp &
     kitty &
-    discord 
+    discord
   '';
 in {
   wayland.windowManager.hyprland = {

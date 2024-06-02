@@ -43,7 +43,7 @@
       slack
       betterdiscordctl
       discord
-			whatsapp-for-linux
+      whatsapp-for-linux
 
       #Common programs
       floorp

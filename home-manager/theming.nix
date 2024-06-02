@@ -1,6 +1,4 @@
-{
-  ...
-}: let
+{...}: let
   accent = "mauve";
   flavor = "mocha";
 in {
