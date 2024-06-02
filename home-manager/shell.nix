@@ -9,7 +9,6 @@
     oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
-      # settings = inputs.self + "./home-manager/dotfiles/.ysomic.omp.json";
       settings = builtins.fromJSON (builtins.readFile ./dotfiles/.ysomic.omp.json);
     };
 
