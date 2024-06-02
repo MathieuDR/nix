@@ -1,25 +1,25 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
 	"palette": {
-        "crust": "#ACB0BE",
-        "mantle": "p:os",
-        "base": "#F5C2E7",
-        "surface": "#B4BEFE",
-        "blue":  "#89B4FA"
+		"yellow": "#f9e2af",
+		"teal": "#94e2d5",
+		"mauve": "#cba6f7",
+		"error": "#f38ba8",
+		"success": "#a6e3a1",
+		"subtle": "#7f849c"
   },
   "blocks": [
     {
       "alignment": "left",
       "segments": [
-
         {
-          "foreground": "#FFE082",
+          "foreground": "p:yellow",
           "style": "plain",
           "template": "@{{ .UserName }} \u279c",
           "type": "session"
         },
         {
-          "foreground": "#56B6C2",
+          "foreground": "p:teal",
           "properties": {
             "style": "agnoster_short",
             "max_depth": 2
@@ -29,40 +29,40 @@
           "type": "path"
         },
         {
-          "foreground": "#7FD5EA",
+          "foreground": "p:mauve",
           "style": "powerline",
-          "template": "(\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}) ",
+          "template": "<p:yellow>(</>\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}<p:yellow>)</> ",
           "type": "python"
         },
         {
           "type": "dotnet",
           "style": "powerline",
-          "foreground": "#9e7eff",
-          "template": "(\uE77F {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
+          "foreground": "p:mauve",
+          "template": "<p:yellow>(</>\uE77F {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<p:yellow>)</> "
         },
         {
           "type": "elixir",
           "style": "powerline",
-          "foreground": "#9e7eff",
-          "template": "(\uE62D {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
+          "foreground": "p:mauve",
+          "template": "<p:yellow>(</>\uE62D {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<p:yellow>)</> "
         },
         {
-          "foreground": "#56B6C2",
+          "foreground": "p:mauve",
           "properties": {
             "fetch_status": true,
             "branch_icon": ""
           },
           "style": "plain",
-          "template": "<#E8CC97>git(</>{{ .HEAD }}{{ .BranchStatus }}<#E8CC97>) </>",
+          "template": "<p:yellow>git(</>{{ .HEAD }}{{ .BranchStatus }}<p:yellow>) </>",
 
           "type": "git"
         },
         {
           "type": "status",
           "style": "plain",
-          "foreground": "#87e85a",
+          "foreground": "p:success",
           "foreground_templates": [
-            "{{ if gt .Code 0 }}#ba454b{{ end }}"
+            "{{ if gt .Code 0 }}p:error{{ end }}"
           ],
           "template": "{{ if gt .Code 0 }}\uf00d {{ .Meaning }}{{ else }}\uf00c{{ end }} ",
           "properties": {
@@ -70,7 +70,7 @@
           }
         },
         {
-          "foreground": "#FFAB91",
+          "foreground": "p:subtle",
           "properties": {
             "always_enabled": false,
             "style": "austin",

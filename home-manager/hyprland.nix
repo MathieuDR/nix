@@ -2,7 +2,6 @@
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww-daemon &
-    #hyprctl setcursor Catppuccin-Mocha-Dark-Cursors 24 &
 
     sleep 1 &
 
@@ -10,7 +9,7 @@
 
     floorp &
     kitty &
-    discord
+    discord 
   '';
 in {
   wayland.windowManager.hyprland = {

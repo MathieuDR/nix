@@ -127,7 +127,19 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.Thieu = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
+  };
+
+  #Docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
 
   # List packages installed in system profile. To search, run:

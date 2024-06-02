@@ -55,6 +55,14 @@
         function docker-compose() {
             command docker compose
         }
+
+				function :wq() {
+					exit
+				}
+
+				function :q() {
+					exit
+				}
       '';
     };
   };
