@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   home = {
@@ -11,12 +10,6 @@
 
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    };
-
-    activation = {
-      steam = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        protonup
-      '';
     };
   };
 }
