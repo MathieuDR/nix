@@ -1,4 +1,7 @@
-{pkgs}: {
+{
+  pkgs,
+  lib,
+}: {
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -12,6 +15,12 @@
 
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    };
+
+    activation = {
+      steam = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        protonup
+      '';
     };
   };
 

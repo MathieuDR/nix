@@ -1,16 +1,16 @@
 {pkgs, ...}: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww-daemon &
+      ${pkgs.waybar}/bin/waybar &
+      ${pkgs.swww}/bin/swww-daemon &
 
-    sleep 1 &
+      sleep 1 &
 
-    ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
+      ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
 
-    floorp &
-    kitty &
-    discord &
-		whatsapp-for-linux
+      floorp &
+      kitty &
+      discord &
+    whatsapp-for-linux
   '';
 in {
   wayland.windowManager.hyprland = {
