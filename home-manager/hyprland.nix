@@ -9,7 +9,8 @@
 
     floorp &
     kitty &
-    discord
+    discord &
+		whatsapp-for-linux
   '';
 in {
   wayland.windowManager.hyprland = {
