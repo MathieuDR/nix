@@ -124,6 +124,15 @@
     jack.enable = true;
   };
 
+  # Enabling steam & other gaming goodness
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+
+  programs.gamemode.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.Thieu = {
     isNormalUser = true;
