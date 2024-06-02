@@ -34,6 +34,12 @@
           "template": "(\uE77F {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
         },
         {
+          "type": "elixir",
+          "style": "powerline",
+          "foreground": "#9e7eff",
+          "template": "(\uE77F {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
+        },
+        {
           "foreground": "#56B6C2",
           "properties": {
             "fetch_status": true,
