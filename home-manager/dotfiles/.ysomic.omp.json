@@ -1,5 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"palette": {
+        "crust": "#ACB0BE",
+        "mantle": "p:os",
+        "base": "#F5C2E7",
+        "surface": "#B4BEFE",
+        "blue":  "#89B4FA"
+  },
   "blocks": [
     {
       "alignment": "left",
@@ -37,7 +44,7 @@
           "type": "elixir",
           "style": "powerline",
           "foreground": "#9e7eff",
-          "template": "(\uE77F {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
+          "template": "(\uE62D {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}) "
         },
         {
           "foreground": "#56B6C2",
@@ -51,13 +58,13 @@
           "type": "git"
         },
         {
-          "type": "exit",
+          "type": "status",
           "style": "plain",
           "foreground": "#87e85a",
           "foreground_templates": [
             "{{ if gt .Code 0 }}#ba454b{{ end }}"
           ],
-          "template": "{{ if gt .Code 0 }}\uf00d {{ .Meaning }}{{ else }}\uf42e{{ end }} ",
+          "template": "{{ if gt .Code 0 }}\uf00d {{ .Meaning }}{{ else }}\uf00c{{ end }} ",
           "properties": {
             "always_enabled": true
           }

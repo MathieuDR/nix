@@ -28,7 +28,6 @@
     self,
     nixpkgs,
     home-manager,
-    yvim,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -47,8 +46,6 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;
-          #inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme; #Compatibility for hyprland
-          #inherit nix-colors;
         };
         modules = [
           inputs.catppuccin.homeManagerModules.catppuccin

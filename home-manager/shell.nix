@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   programs = {
     direnv = {
       enable = true;
@@ -9,7 +9,8 @@
     oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
-      #settings = config.home.file.".config/.ysomic.omp.json".source;
+      # settings = inputs.self + "./home-manager/dotfiles/.ysomic.omp.json";
+      settings = builtins.fromJSON (builtins.readFile ./dotfiles/.ysomic.omp.json);
     };
 
     jq.enable = true;

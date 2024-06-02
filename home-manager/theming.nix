@@ -1,8 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
-  inputs,
   ...
 }: let
   accent = "mauve";
@@ -17,7 +13,7 @@ in {
   gtk = {
     enable = true;
     font = {
-      name = "JetBrainsMono";
+      name = "JetBrainsMono Nerd Font";
     };
 
     catppuccin = {

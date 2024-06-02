@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   inputs,
@@ -23,7 +22,11 @@
 
     packages = with pkgs; [
       #Fonts
-      (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+      (pkgs.nerdfonts.override {
+        fonts = [
+          "JetBrainsMono"
+        ];
+      })
 
       #Dev env
       vscode
@@ -58,9 +61,9 @@
       '';
     };
 
-    file = {
-      ".config/.ysomic.omp.json".source = ./home-manager/dotfiles/.ysomic.omp.json;
-    };
+    # file = {
+    #   ".config/.ysomic.omp.json".source = ./home-manager/dotfiles/.ysomic.omp.json;
+    # };
 
     # Home Manager can also manage your environment variables through
     sessionVariables = {

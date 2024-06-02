@@ -1,7 +1,7 @@
 {...}: {
   programs.kitty = {
     enable = true;
-    font.name = "JetBrainsMono";
+    font.name = "JetBrainsMono Nerd Font";
     font.size = 12;
     settings = {
       tab_bar_min_tabs = 1;
