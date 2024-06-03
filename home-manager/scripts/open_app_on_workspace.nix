@@ -1,6 +1,6 @@
 
 {pkgs}:
-pkgs.writeShellScriptBin "powermenu" ''
+pkgs.writeShellScriptBin "open_in_workspace" ''
 #!/usr/bin/env bash
 
 command=$1

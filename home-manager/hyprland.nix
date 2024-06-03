@@ -8,14 +8,19 @@
       ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
 
       sleep 1 &
-			hyprctl dispatch workspace 1 &
-      kitty &
+			
+			# Important thingies
+			exec-once = copyq --start-server
 
-      sleep 1 &
-			hyprctl dispatch workspace 2 &
-      floorp &
-      discord --in-progress-gpu --use-gl=desktop &
-    	whatsapp-for-linux
+			#TODO: Make this not impure, but import the location / script?
+      open_in_workspace "whatsapp-for-linux" 1 &
+      open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
+      open_in_workspace "spotify" 2 &
+      open_in_workspace "floorp" 3 &
+      open_in_workspace "slack" 3 &
+      open_in_workspace "kitty" 4 &
+
+			hyprctl dispatch workspace 4 &
   '';
 
 in {
@@ -37,6 +42,7 @@ in {
 			workspace = [
 				"name:1, monitor:DP-1"
 				"name:2, monitor:DP-2"
+				"name:3, monitor:DP-1"
 			];
 
       group = {
@@ -115,6 +121,9 @@ in {
         "$mainMod_CTRL, up, workspace, r-1"
         "$mainMod_SHIFT, down, movetoworkspace, r+1"
         "$mainMod_SHIFT, up, movetoworkspace, r-1"
+
+				# utilities
+				", Print, exec, grimblast save area - | swappy -f -"
       ];
 
       # Locked
@@ -174,8 +183,27 @@ in {
       swww
       rofi-wayland
       playerctl
+			grimblast
+			swappy
     ];
   };
+
+	xdg.configFile."swappy/config" = {
+		enable = true;
+		text = ''
+			[Default]
+      save_dir=$HOME/pictures/screenshots
+      save_filename_format=screenshot-%Y%m%d-%H%M%S.png
+      show_panel=true
+      line_size=5
+      text_size=20
+      text_font=JetBrainsMono Nerd Font
+      paint_mode=brush
+      early_exit=false
+      fill_shape=false
+		'';
+	};
+
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;

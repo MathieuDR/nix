@@ -59,6 +59,7 @@
         run mkdir -p "./development/sources"
         run mkdir -p "./development/sources/sevenmind"
         run mkdir -p "./notes"
+        run mkdir -p "./pictures/screenshots"
         run mkdir -p "./secrets/keepass"
       '';
     };
