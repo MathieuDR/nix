@@ -7,11 +7,17 @@
 
       ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
 
-      floorp &
+      sleep 1 &
+			hyprctl dispatch workspace 1 &
       kitty &
-      discord &
-    whatsapp-for-linux
+
+      sleep 1 &
+			hyprctl dispatch workspace 2 &
+      floorp &
+      discord --in-progress-gpu --use-gl=desktop &
+    	whatsapp-for-linux
   '';
+
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -27,6 +33,11 @@ in {
         "col.inactive_border" = "$surface1";
         "col.active_border" = "$mauve";
       };
+			
+			workspace = [
+				"name:1, monitor:DP-1"
+				"name:2, monitor:DP-2"
+			];
 
       group = {
         "col.border_inactive" = "$surface1";

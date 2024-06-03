@@ -35,6 +35,7 @@
       #cli
       yq
       tree
+			wl-clipboard
 
       #Productive programs
       obsidian
@@ -77,7 +78,7 @@
   };
 
   #TEMP: discord fix
-  xdg.desktopEntries.discord.exec = "discord --in-progress-gu --use-gl=desktop";
+  xdg.desktopEntries.discord.exec = "discord --in-progress-gpu --use-gl=desktop";
   xdg.desktopEntries.discord.name = "Discord";
 
   programs.home-manager.enable = true;
