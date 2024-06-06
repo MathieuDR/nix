@@ -38,9 +38,9 @@
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"
-			"steam"
-			"steam-original"
-			"steam-run"
+      "steam"
+      "steam-original"
+      "steam-run"
     ];
 
   hardware = {
@@ -91,7 +91,35 @@
     useXkbConfig = true; # use xkb.options in tty.
   };
 
+
+	services.getty.autologinUser = "Thieu";
+
+  # # Greeter
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+  #
+  # # https://www.reddit.com/r/NixOS/comments/u0cdpi/tuigreet_with_xmonad_how/
+  # # https://github.com/sjcobb2022/nixos-config/blob/29077cee1fc82c5296908f0594e28276dacbe0b0/hosts/common/optional/greetd.nix
+  # systemd.services.greetd.serviceConfig = {
+  #   Type = "idle";
+  #   StandardInput = "tty";
+  #   StandardOutput = "tty";
+  #   StandardError = "journal"; # Without this errors will spam on screen
+  #   # Without these bootlogs will spam on screen
+  #   TTYReset = true;
+  #   TTYVHangup = true;
+  #   TTYVTDisallocate = true;
+  # };
+
   # Enable Hyprland
+  security.pam.services.hyprlock = {};
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
