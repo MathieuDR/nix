@@ -182,7 +182,6 @@ in {
 
   home = {
     packages = with pkgs; [
-      dunst
       libnotify
       swww
       rofi-wayland
@@ -206,6 +205,10 @@ in {
       early_exit=false
       fill_shape=false
 		'';
+	};
+
+	services.dunst = {
+		enable = true;
 	};
 
   programs.rofi = {
