@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   wtheme = {
-    font = "JetBrainsMono";
+    font = "JetBrainsMono Nerd Font";
     font_size = "15px";
     font_weight = "bold";
     opacity = "0.90";
