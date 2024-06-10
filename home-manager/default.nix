@@ -7,6 +7,7 @@
     ./waybar.nix
     ./shell.nix
     ./kitty.nix
+    ./spicetify.nix
     ./games.nix
     ./scripts
   ];

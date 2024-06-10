@@ -10,6 +10,7 @@
 
     #nix-colors.url = "github:misterio77/nix-colors";
     catppuccin.url = "github:catppuccin/nix";
+		inputs.spicetify-nix.url = "github:the-argus/spicetify-nix";
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
