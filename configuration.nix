@@ -57,6 +57,13 @@
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
+
+		#Bluetooth
+		bluetooth = {
+			enable = true;
+			powerOnBoot = true;
+			settings.General.Experimental = true; # Show battery level
+		};
   };
 
   networking = {
@@ -153,6 +160,11 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+
+		#Extra config if needed
+		# https://wiki.nixos.org/wiki/PipeWire#Bluetooth_Configuration
+		# https://wiki.archlinux.org/title/bluetooth_headset#Disable_PipeWire_HSP/HFP_profile
+
   };
 
   # Enabling steam & other gaming goodness

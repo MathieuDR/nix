@@ -52,6 +52,10 @@
       keepassxc
       spotify
       spicetify-cli
+
+			#Necessary
+			blueman
+			pavucontrol
     ];
 
     activation = {
