@@ -8,31 +8,31 @@ in {
     flavor = flavor;
   };
 
-  gtk = {
-    enable = true;
-    font = {
-      name = "JetBrainsMono Nerd Font";
-    };
-
-    catppuccin = {
-      enable = true;
-      accent = accent;
-      flavor = flavor;
-      tweaks = ["rimless" "normal"];
-
-      cursor = {
-        enable = true;
-        accent = accent;
-        flavor = flavor;
-      };
-
-      icon = {
-        enable = true;
-        accent = accent;
-        flavor = flavor;
-      };
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   font = {
+  #     name = "JetBrainsMono Nerd Font";
+  #   };
+  #
+  #   catppuccin = {
+  #     enable = true;
+  #     accent = accent;
+  #     flavor = flavor;
+  #     tweaks = ["rimless" "normal"];
+  #
+  #     cursor = {
+  #       enable = true;
+  #       accent = accent;
+  #       flavor = flavor;
+  #     };
+  #
+  #     icon = {
+  #       enable = true;
+  #       accent = accent;
+  #       flavor = flavor;
+  #     };
+  #   };
+  # };
 
   programs = {
     waybar.catppuccin = {

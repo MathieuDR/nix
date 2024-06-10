@@ -8,7 +8,7 @@
   hyprlock = lib.getExe' config.programs.hyprlock.package "hyprlock";
   lock = "${pkgs.systemd}/bin/loginctl lock-session";
 in {
-  programs.hypridle = {
+  services.hypridle = {
     enable = true;
 
     settings = {
