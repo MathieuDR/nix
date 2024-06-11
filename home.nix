@@ -50,8 +50,6 @@
       floorp
       firefox
       keepassxc
-      spotify
-      spicetify-cli
 
 			#Necessary
 			blueman

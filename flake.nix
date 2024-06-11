@@ -10,7 +10,7 @@
 
     #nix-colors.url = "github:misterio77/nix-colors";
     catppuccin.url = "github:catppuccin/nix";
-		inputs.spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
@@ -29,6 +29,7 @@
     self,
     nixpkgs,
     home-manager,
+		spicetify-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -46,7 +47,7 @@
       "Thieu@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs spicetify-nix;
         };
         modules = [
           inputs.catppuccin.homeManagerModules.catppuccin
