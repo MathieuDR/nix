@@ -1,31 +1,31 @@
 {pkgs, ...}: let
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-      waybar &
-      swww-daemon &
+       waybar &
+       swww-daemon &
+       copyq --start-server &
 
-      sleep 1 &
+       sleep 1 &
 
-      ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
+       ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
 
-      sleep 1 &
-			
-			# Important thingies
-			exec-once = copyq --start-server
+       sleep 1 &
 
-			#TODO: Make this not impure, but import the location / script?
-      open_in_workspace "whatsapp-for-linux" 1 &
-      open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
-      open_in_workspace "spotify" 2 &
-      open_in_workspace "floorp" 3 &
-      # open_in_workspace "slack" 3 &
-      open_in_workspace "kitty" 4 &
+    # Important thingies
+    exec-once = copyq --start-server
 
-			sleep 10 &
+    #TODO: Make this not impure, but import the location / script?
+       open_in_workspace "whatsapp-for-linux" 1 &
+       open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
+       open_in_workspace "spotify" 2 &
+       open_in_workspace "floorp" 3 &
+       # open_in_workspace "slack" 3 &
+       open_in_workspace "kitty" 4 &
 
-			hyprctl dispatch workspace 4 &
-			nohup hyprlock &
+    sleep 10 &
+
+    hyprctl dispatch workspace 4 &
+    nohup hyprlock &
   '';
-
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,13 +41,13 @@ in {
         "col.inactive_border" = "$surface1";
         "col.active_border" = "$mauve";
       };
-			
-			workspace = [
-				"name:1, monitor:DP-3"
-				"name:2, monitor:DP-1"
-				"name:3, monitor:DP-3"
-				"name:4, monitor:DP-1"
-			];
+
+      workspace = [
+        "name:1, monitor:DP-3"
+        "name:2, monitor:DP-1"
+        "name:3, monitor:DP-3"
+        "name:4, monitor:DP-1"
+      ];
 
       group = {
         "col.border_inactive" = "$surface1";
@@ -98,6 +98,7 @@ in {
         "$mainMod, SLASH, exec, rofi -modes combi -show combi -combi-modes window,drun"
         "$mainMod SHIFT, SLASH, exec, rofi -show drun"
         "$mainMod CTRL, SLASH, exec, rofi -show window"
+        "$mainMod ALT, SEMICOLON, exec, copyq show"
 
         # exiting window / hyprland
         "$mainMod, q, killactive,"
@@ -126,8 +127,8 @@ in {
         "$mainMod_SHIFT, down, movetoworkspace, r+1"
         "$mainMod_SHIFT, up, movetoworkspace, r-1"
 
-				# utilities
-				", Print, exec, grimblast save area - | swappy -f -"
+        # utilities
+        ", Print, exec, grimblast save area - | swappy -f -"
       ];
 
       # Locked
@@ -173,11 +174,20 @@ in {
           "workspaces, 1, 6, winIn, slidevert"
         ];
       };
-    };
 
-    #plugins = [
-    #  inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-    #];
+      windowrulev2 = [
+        "float, class:(com.github.hluk.copyq)"
+        "size 400 400, class:(com.github.hluk.copyq)"
+				"float, class:(floorp), title:(Floorp — Sharing Indicator)"
+				"suppressevent fullscreen maximize activate activatefocus, class:(floorp), title:(Floorp — Sharing Indicator)"
+				"size 55 32, class:(floorp), title:(Floorp — Sharing Indicator)"
+				"move 5 1400, class:(floorp), title:(Floorp — Sharing Indicator)"
+      ];
+
+      # windowrule = [
+      #   "size 400 400, float:1"
+      # ];
+    };
   };
 
   home = {
@@ -186,30 +196,30 @@ in {
       swww
       rofi-wayland
       playerctl
-			grimblast
-			swappy
+      grimblast
+      swappy
     ];
   };
 
-	xdg.configFile."swappy/config" = {
-		enable = true;
-		text = ''
-			[Default]
-      save_dir=$HOME/pictures/screenshots
-      save_filename_format=screenshot-%Y%m%d-%H%M%S.png
-      show_panel=true
-      line_size=5
-      text_size=20
-      text_font=JetBrainsMono Nerd Font
-      paint_mode=brush
-      early_exit=false
-      fill_shape=false
-		'';
-	};
+  xdg.configFile."swappy/config" = {
+    enable = true;
+    text = ''
+      [Default]
+         save_dir=$HOME/pictures/screenshots
+         save_filename_format=screenshot-%Y%m%d-%H%M%S.png
+         show_panel=true
+         line_size=5
+         text_size=20
+         text_font=JetBrainsMono Nerd Font
+         paint_mode=brush
+         early_exit=false
+         fill_shape=false
+    '';
+  };
 
-	services.dunst = {
-		enable = true;
-	};
+  services.dunst = {
+    enable = true;
+  };
 
   programs.rofi = {
     enable = true;

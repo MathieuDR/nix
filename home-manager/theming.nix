@@ -26,6 +26,15 @@ in {
     };
   };
 
+	qt = {
+		enable = true;
+		style = {
+			package = pkgs.catppuccin-qt5ct;
+			name = "Catppuccin-Mocha";
+		};
+	};
+
+
   gtk = {
     enable = true;
     font = {
