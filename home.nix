@@ -64,6 +64,10 @@
         run mkdir -p "./pictures/screenshots"
         run mkdir -p "./secrets/keepass"
       '';
+
+			discord = lib.hm.dag.entryAfter ["writeBoundary"] ''
+				betterdiscordctl install
+			'';
     };
 
     # file = {
