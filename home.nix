@@ -44,7 +44,7 @@
       slack
       betterdiscordctl
       discord
-      whatsapp-for-linux
+      # whatsapp-for-linux
 
       #Common programs
       floorp
@@ -64,15 +64,7 @@
         run mkdir -p "./pictures/screenshots"
         run mkdir -p "./secrets/keepass"
       '';
-
-      # discord = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      #   betterdiscordctl install
-      # '';
     };
-
-    # file = {
-    #   ".config/.ysomic.omp.json".source = ./home-manager/dotfiles/.ysomic.omp.json;
-    # };
 
     # Home Manager can also manage your environment variables through
     sessionVariables = {
