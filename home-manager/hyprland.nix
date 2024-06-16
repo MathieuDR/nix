@@ -1,4 +1,11 @@
 {pkgs, ...}: let
+  wallpapers = builtins.path {
+    name = "wallpapers";
+    path = ./wallpapers;
+  };
+
+  wallpaper = ./wallpapers/firewatch.jpg;
+
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
        waybar &
        swww-daemon &
@@ -6,7 +13,7 @@
 
        sleep 1 &
 
-       ${pkgs.swww}/bin/swww img ./wallpapers/firewatch.jpg &
+       ${pkgs.swww}/bin/swww img ${wallpaper} &
 
        sleep 1 &
 
@@ -14,7 +21,8 @@
     exec-once = copyq --start-server
 
     #TODO: Make this not impure, but import the location / script?
-       open_in_workspace "whatsapp-for-linux" 1 &
+       # open_in_workspace "whatsapp-for-linux" 1 &
+    	 open_kiosk_in_window_and_workspace "floorp" "https://web.whatsapp.com" "floorp" 1 &
        open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
        open_in_workspace "spotify" 2 &
        open_in_workspace "floorp" 3 &
@@ -176,12 +184,17 @@ in {
       };
 
       windowrulev2 = [
+        #copyq
         "float, class:(com.github.hluk.copyq)"
         "size 400 400, class:(com.github.hluk.copyq)"
-				"float, class:(floorp), title:(Floorp — Sharing Indicator)"
-				"suppressevent fullscreen maximize activate activatefocus, class:(floorp), title:(Floorp — Sharing Indicator)"
-				"size 55 32, class:(floorp), title:(Floorp — Sharing Indicator)"
-				"move 5 1400, class:(floorp), title:(Floorp — Sharing Indicator)"
+
+        # Sharing floorp
+        "float, class:(floorp), title:(Floorp — Sharing Indicator)"
+        "suppressevent fullscreen maximize activate activatefocus, class:(floorp), title:(Floorp — Sharing Indicator)"
+        "size 55 32, class:(floorp), title:(Floorp — Sharing Indicator)"
+        "move 5 1400, class:(floorp), title:(Floorp — Sharing Indicator)"
+
+        #web-whatsapp
       ];
 
       # windowrule = [
@@ -199,6 +212,11 @@ in {
       grimblast
       swappy
     ];
+
+    file."wallpapers" = {
+      source = wallpapers;
+      target = "wallpapers/";
+    };
   };
 
   xdg.configFile."swappy/config" = {

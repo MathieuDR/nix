@@ -35,7 +35,7 @@
       #cli
       yq
       tree
-			wl-clipboard
+      wl-clipboard
 
       #Productive programs
       obsidian
@@ -51,9 +51,9 @@
       firefox
       keepassxc
 
-			#Necessary
-			blueman
-			pavucontrol
+      #Necessary
+      blueman
+      pavucontrol
     ];
 
     activation = {
@@ -65,9 +65,9 @@
         run mkdir -p "./secrets/keepass"
       '';
 
-			discord = lib.hm.dag.entryAfter ["writeBoundary"] ''
-				betterdiscordctl install
-			'';
+      # discord = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      #   betterdiscordctl install
+      # '';
     };
 
     # file = {
@@ -84,9 +84,19 @@
     copyq.enable = true;
   };
 
-  #TEMP: discord fix
-  xdg.desktopEntries.discord.exec = "discord --in-progress-gpu --use-gl=desktop";
-  xdg.desktopEntries.discord.name = "Discord";
+  xdg.desktopEntries = {
+    #TEMP: discord fix
+    discord = {
+      exec = "discord --in-progress-gpu --use-gl=desktop";
+      name = "Discord";
+    };
+
+    whatsapp = {
+      name = "WhatsApp";
+      exec = "open_kiosk_in_window_and_workspace floorp \"https://web.whatsapp.com\" floorp 1";
+      type = "Application";
+    };
+  };
 
   programs.home-manager.enable = true;
 }
