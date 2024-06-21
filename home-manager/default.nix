@@ -5,6 +5,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./waybar.nix
+    ./rofi.nix
     ./shell.nix
     ./kitty.nix
     ./spicetify.nix

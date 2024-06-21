@@ -44,7 +44,8 @@
       slack
       betterdiscordctl
       discord
-      # whatsapp-for-linux
+      whatsapp-for-linux
+      tutanota-desktop
 
       #Common programs
       floorp
@@ -84,7 +85,7 @@
     };
 
     whatsapp = {
-      name = "WhatsApp";
+      name = "WhatsApp kiosk";
       exec = "open_kiosk_in_window_and_workspace floorp \"https://web.whatsapp.com\" floorp 1";
       type = "Application";
     };

@@ -7,32 +7,27 @@
   wallpaper = ./wallpapers/firewatch.jpg;
 
   startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-       waybar &
-       swww-daemon &
-       copyq --start-server &
+    waybar &
+    swww-daemon &
+    copyq --start-server &
 
-       sleep 1 &
+    sleep 0.5 &
 
-       ${pkgs.swww}/bin/swww img ${wallpaper} &
+    ${pkgs.swww}/bin/swww img ${wallpaper} &
 
-       sleep 1 &
-
-    # Important thingies
-    exec-once = copyq --start-server
+    sleep 0.5 &
 
     #TODO: Make this not impure, but import the location / script?
-       # open_in_workspace "whatsapp-for-linux" 1 &
-    	 open_kiosk_in_window_and_workspace "floorp" "https://web.whatsapp.com" "floorp" 1 &
-       open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
-       open_in_workspace "spotify" 2 &
-       open_in_workspace "floorp" 3 &
-       # open_in_workspace "slack" 3 &
-       open_in_workspace "kitty" 4 &
+    # open_in_workspace "whatsapp-for-linux" 1 &
+    open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
+    open_in_workspace "spotify" 2 &
+    open_in_workspace "floorp" 3 &
+    open_in_workspace "kitty" 4 &
 
-    sleep 10 &
+    sleep 0.5 &
 
     hyprctl dispatch workspace 4 &
-    nohup hyprlock &
+    #nohup hyprlock &
   '';
 in {
   wayland.windowManager.hyprland = {
@@ -51,10 +46,14 @@ in {
       };
 
       workspace = [
-        "name:1, monitor:DP-3"
-        "name:2, monitor:DP-1"
-        "name:3, monitor:DP-3"
-        "name:4, monitor:DP-1"
+        "name:1, monitor:DP-3, persistent:true"
+        "name:2, monitor:DP-1, persistent:true"
+        "name:3, monitor:DP-3, persistent:true"
+        "name:4, monitor:DP-1, persistent:true"
+        "name:5, monitor:DP-3, persistent:true"
+        "name:6, monitor:DP-1, persistent:true"
+        "name:7, monitor:DP-3, persistent:true"
+        "name:8, monitor:DP-1, persistent:true"
       ];
 
       group = {
@@ -66,7 +65,6 @@ in {
         # Left screen
         "DP-3, 2560x1440, 0x0, 1"
         # Main screen
-        #"DP-1, 2560x1440@164.84, 0x0, 1"
         "DP-1, 2560x1440@165, 2560x0, 1"
       ];
 
@@ -103,7 +101,7 @@ in {
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
-        "$mainMod, SLASH, exec, rofi -modes combi -show combi -combi-modes window,drun"
+        "$mainMod, SLASH, exec, rofi -modes combi -show combi -combi-modes calc,window,drun"
         "$mainMod SHIFT, SLASH, exec, rofi -show drun"
         "$mainMod CTRL, SLASH, exec, rofi -show window"
         "$mainMod ALT, SEMICOLON, exec, copyq show"
@@ -237,10 +235,5 @@ in {
 
   services.dunst = {
     enable = true;
-  };
-
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
   };
 }
