@@ -101,7 +101,7 @@ in {
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
-        "$mainMod, SLASH, exec, rofi -modes combi,calc,rofimoji -show combi -combi-modes window,drun"
+        "$mainMod, SLASH, exec, rofi -modes combi,calc -show combi -combi-modes window,drun"
         "$mainMod SHIFT, SLASH, exec, rofi -show drun"
         "$mainMod CTRL, SLASH, exec, rofi -show window"
         "$mainMod ALT, SEMICOLON, exec, copyq show"

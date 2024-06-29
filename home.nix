@@ -33,6 +33,15 @@
       (inputs.yvim.packages.x86_64-linux.default)
 
       #cli
+      bat
+      bottom
+      du-dust
+      mosh
+      fd
+      fx
+      killall
+			procs
+			ripgrep
       yq
       tree
       wl-clipboard

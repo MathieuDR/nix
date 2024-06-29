@@ -12,8 +12,12 @@
     package = pkgs.rofi-wayland;
     plugins = with pkgs; [
       rofi-calc
-      rofimoji
-      rofi-bluetooth
+      # rofimoji
+      # rofi-bluetooth
     ];
   };
+  home.packages = with pkgs; [
+    rofimoji
+    rofi-bluetooth
+  ];
 }
