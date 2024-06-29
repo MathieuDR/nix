@@ -40,10 +40,12 @@
       fd
       fx
       killall
-			procs
-			ripgrep
+      procs
+      ripgrep
       yq
       tree
+      just
+      httpie
       wl-clipboard
 
       #Productive programs

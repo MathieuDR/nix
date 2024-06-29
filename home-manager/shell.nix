@@ -17,6 +17,11 @@
     gh.enable = true;
     fzf.enable = true;
 
+    lsd = {
+      enable = true;
+      enableAliases = true;
+    };
+
     zoxide = {
       enable = true;
       options = [
