@@ -31,6 +31,7 @@
       #Dev env
       vscode
       (inputs.yvim.packages.x86_64-linux.default)
+      httpie-desktop
 
       #cli
       bat
@@ -66,6 +67,9 @@
       #Necessary
       blueman
       pavucontrol
+
+      #Games
+      (prismlauncher.override {jdks = [jdk8];})
     ];
 
     activation = {
@@ -93,12 +97,6 @@
     discord = {
       exec = "discord --in-progress-gpu --use-gl=desktop";
       name = "Discord";
-    };
-
-    whatsapp = {
-      name = "WhatsApp kiosk";
-      exec = "open_kiosk_in_window_and_workspace floorp \"https://web.whatsapp.com\" floorp 1";
-      type = "Application";
     };
   };
 

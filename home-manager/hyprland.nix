@@ -10,11 +10,6 @@
     waybar &
     swww-daemon &
     copyq --start-server &
-
-    sleep 0.5 &
-
-    ${pkgs.swww}/bin/swww img ${wallpaper} &
-
     sleep 0.5 &
 
     #TODO: Make this not impure, but import the location / script?
@@ -23,7 +18,9 @@
     open_in_workspace "spotify" 2 &
     open_in_workspace "floorp" 3 &
     open_in_workspace "kitty" 4 &
+    sleep 0.5 &
 
+    ${pkgs.swww}/bin/swww img ${wallpaper} &
     sleep 0.5 &
 
     hyprctl dispatch workspace 4 &
@@ -71,8 +68,8 @@ in {
       decoration = {
         rounding = 7;
         active_opacity = 0.97;
-        inactive_opacity = 0.88;
-        fullscreen_opacity = 0.97;
+        inactive_opacity = 0.85;
+        fullscreen_opacity = 1;
         drop_shadow = true;
       };
 
@@ -101,6 +98,7 @@ in {
         "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
         "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
         "$mainMod, f, exec, thunar"
+        "$mainMod, e, fullscreen"
         "$mainMod, SLASH, exec, rofi -modes combi,calc -show combi -combi-modes window,drun"
         "$mainMod SHIFT, SLASH, exec, rofi -show drun"
         "$mainMod CTRL, SLASH, exec, rofi -show window"
@@ -192,12 +190,11 @@ in {
         "size 55 32, class:(floorp), title:(Floorp — Sharing Indicator)"
         "move 5 1400, class:(floorp), title:(Floorp — Sharing Indicator)"
 
-        #web-whatsapp
+        # Videos
+        "opaque, class:(floorp), title:(YouTube)"
+        "opaque, class:(floorp), title:(Prime Video)"
+        "opaque, class:(Nomifactory.*)"
       ];
-
-      # windowrule = [
-      #   "size 400 400, float:1"
-      # ];
     };
   };
 

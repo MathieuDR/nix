@@ -41,13 +41,12 @@
       "steam"
       "steam-original"
       "steam-run"
+      "libXNVCtrl"
     ];
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
     };
 
     nvidia = {
@@ -58,12 +57,12 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
-		#Bluetooth
-		bluetooth = {
-			enable = true;
-			powerOnBoot = true;
-			settings.General.Experimental = true; # Show battery level
-		};
+    #Bluetooth
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings.General.Experimental = true; # Show battery level
+    };
   };
 
   networking = {
@@ -98,8 +97,7 @@
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-
-	services.getty.autologinUser = "Thieu";
+  services.getty.autologinUser = "Thieu";
 
   # # Greeter
   # services.greetd = {
@@ -161,15 +159,15 @@
     pulse.enable = true;
     jack.enable = true;
 
-		#Extra config if needed
-		# https://wiki.nixos.org/wiki/PipeWire#Bluetooth_Configuration
-		# https://wiki.archlinux.org/title/bluetooth_headset#Disable_PipeWire_HSP/HFP_profile
+    #Extra config if needed
+    # https://wiki.nixos.org/wiki/PipeWire#Bluetooth_Configuration
+    # https://wiki.archlinux.org/title/bluetooth_headset#Disable_PipeWire_HSP/HFP_profile
   };
 
-	#
+  #
   # Enabling steam & other gaming goodness
-	# 
-	# 
+  #
+  #
 
   programs.steam = {
     enable = true;
@@ -208,7 +206,7 @@
     git
     htop
 
-    alejandra
+    egl-wayland
   ];
 
   # Thunar
