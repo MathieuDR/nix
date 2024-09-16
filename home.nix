@@ -34,6 +34,7 @@
       httpie-desktop
 
       #cli
+      csvkit
       bat
       bottom
       du-dust
@@ -48,6 +49,10 @@
       just
       httpie
       wl-clipboard
+      zip
+      unzip
+      gotop
+      imv
 
       #Productive programs
       obsidian
@@ -63,6 +68,10 @@
       floorp
       firefox
       keepassxc
+      calibre
+      calibre-web
+      gzip
+      filezilla
 
       #Necessary
       blueman

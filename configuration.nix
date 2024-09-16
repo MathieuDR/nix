@@ -26,6 +26,7 @@
     #"nvidia-drm.modset=1"
     #"initcall_blacklist=simpledrm_platform_driver_init"
     #];
+    binfmt.emulatedSystems = ["aarch64-linux"];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -42,6 +43,8 @@
       "steam-original"
       "steam-run"
       "libXNVCtrl"
+      "1password"
+      "1password-cli"
     ];
 
   hardware = {
@@ -211,6 +214,19 @@
 
   # Thunar
   programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
+
+  #TODO: Put in separate file
+  # 1Password, for work
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    #TODO: Get user from homemngr
+    polkitPolicyOwners = ["Thieu"];
+  };
 
   # Desktop portals which let windows interact?
   #xdg.portal.enable = true;
@@ -228,6 +244,12 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Caddy CA for local stuff
+  security.pki.certificates = [
+    # HPI Certificate
+    (builtins.readFile ./secrets/hpi_ca.crt)
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
