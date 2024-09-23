@@ -53,9 +53,14 @@
       unzip
       gotop
       imv
+      img2pdf
+      imagemagick
+      dnsutils
+      nmap
 
       #Productive programs
       obsidian
+      libreoffice
 
       #Social programs
       slack

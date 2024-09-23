@@ -21,12 +21,12 @@
 
       label = [
         {
-          monitor = "DP-1";
+          monitor = "DP-2";
           text = "$TIME<br/>$USER";
           font_family = "JetBrainsMono Nerd Font";
           font_size = 50;
 
-					color = "rgb(69, 71, 90)";
+          color = "rgb(69, 71, 90)";
           position = "4, 296";
 
           valign = "center";
@@ -34,7 +34,7 @@
         }
 
         {
-          monitor = "DP-1";
+          monitor = "DP-2";
           text = "$TIME<br/>$USER";
           font_family = "JetBrainsMono Nerd Font";
           font_size = 50;
@@ -50,7 +50,7 @@
 
       input-field = [
         {
-          monitor = "DP-1";
+          monitor = "DP-2";
           size = "200, 50";
           position = "0, -100";
           valign = "center";
