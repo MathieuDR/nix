@@ -1,12 +1,14 @@
 {
   pkgs,
-  spicetify-nix,
+  inputs,
   ...
 }: let
-  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in {
+  _file = ./spicetify.nix;
+
   # import the flake's module for your system
-  imports = [spicetify-nix.homeManagerModule];
+  imports = [inputs.spicetify-nix.homeManagerModules.default];
 
   programs.spicetify = {
     enable = true;
@@ -14,6 +16,9 @@ in {
     colorScheme = "mocha";
 
     enabledExtensions = with spicePkgs.extensions; [
+      history
+      skipStats
+      trashbin
       fullAppDisplay
       shuffle # shuffle+ (special characters are sanitized out of ext names)
       hidePodcasts

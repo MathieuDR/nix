@@ -32,6 +32,7 @@
       vscode
       (inputs.yvim.packages.x86_64-linux.default)
       httpie-desktop
+      postman
 
       #cli
       csvkit
@@ -57,10 +58,12 @@
       imagemagick
       dnsutils
       nmap
+      rsync
 
       #Productive programs
       obsidian
       libreoffice
+      okular
 
       #Social programs
       slack
@@ -77,6 +80,7 @@
       calibre-web
       gzip
       filezilla
+      file-roller
 
       #Necessary
       blueman

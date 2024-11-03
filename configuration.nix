@@ -72,9 +72,9 @@
     hostName = "nixos";
     wireless = {
       enable = true;
-      environmentFile = "/etc/secrets/wifi-secrets.env";
+      secretsFile = "/etc/secrets/wifi-secrets.conf";
       networks = {
-        BeeConnected.psk = "@PASS_HOME@";
+        BeeConnected.pskRaw = "ext:psk_home";
       };
     };
   };
@@ -152,8 +152,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

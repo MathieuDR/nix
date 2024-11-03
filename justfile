@@ -6,7 +6,7 @@ rebuild:
 	sudo nixos-rebuild switch --flake .#nixos
 
 hm:
-	home-manager switch --flake .#Thieu@nixos
+	home-manager switch --flake .#Thieu@nixos -b backup
 
 update:
 	nix flake update
