@@ -11,10 +11,10 @@ pkgs.writeShellScriptBin "powermenu" ''
   opt=$(echo -e $options | ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p "Power menu")
 
   case $opt in
-		$lock)
-			nohup hyprlock &
-			sleep 2
-		;;
+  $lock)
+  	nohup hyprlock &
+  	sleep 2
+  ;;
   	$quit)
   		hyprctl dispatch exit
   	;;

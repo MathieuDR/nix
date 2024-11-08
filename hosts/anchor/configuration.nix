@@ -1,5 +1,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
+  self,
   config,
   lib,
   pkgs,
@@ -246,7 +247,7 @@
   # Caddy CA for local stuff
   security.pki.certificates = [
     # HPI Certificate
-    (builtins.readFile ./secrets/hpi_ca.crt)
+    (builtins.readFile "${self}/secrets/hpi_ca.crt")
   ];
 
   # Open ports in the firewall.

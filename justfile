@@ -3,10 +3,10 @@ default:
     @just --list
 
 rebuild:
-	sudo nixos-rebuild switch --flake .#nixos
+	sudo nixos-rebuild switch --flake .#anchor
 
 hm:
-	home-manager switch --flake .#Thieu@nixos -b backup
+	home-manager switch --flake .#Thieu@anchor -b backup
 
 update:
 	nix flake update

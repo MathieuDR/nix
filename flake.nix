@@ -2,20 +2,28 @@
   description = "ySomic's NixOS flake";
 
   inputs = {
+    #TODO: What is this?
+    # global, so they can be `.follow`ed
+    systems.url = "github:nix-systems/default-linux";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
-
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    flake-compat.url = "github:edolstra/flake-compat";
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+      };
     };
 
     catppuccin.url = "github:catppuccin/nix";
@@ -57,8 +65,8 @@
           packages = [
             pkgs.alejandra
             pkgs.git
+            pkgs.just
             pkgs.nodePackages.prettier
-            config.packages.repl
           ];
           name = "dots";
           DIRENV_LOG_FORMAT = "";
@@ -118,3 +126,4 @@
 #     };
 #   };
 # }
+

@@ -4,7 +4,7 @@
   inputs,
   ...
 }: {
-  flake.homeConfiguration = let
+  flake.homeConfigurations = let
     # shorten paths
     inherit (inputs.home-manager.lib) homeManagerConfiguration;
 
@@ -15,8 +15,8 @@
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       inherit specialArgs;
       modules = [
-        inputs.catppuccin.homeManagerModules.catppuccin
-        ./anchor
+        # inputs.catppuccin.homeManagerModules.catppuccin
+        # ./anchor
       ];
     };
   };

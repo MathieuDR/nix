@@ -26,7 +26,7 @@ in {
 
         {
           timeout = 600; # 10 min
-					on-timeout = "loginctl lock-session";
+          on-timeout = "loginctl lock-session";
         }
       ];
     };
