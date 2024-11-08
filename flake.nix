@@ -8,6 +8,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -27,34 +37,84 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-  in {
-    nixosConfigurations = {
-      "nixos" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./configuration.nix
-        ];
-      };
-    };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
 
-    homeConfigurations = {
-      "Thieu@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs;
+      imports = [
+        ./hosts
+        ./home-manager
+        # ./modules
+        ./pre-commit-hooks.nix
+      ];
+
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
+        devShells.default = pkgs.mkShell {
+          packages = [
+            pkgs.alejandra
+            pkgs.git
+            pkgs.nodePackages.prettier
+            config.packages.repl
+          ];
+          name = "dots";
+          DIRENV_LOG_FORMAT = "";
+          shellHook = ''
+            ${config.pre-commit.installationScript}
+          '';
         };
-        modules = [
-          inputs.catppuccin.homeManagerModules.catppuccin
-          ./home.nix
-        ];
+
+        formatter = pkgs.alejandra;
       };
     };
-  };
 }
+#   outputs = {
+#     self,
+#     nixpkgs,
+#     home-manager,
+#     ...
+#   } @ inputs: let
+#     inherit (self) outputs;
+#   in {
+#     nixosConfigurations = {
+#       "anchor" = nixpkgs.lib.nixosSystem {
+#         specialArgs = {inherit inputs;};
+#         modules = [
+#           ./configuration.nix
+#         ];
+#       };
+#
+#       "wanderer" = nixpkgs.lib.nixosSystem {
+#         specialArgs = {inherit inputs;};
+#         modules = [];
+#       };
+#     };
+#
+#     homeConfigurations = {
+#       "thieu@anchor" = home-manager.lib.homeManagerConfiguration {
+#         pkgs = nixpkgs.legacyPackages.x86_64-linux;
+#         extraSpecialArgs = {
+#           inherit inputs outputs;
+#         };
+#         modules = [
+#           inputs.catppuccin.homeManagerModules.catppuccin
+#           ./home.nix
+#         ];
+#       };
+#
+#       "mathieu@wanderer" = home-manager.lib.homeManagerConfiguration {
+#         pkgs = nixpkgs.legacyPackages.x86_64-linux;
+#         extraSpecialArgs = {
+#           inherit inputs;
+#         };
+#         modules = [
+#           inputs.catppuccin.homeManagerModules.catppuccin
+#           ./home.nix
+#         ];
+#       };
+#     };
+#   };
+# }

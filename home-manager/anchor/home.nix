@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   lib,
   inputs,
@@ -12,7 +13,7 @@
   };
 
   imports = [
-    ./home-manager
+    "${self}/home-manager-legacy"
   ];
 
   home = {
