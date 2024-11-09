@@ -1,3 +1,6 @@
 {
-  imports = [];
+  imports = [
+    ./networking
+    ./common-packages.nix
+  ];
 }

@@ -12,12 +12,19 @@
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
+
+    mkSystem = hostname:
+      nixosSystem {
+        specialArgs = {
+          inherit inputs self hostname;
+        };
+        modules = [
+          "${self}/configuration"
+          ./${hostname}
+        ];
+      };
   in {
-    anchor = nixosSystem {
-      inherit specialArgs;
-      modules = [
-        ./anchor
-      ];
-    };
+    anchor = mkSystem "anchor";
+    # wanderer = mkSystem "wanderer";
   };
 }

@@ -70,13 +70,9 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "anchor";
     wireless = {
       enable = true;
-      secretsFile = "/etc/secrets/wifi-secrets.conf";
-      networks = {
-        BeeConnected.pskRaw = "ext:psk_home";
-      };
     };
   };
   # Pick only one of the below networking options.
