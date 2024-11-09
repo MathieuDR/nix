@@ -1,22 +1,21 @@
 {
   self,
-  nixpkgs,
   inputs,
   ...
 }: {
   flake.homeConfigurations = let
-    # shorten paths
     inherit (inputs.home-manager.lib) homeManagerConfiguration;
-
-    # get these into the module system
-    specialArgs = {inherit inputs self;};
+    extraSpecialArgs = {
+      inherit inputs self;
+      nixpkgs = inputs.nixpkgs;
+    };
   in {
     "thieu@anchor" = homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      inherit specialArgs;
+      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; # Use inputs.nixpkgs instead
+      inherit extraSpecialArgs;
       modules = [
-        # inputs.catppuccin.homeManagerModules.catppuccin
-        # ./anchor
+        inputs.catppuccin.homeManagerModules.catppuccin
+        ./anchor
       ];
     };
   };

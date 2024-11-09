@@ -4,7 +4,7 @@
   inputs = {
     #TODO: What is this?
     # global, so they can be `.follow`ed
-    systems.url = "github:nix-systems/default-linux";
+    # systems.url = "github:nix-systems/default-linux";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -32,7 +32,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.system.follows = "system";
+    };
+
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -79,51 +84,3 @@
       };
     };
 }
-#   outputs = {
-#     self,
-#     nixpkgs,
-#     home-manager,
-#     ...
-#   } @ inputs: let
-#     inherit (self) outputs;
-#   in {
-#     nixosConfigurations = {
-#       "anchor" = nixpkgs.lib.nixosSystem {
-#         specialArgs = {inherit inputs;};
-#         modules = [
-#           ./configuration.nix
-#         ];
-#       };
-#
-#       "wanderer" = nixpkgs.lib.nixosSystem {
-#         specialArgs = {inherit inputs;};
-#         modules = [];
-#       };
-#     };
-#
-#     homeConfigurations = {
-#       "thieu@anchor" = home-manager.lib.homeManagerConfiguration {
-#         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-#         extraSpecialArgs = {
-#           inherit inputs outputs;
-#         };
-#         modules = [
-#           inputs.catppuccin.homeManagerModules.catppuccin
-#           ./home.nix
-#         ];
-#       };
-#
-#       "mathieu@wanderer" = home-manager.lib.homeManagerConfiguration {
-#         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-#         extraSpecialArgs = {
-#           inherit inputs;
-#         };
-#         modules = [
-#           inputs.catppuccin.homeManagerModules.catppuccin
-#           ./home.nix
-#         ];
-#       };
-#     };
-#   };
-# }
-
