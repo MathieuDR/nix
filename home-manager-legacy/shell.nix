@@ -22,10 +22,10 @@
       userName = "MathieuDR";
       userEmail = "mathieu@deraedt.dev";
 
-      signing = {
-        signByDefault = true;
-        #TODO: SECRET
-      };
+      # signing = {
+      #   signByDefault = true;
+      #   #TODO: SECRET
+      # };
 
       extraConfig = {
         init.defaultBranch = "main";
