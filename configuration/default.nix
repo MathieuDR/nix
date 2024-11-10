@@ -4,6 +4,9 @@
     ./common-packages.nix
   ];
 
+  # I imagine this is common...
+  hardware.graphics.enable = true;
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
   time.timeZone = "Europe/Berlin";
 

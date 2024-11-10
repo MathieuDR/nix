@@ -1,11 +1,5 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -20,26 +14,10 @@
     };
   };
 
-  #GPU stuff
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "libXNVCtrl" # nvidia
-    ];
-
-  hardware = {
-    graphics = {
-      enable = true;
-    };
-
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      open = false;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
+  ysomic.hardware.nvidia.enable = true;
+  ysomic.wayland.hyprland = {
+    enable = true;
+    hyprlock.enable = false;
   };
 
   networking = {
@@ -47,16 +25,6 @@
       enable = true;
     };
   };
-
-  # Configure keymap in X11
-  services.xserver = {
-    videoDrivers = ["nvidia"]; # enables nvidia drivers in xorg and wayland
-  };
-
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
-    egl-wayland
-  ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
