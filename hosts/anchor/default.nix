@@ -1,8 +1,8 @@
 {self, ...}: let
-  dir = "${self}/configuration";
+  opt = "${self}/configuration/optional";
 in {
   imports = [
     ./configuration.nix
-    "${dir}/gaming.nix"
+    "${opt}/gaming.nix"
   ];
 }
