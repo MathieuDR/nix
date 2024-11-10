@@ -17,6 +17,23 @@
     gh.enable = true;
     fzf.enable = true;
 
+    git = {
+      enable = true;
+      userName = "MathieuDR";
+      userEmail = "mathieu@deraedt.dev";
+
+      signing = {
+        signByDefault = true;
+        #TODO: SECRET
+      };
+
+      extraConfig = {
+        init.defaultBranch = "main";
+        push.autoSetupRemote = true;
+        pull.rebase = true;
+      };
+    };
+
     lsd = {
       enable = true;
       enableAliases = true;

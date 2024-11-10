@@ -66,7 +66,7 @@ in {
           rewrite = {
             "(.*) — Ablaze Floorp" = "󰈹 $1";
             "(.*) - Discord" = "  $1";
-            ".*Thieu\@nixos: (.*)" = "  $1";
+            ".*thieu\@anchor: (.*)" = "  $1";
           };
           separate-outputs = true;
         };

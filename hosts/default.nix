@@ -6,6 +6,7 @@
   flake.nixosConfigurations = let
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
+    config = import "${self}/configuration";
     mkSystem = {
       hostname,
       user,
@@ -16,14 +17,14 @@
         };
         modules = [
           self.nixosModules.default
-          "${self}/configuration"
+          config.nixos.shared
           ./${hostname}
         ];
       };
   in {
     anchor = mkSystem {
       hostname = "anchor";
-      user = "Thieu";
+      user = "thieu";
     };
     # wanderer = mkSystem "wanderer";
   };

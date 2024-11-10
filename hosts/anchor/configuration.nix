@@ -1,9 +1,5 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {pkgs, ...}: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     binfmt.emulatedSystems = ["aarch64-linux"];

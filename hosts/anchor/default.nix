@@ -1,11 +1,12 @@
 {self, ...}: let
-  opt = "${self}/configuration/optional";
+  config = import "${self}/configuration";
 in {
   imports = [
+    ./hardware-configuration.nix
     ./configuration.nix
-    "${opt}/gaming.nix"
-    "${opt}/programs/1password.nix"
-    "${opt}/programs/docker.nix"
-    "${opt}/programs/thunar.nix"
+    config.nixos.optional.gaming
+    config.nixos.optional.programs.onepassword
+    config.nixos.optional.programs.docker
+    config.nixos.optional.programs.thunar
   ];
 }
