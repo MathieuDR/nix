@@ -14,6 +14,7 @@
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; # Use inputs.nixpkgs instead
       inherit extraSpecialArgs;
       modules = [
+        self.homeManagerModules.default
         inputs.catppuccin.homeManagerModules.catppuccin
         ./anchor
       ];

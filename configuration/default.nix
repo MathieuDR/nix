@@ -9,9 +9,12 @@
 
   i18n.defaultLocale = "en_GB.UTF-8";
   console = {
-    #font = "Lat2-Terminus16";
-    #keyMap = "us-intl";
-    useXkbConfig = true; # use xkb.options in tty.
+    useXkbConfig = true;
+  };
+
+  services.xserver = {
+    xkb.layout = "us";
+    xkb.variant = "intl";
   };
 
   # Automounting usb

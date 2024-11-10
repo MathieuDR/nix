@@ -57,7 +57,7 @@
       imports = [
         ./hosts
         ./home-manager
-        # ./modules
+        ./modules
         ./pre-commit-hooks.nix
       ];
 

@@ -48,22 +48,9 @@
     };
   };
 
-  # Enable Hyprland
-  security.pam.services.hyprlock = {};
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    xwayland.enable = true;
-  };
-
-  services.displayManager.sddm.wayland.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
-    enable = false;
     videoDrivers = ["nvidia"]; # enables nvidia drivers in xorg and wayland
-    xkb.layout = "us";
-    xkb.variant = "intl";
   };
 
   # List packages installed in system profile. To search, run:

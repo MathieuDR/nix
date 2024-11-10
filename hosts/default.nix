@@ -22,6 +22,7 @@
           inherit inputs self hostname user;
         };
         modules = [
+          self.nixosModules.default
           "${self}/configuration"
           ./${hostname}
         ];
