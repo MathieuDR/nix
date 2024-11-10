@@ -1,4 +1,4 @@
-{pkgs}: {
+{pkgs, ...}: {
   # Thunar
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [

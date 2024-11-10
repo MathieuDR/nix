@@ -23,7 +23,7 @@
   in {
     anchor = mkSystem {
       hostname = "anchor";
-      user = "thieu";
+      user = "Thieu";
     };
     # wanderer = mkSystem "wanderer";
   };

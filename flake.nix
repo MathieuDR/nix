@@ -71,6 +71,7 @@
             pkgs.alejandra
             pkgs.git
             pkgs.just
+            pkgs.fzf
             pkgs.nodePackages.prettier
           ];
           name = "dots";

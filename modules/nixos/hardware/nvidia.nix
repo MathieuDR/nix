@@ -14,12 +14,11 @@ in {
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "nvidia-x11"
-        "nvidia-settings"
-        "libXNVCtrl" # nvidia
-      ];
+    allowedUnfree = [
+      "nvidia-x11"
+      "nvidia-settings"
+      "libXNVCtrl" # nvidia
+    ];
 
     # enables nvidia drivers in xorg and wayland
     services.xserver = {

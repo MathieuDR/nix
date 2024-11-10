@@ -1,13 +1,9 @@
-{
-  lib,
-  user,
-  ...
-}: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "1password"
-      "1password-cli"
-    ];
+{user, ...}: {
+  allowedUnfree = [
+    "1password"
+    "1password-cli"
+    "1password-gui"
+  ];
 
   programs._1password.enable = true;
   programs._1password-gui = {

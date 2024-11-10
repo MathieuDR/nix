@@ -10,7 +10,7 @@
       nixpkgs = inputs.nixpkgs;
     };
   in {
-    "thieu@anchor" = homeManagerConfiguration {
+    "Thieu@anchor" = homeManagerConfiguration {
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; # Use inputs.nixpkgs instead
       inherit extraSpecialArgs;
       modules = [
