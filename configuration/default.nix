@@ -2,6 +2,9 @@
   imports = [
     ./networking
     ./common-packages.nix
+    ./security.nix
+    ./sound.nix
+    ./user.nix
   ];
 
   # I imagine this is common...
