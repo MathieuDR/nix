@@ -58,6 +58,7 @@
         ./hosts
         ./home-manager
         ./modules
+        ./pkgs
         ./pre-commit-hooks.nix
       ];
 
@@ -73,6 +74,7 @@
             pkgs.just
             pkgs.fzf
             pkgs.nodePackages.prettier
+            (config.packages.repl)
           ];
           name = "dots";
           DIRENV_LOG_FORMAT = "";
