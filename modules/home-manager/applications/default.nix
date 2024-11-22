@@ -22,9 +22,6 @@ in {
         terminals = {
           kitty = pkgs.kitty;
         };
-        fileManagers = {
-          thunar = pkgs.xfce.thunar;
-        };
       };
     };
 
@@ -42,24 +39,6 @@ in {
         Default terminal emulator.
         Supported values: ${builtins.concatStringsSep ", " (builtins.attrNames config.ysomic.applications.defaults.supported.terminals)}
       '';
-    };
-
-    fileManager = lib.mkOption {
-      type = lib.types.enum (builtins.attrNames config.ysomic.applications.defaults.supported.fileManagers);
-      default = "thunar";
-      description = ''
-        Default file manager.
-        Supported values: ${builtins.concatStringsSep ", " (builtins.attrNames config.ysomic.applications.defaults.supported.fileManagers)}
-      '';
-    };
-
-    fileManagerPlugins = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      default = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-      description = "Plugins to enable for the filemanager, for example Thunar";
     };
 
     pdfReader = lib.mkOption {
@@ -124,12 +103,6 @@ in {
         FILE_MANAGER = lib.getExe fileManagerPackage;
       };
     }
-
-    ## FILE MANAGERS
-    (lib.mkIf (cfg.fileManager == "thunar") {
-      programs.thunar.enable = true;
-      programs.thunar.plugins = cfg.fileManagerPlugins;
-    })
 
     ## TERMINALS
     (lib.mkIf (cfg.terminal == "kitty") {
