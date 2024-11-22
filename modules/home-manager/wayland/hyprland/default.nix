@@ -1,4 +1,4 @@
-# Current, naive implementation
+# ./modules/home-manager/wayland/hyprland/default.nix
 {
   pkgs,
   lib,
@@ -6,7 +6,77 @@
   ...
 }: let
   cfg = config.ysomic.wayland.hyprland;
+  defaultsCfg = config.ysomic.applications.defaults;
+  startupScript = let
+    hyprlockCommand =
+      if cfg.hyprlock.lockOnStartup
+      then "nohup hyprlock &"
+      else "";
+  in
+    pkgs.pkgs.writeShellScriptBin "ysomic_hyprland_init" ''
+      waybar &
+      swww-daemon &
+      copyq --start-server &
+      ${cfg.startupScript.preInit}
+      sleep 0.5 &
+
+      ${cfg.startupScript.init}
+      sleep 0.5 &
+
+      ${pkgs.swww}/bin/swww img ${cfg.wallpaper} &
+      sleep 0.5 &
+
+      ${cfg.startupScript.postInit}
+      ${hyprlockCommand}
+    '';
 in {
+  options.ysomic.wayland.hyprland = {
+    wallpaper = lib.mkOption {
+      type = lib.types.path;
+      description = "Path to wallpaper image";
+      default = pkgs.writeText "default-wallpaper.png" "";
+    };
+
+    startupScript = {
+      preInit = lib.mkOption {
+        type = lib.types.lines;
+        default = "";
+        description = "PreInit script to run at startup";
+        example = ''
+          waybar &
+          swww-daemon &
+          copyq --start-server &
+        '';
+      };
+
+      init = lib.mkOption {
+        type = lib.types.lines;
+        default = "";
+        description = "The init script to run at startup";
+        example = ''
+          ...
+        '';
+      };
+
+      postInit = lib.mkOption {
+        type = lib.types.lines;
+        default = "";
+        description = "postInit script to run at startup";
+        example = ''
+          hyprctl dispatch workspace 4
+        '';
+      };
+    };
+
+    hyprlock = {
+      lockOnStartup = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "If hyprlock should be started together with Hyprland";
+      };
+    };
+  };
+
   config = lib.mkMerge [
     #
     (lib.mkIf cfg.enable {
@@ -14,6 +84,8 @@ in {
         enable = true;
 
         settings = {
+          exec-once = ''${startupScript}/bin/ysomic_hyprland_init'';
+
           general = {
             layout = "dwindle";
             gaps_in = 5;
@@ -95,9 +167,9 @@ in {
 
           bind = [
             # program shortcuts
-            "$mainMod, b, exec, ${pkgs.floorp}/bin/floorp"
-            "$mainMod, t, exec, ${pkgs.kitty}/bin/kitty"
-            "$mainMod, f, exec, thunar"
+            "$mainMod, b, exec, ${lib.getExe defaultsCfg.browser}"
+            "$mainMod, t, exec, ${lib.getExe defaultsCfg.supported.terminals.${defaultsCfg.terminal}}"
+            "$mainMod, f, exec, ${lib.getExe defaultsCfg.supported.fileManagers.${defaultsCfg.fileManager}}"
             "$mainMod, e, fullscreen"
             "$mainMod, SLASH, exec, rofi -modes combi,calc -show combi -combi-modes window,drun"
             "$mainMod SHIFT, SLASH, exec, rofi -show drun"
