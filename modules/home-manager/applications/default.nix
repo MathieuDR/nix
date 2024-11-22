@@ -14,14 +14,11 @@ in {
     enable = lib.mkEnableOption "Default application configuration";
 
     # Helpers for other modules
-    supported = lib.mkOption {
+    supported.terminals = lib.mkOption {
       type = lib.types.attrs;
-      # Won't show up in documentation
       internal = true;
       default = {
-        terminals = {
-          kitty = pkgs.kitty;
-        };
+        kitty = pkgs.kitty;
       };
     };
 

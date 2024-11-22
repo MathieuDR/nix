@@ -11,6 +11,7 @@
   };
 
   ysomic.hardware.nvidia.enable = true;
+  ysomic.applications.defaults.fileManager = "thunar";
   ysomic.wayland.hyprland = {
     enable = true;
     hyprlock.enable = false;
