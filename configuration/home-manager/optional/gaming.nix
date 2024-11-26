@@ -3,6 +3,7 @@
     packages = with pkgs; [
       mangohud
       protonup
+      (prismlauncher.override {jdks = [jdk8];})
     ];
 
     sessionVariables = {

@@ -16,6 +16,7 @@
       # rofi-bluetooth
     ];
   };
+
   home.packages = with pkgs; [
     rofimoji
     rofi-bluetooth

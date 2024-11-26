@@ -131,10 +131,4 @@ in {
       flavor = flavor;
     };
   };
-
-  wayland.windowManager.hyprland.catppuccin = {
-    enable = true;
-    accent = accent;
-    flavor = flavor;
-  };
 }

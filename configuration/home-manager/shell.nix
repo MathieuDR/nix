@@ -1,4 +1,4 @@
-{...}: {
+{self, ...}: {
   programs = {
     direnv = {
       enable = true;
@@ -9,7 +9,7 @@
     oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
-      settings = builtins.fromJSON (builtins.readFile ./dotfiles/.ysomic.omp.json);
+      settings = builtins.fromJSON (builtins.readFile "${self}/data/dotfiles/.ysomic.omp.json");
     };
 
     jq.enable = true;
@@ -50,22 +50,7 @@
     bash = {
       enable = true;
       historySize = 2500;
-      profileExtra = ''
-        if [ "$(tty)" = "/dev/tty1" ]; then
-        			Hyprland
-        fi
-      '';
       bashrcExtra = ''
-        function gfnb() {
-        	if [ -z "$1" ]; then
-        	  echo "Usage: gfnb <branch_name>"
-        	  return 1
-        	fi
-
-        	gfp
-        	gnb
-        }
-
         function gfp() {
         	git fetch && git pull
         }

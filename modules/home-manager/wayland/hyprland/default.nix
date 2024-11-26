@@ -7,34 +7,59 @@
 }: let
   cfg = config.ysomic.wayland.hyprland;
   defaultsCfg = config.ysomic.applications.defaults;
-  startupScript = let
-    hyprlockCommand =
-      if cfg.hyprlock.lockOnStartup
-      then "nohup hyprlock &"
-      else "";
-  in
-    pkgs.pkgs.writeShellScriptBin "ysomic_hyprland_init" ''
-      waybar &
-      swww-daemon &
-      copyq --start-server &
-      ${cfg.startupScript.preInit}
-      sleep 0.5 &
+  startupScript = pkgs.writeShellScriptBin "ysomic_hyprland_init" ''
+    waybar &
+    swww-daemon &
+    copyq --start-server &
+    ${cfg.startupScript.preInit}
+    sleep 0.5 &
 
-      ${cfg.startupScript.init}
-      sleep 0.5 &
+    ${cfg.startupScript.init}
+    sleep 0.5 &
 
-      ${pkgs.swww}/bin/swww img ${cfg.wallpaper} &
-      sleep 0.5 &
+    ${pkgs.swww}/bin/swww img ${cfg.wallpaper} &
+    sleep 0.5 &
 
-      ${cfg.startupScript.postInit}
-      ${hyprlockCommand}
-    '';
+    ${cfg.startupScript.postInit}
+  '';
 in {
+  imports = [
+    ./hyprlock.nix
+    ./hypridle.nix
+  ];
+
   options.ysomic.wayland.hyprland = {
+    # Enable in shared module
     wallpaper = lib.mkOption {
       type = lib.types.path;
       description = "Path to wallpaper image";
       default = pkgs.writeText "default-wallpaper.png" "";
+    };
+
+    autoStart = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "To auto-start hyprland on tty1 on bash";
+    };
+
+    theming = {
+      enabled = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "To auto-start hyprland on tty1 on bash";
+      };
+
+      flavor = lib.mkOption {
+        type = lib.types.string;
+        default = "mocha";
+        description = "Catppuccin flavor for theming";
+      };
+
+      accent = lib.mkOption {
+        type = lib.types.string;
+        default = "mauve";
+        description = "Catppuccin accent colour for theming";
+      };
     };
 
     startupScript = {
@@ -67,18 +92,9 @@ in {
         '';
       };
     };
-
-    hyprlock = {
-      lockOnStartup = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "If hyprlock should be started together with Hyprland";
-      };
-    };
   };
 
   config = lib.mkMerge [
-    #
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland = {
         enable = true;
@@ -239,6 +255,8 @@ in {
           playerctl
           grimblast
           swappy
+
+          wl-clipboard
         ];
       };
 
@@ -262,5 +280,25 @@ in {
         enable = true;
       };
     })
+
+    (lib.mkIf cfg.enable
+      && cfg.autoStart {
+        bash.profileExtra = ''
+          if [ "$(tty)" = "/dev/tty1" ]; then
+            Hyprland
+          fi
+        '';
+      })
+
+    # This uses the catppuccin plugin.
+    # which is not necessarily 'imported'
+    (lib.mkIf cfg.enable
+      && cfg.theming.enabled {
+        wayland.windowManager.hyprland.catppuccin = {
+          enable = true;
+          accent = cfg.theming.accent;
+          flavor = cfg.theming.flavor;
+        };
+      })
   ];
 }
