@@ -1,18 +1,16 @@
 {
-  optional = {
-    gaming = import ./gaming.nix;
+  gaming = import ./gaming.nix;
 
-    theming = {
-      general = import ./theming/general.nix;
-      spotify = import ./theming/spotify.nix;
-    };
+  theming = {
+    general = import ./theming/general.nix;
+    spotify = import ./theming/spotify.nix;
+  };
 
-    fixes = {
-      discord = import ./fixes/discord.nix;
-    };
+  fixes = {
+    discord = import ./fixes/discord.nix;
+  };
 
-    programs = {
-      copyq = import ./programs/copyq.nix;
-    };
+  programs = {
+    copyq = import ./programs/copyq.nix;
   };
 }
