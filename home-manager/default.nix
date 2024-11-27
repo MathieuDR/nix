@@ -17,7 +17,7 @@
       modules = [
         self.homeManagerModules.default
         inputs.catppuccin.homeManagerModules.catppuccin
-        config.home-manager
+        config.home-manager.shared
         ./anchor
       ];
     };

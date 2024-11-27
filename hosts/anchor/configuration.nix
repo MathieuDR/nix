@@ -1,4 +1,3 @@
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {pkgs, ...}: {
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;

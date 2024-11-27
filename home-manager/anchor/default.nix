@@ -1,8 +1,7 @@
 {self, ...}: let
-  optional = import "${self}/configuration".home-manager.optional;
+  optional = (import "${self}/configuration").home-manager.optional;
 in {
   imports = [
-    ./home.nix
     ./desktop-environment.nix
 
     optional.gaming
