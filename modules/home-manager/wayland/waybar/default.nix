@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.programs.waybar-custom;
+  cfg = config.ysomic.wayland.waybar;
 in {
-  options.programs.waybar-custom = {
+  options.ysomic.wayland.waybar = {
     enable = mkEnableOption "Custom Waybar configuration";
 
     battery = mkOption {
@@ -35,30 +35,6 @@ in {
         default = "bold";
         description = "Font weight";
       };
-
-      # opacity = mkOption {
-      #   type = types.str;
-      #   default = "0.90";
-      #   description = "Opacity value";
-      # };
-      #
-      # text_color = mkOption {
-      #   type = types.str;
-      #   default = "#cdd6f4";
-      #   description = "Default text color";
-      # };
-      #
-      # accent = mkOption {
-      #   type = types.str;
-      #   default = "89b4fa";
-      #   description = "Accent color";
-      # };
-      #
-      # background = mkOption {
-      #   type = types.str;
-      #   default = "11111B";
-      #   description = "Background color";
-      # };
     };
   };
 
