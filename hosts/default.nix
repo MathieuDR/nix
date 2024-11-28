@@ -16,6 +16,7 @@
           inherit inputs self hostname user;
         };
         modules = [
+          inputs.agenix.nixosModules.default
           self.nixosModules.default
           config.nixos.shared
           ./${hostname}
