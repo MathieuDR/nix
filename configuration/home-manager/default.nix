@@ -1,9 +1,12 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   imports = [
+    ./shell.nix
+    ./rofi.nix
     ./scripts
   ];
 
@@ -31,7 +34,7 @@
       httpie-desktop
       postman
 
-      #nixvom package
+      #nixvim package
       (inputs.yvim.packages.x86_64-linux.default)
 
       #cli

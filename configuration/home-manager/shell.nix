@@ -9,7 +9,7 @@
     oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
-      settings = builtins.fromJSON (builtins.readFile "${self}/data/dotfiles/.ysomic.omp.json");
+      settings = builtins.fromJSON (builtins.readFile "${self}/data/.ysomic.omp.json");
     };
 
     jq.enable = true;

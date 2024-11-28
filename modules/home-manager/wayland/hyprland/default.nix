@@ -281,24 +281,22 @@ in {
       };
     })
 
-    (lib.mkIf cfg.enable
-      && cfg.autoStart {
-        bash.profileExtra = ''
-          if [ "$(tty)" = "/dev/tty1" ]; then
-            Hyprland
-          fi
-        '';
-      })
+    (lib.mkIf (cfg.enable && cfg.autoStart) {
+      programs.bash.profileExtra = ''
+        if [ "$(tty)" = "/dev/tty1" ]; then
+          Hyprland
+        fi
+      '';
+    })
 
     # This uses the catppuccin plugin.
     # which is not necessarily 'imported'
-    (lib.mkIf cfg.enable
-      && cfg.theming.enabled {
-        wayland.windowManager.hyprland.catppuccin = {
-          enable = true;
-          accent = cfg.theming.accent;
-          flavor = cfg.theming.flavor;
-        };
-      })
+    (lib.mkIf (cfg.enable && cfg.theming.enabled) {
+      wayland.windowManager.hyprland.catppuccin = {
+        enable = true;
+        accent = cfg.theming.accent;
+        flavor = cfg.theming.flavor;
+      };
+    })
   ];
 }
