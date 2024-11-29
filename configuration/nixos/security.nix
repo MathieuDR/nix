@@ -1,8 +1,4 @@
-{
-  pkgs,
-  self,
-  ...
-}: {
+{self, ...}: {
   # local caddy certificate
   security.pki.certificates = [
     # HPI Certificate
