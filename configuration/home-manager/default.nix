@@ -7,8 +7,8 @@
   imports = [
     ./shell.nix
     ./rofi.nix
+    ./security.nix
     ./scripts
-    ./security
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -19,7 +19,6 @@
     username = "thieu";
     homeDirectory = "/home/thieu";
 
-    # Home Manager can also manage your environment variables through
     sessionVariables = {
       EDITOR = "nvim";
     };
