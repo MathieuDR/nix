@@ -8,6 +8,7 @@
     ./shell.nix
     ./rofi.nix
     ./scripts
+    ./security
   ];
 
   nixpkgs.config.allowUnfree = true;
