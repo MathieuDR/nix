@@ -7,4 +7,5 @@ in {
 
   # common
   "common/gpg.age".publicKeys = all_recipients;
+  "common/gpg_pub.age".publicKeys = all_recipients;
 }
