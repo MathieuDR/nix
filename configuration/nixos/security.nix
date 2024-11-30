@@ -1,9 +1,13 @@
-{self, ...}: {
+{
+  self,
+  hostname,
+  ...
+}: {
   # local caddy certificate
   security.pki.certificates = [
     # HPI Certificate
-    (builtins.readFile "${self}/data/secrets/hpi_ca.crt")
+    (builtins.readFile "${self}/data/secrets/certificates/hpi_ca.crt")
   ];
 
-  # age.identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
+  age.identityPaths = ["/etc/${hostname}/agenix/agenix_${hostname}_system"];
 }

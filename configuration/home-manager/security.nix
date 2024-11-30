@@ -6,7 +6,7 @@
   ...
 }: let
   secretsDir = "${self}/data/secrets";
-  commonPub = "${secretsDir}/common/pub.gpg";
+  commonPub = "${secretsDir}/public_keys/gpg.pub";
 
   # We create a trigger file on activation to make sure we only run once per activation
   # triggerFile = "${config.home.homeDirectory}/.local/state/gpg-import-needed";
