@@ -1,5 +1,5 @@
 let
-  anchor = builtins.readFile ./id_rsa.pub;
+  anchor = builtins.readFile ./agenix-anchor.pub;
   all_recipients = [anchor];
 in {
   # network

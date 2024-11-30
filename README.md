@@ -92,3 +92,11 @@ This configuration is inspired by and borrows from:
 - [Home Manager Manual](https://nix-community.github.io/home-manager/)
 - [Nix Flakes](https://nixos.wiki/wiki/Flakes)
 - [Hyprland Documentation](https://wiki.hyprland.org/)
+
+# Bootstrapping
+
+*Work in progress*
+1. Create an agenix shh key
+2. add it the pub key to `data/secrets/secrets.nix`
+3. use the keepass bootstrap to get google pw
+4. download full keepass

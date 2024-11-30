@@ -114,10 +114,13 @@
 in {
   inherit assertions;
 
-  age.secrets = {
-    "common/gpg" = {
-      file = "${secretsDir}/common/gpg.age";
-      path = "${config.home.homeDirectory}/secrets/gpg/common.gpg.temp";
+  age = {
+    identityPaths = ["~/.config/agenix/agenix-key"];
+    secrets = {
+      "common/gpg" = {
+        file = "${secretsDir}/common/gpg.age";
+        path = "${config.home.homeDirectory}/secrets/gpg/common.gpg.temp";
+      };
     };
   };
 
