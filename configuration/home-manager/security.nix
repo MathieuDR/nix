@@ -22,14 +22,18 @@
 
   # Cleanup script, that will be ran in a separate systemd service
   # The reason it's in a separate one is, that we guarantee the run onSuccess or OnFailure.
-  # If we don't do this, we need to jump around hoops and trap exits to make sure we shred the decrypted keys
+  # If we don't do this, we need to jump around hoops and trap exits to make sure we remove the link / shred of the decrypted keys
   cleanupScriptFunc = keys:
     lib.concatMapStrings (key: ''
-        if [ -f "${config.age.secrets."${key}".path}" ]; then
-        echo "Will shred GPG Key: ${config.age.secrets."${key}".path}"
-        ${pkgs.coreutils}/bin/shred -u "${config.age.secrets."${key}".path}"
+      keyPath="${config.age.secrets."${key}".path}"
+      if [ -L "$keyPath" ]; then
+        echo "Will unlink symlink of GPG Key: $keyPath"
+        ${pkgs.coreutils}/bin/unlink "$keyPath"
+      elif [ -f "$keyPath" ]; then
+        echo "Will shred GPG Key: $keyPath"
+        ${pkgs.coreutils}/bin/shred -u "$keyPath"
       else
-        echo "Key not found: ${config.age.secrets."${key}".path}"
+        echo "Key not found: $keyPath"
       fi
     '')
     keys;
@@ -72,14 +76,17 @@
     import_gpg_key() {
       local key_path="$1"
       if [ -f "$key_path" ]; then
+        echo "Will import key: $key_path"
         local gpg_output
-        gpg_output=$(run ${pkgs.gnupg}/bin/gpg --import "$key_path" 2>&1)
+        gpg_output=$(${pkgs.gnupg}/bin/gpg --import "$key_path" 2>&1)
         local gpg_exit_code=$?
+
         if echo "$gpg_output" | grep -q "not changed"; then
           echo "Warning: Key $key_name already exists and wasn't modified"
         elif echo "$gpg_output" | grep -q "secret key already exists"; then
           echo "Warning: Secret key $key_name already exists"
         fi
+
         if [ $gpg_exit_code -ne 0 ]; then
           echo "Error: Failed to import GPG key: $key_path"
           echo "GPG output: $gpg_output"
@@ -87,6 +94,7 @@
         else
           echo "GPG imported: $key_path"
         fi
+
       else
         echo "Path not found: $key_path"
         return 1
@@ -115,7 +123,7 @@ in {
   inherit assertions;
 
   age = {
-    identityPaths = ["~/.config/agenix/agenix-key"];
+    identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
     secrets = {
       "common/gpg" = {
         file = "${secretsDir}/common/gpg.age";
