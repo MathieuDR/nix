@@ -11,6 +11,7 @@
   mkGpgImportsWithFunc = keys: let
     importStatements =
       lib.concatMapStrings (key: ''
+        echo "Attempting to import key: ${key}"
         import_gpg_key "${config.age.secrets.${key}.path}"
       '')
       keys;
@@ -19,7 +20,7 @@
       local key_path="$1"
       if [ -f "$key_path" ]; then
         local gpg_output
-        gpg_output=$(${pkgs.gnupg}/bin/gpg --import "$key_path" 2>&1)
+        gpg_output=$(run ${pkgs.gnupg}/bin/gpg --import "$key_path" 2>&1)
         local gpg_exit_code=$?
 
         if echo "$gpg_output" | grep -q "not changed"; then
@@ -32,10 +33,15 @@
           echo "Error: Failed to import GPG key: $key_path"
           echo "GPG output: $gpg_output"
           failed=1
+        else
+          echo "GPG imported: $key_path"
         fi
 
+        echo "Will shred GPG Key: $key_path"
         run ${pkgs.coreutils}/bin/shred -u "$key_path"
         [ "$failed" = "1" ] && return 1
+      else
+        echo "Path not found: $key_path"
       fi
     }
 
@@ -82,7 +88,7 @@ in {
   };
 
   home.activation = {
-    gpgImportKeys =
+    importPrivateGpgKeys =
       lib.hm.dag.entryAfter ["writeBoundary"]
       (mkGpgImportsWithFunc gpgKeys);
   };
