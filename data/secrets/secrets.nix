@@ -1,5 +1,5 @@
 let
-  anchor = "";
+  anchor = builtins.readFile ./id_rsa.pub;
   all_recipients = [anchor];
 in {
   # network
@@ -7,5 +7,4 @@ in {
 
   # common
   "common/gpg.age".publicKeys = all_recipients;
-  "common/gpg_pub.age".publicKeys = all_recipients;
 }

@@ -6,7 +6,7 @@
   ...
 }: let
   secretsDir = "${self}/data/secrets";
-  commonPub = "${secretsDir}/common_pub.gpg";
+  commonPub = "${secretsDir}/common/pub.gpg";
 
   mkGpgImportsWithFunc = keys: let
     importStatements =
@@ -18,10 +18,22 @@
     import_gpg_key() {
       local key_path="$1"
       if [ -f "$key_path" ]; then
-        if ! run ${pkgs.gnupg}/bin/gpg --import "$key_path"; then
-          echo "Failed to import GPG key: $key_path"
+        local gpg_output
+        gpg_output=$(${pkgs.gnupg}/bin/gpg --import "$key_path" 2>&1)
+        local gpg_exit_code=$?
+
+        if echo "$gpg_output" | grep -q "not changed"; then
+          echo "Warning: Key $key_name already exists and wasn't modified"
+        elif echo "$gpg_output" | grep -q "secret key already exists"; then
+          echo "Warning: Secret key $key_name already exists"
+        fi
+
+        if [ $gpg_exit_code -ne 0 ]; then
+          echo "Error: Failed to import GPG key: $key_path"
+          echo "GPG output: $gpg_output"
           failed=1
         fi
+
         run ${pkgs.coreutils}/bin/shred -u "$key_path"
         [ "$failed" = "1" ] && return 1
       fi
@@ -48,7 +60,7 @@ in {
 
   age.secrets = {
     "common/gpg" = {
-      file = "${secretsDir}/gpg.age";
+      file = "${secretsDir}/common/gpg.age";
       path = "${config.home.homeDirectory}/secrets/gpg/common.gpg.temp";
     };
   };
