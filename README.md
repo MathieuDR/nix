@@ -96,7 +96,7 @@ This configuration is inspired by and borrows from:
 # Bootstrapping
 
 *Work in progress*
-- Create system agenix ssh key called /etc/HOSTNAME/agenix/agenix_HOSTNAME_system
+- Create system agenix ssh key called /etc/HOSTNAME/agenix_HOSTNAME_system
     - Copy public key in `data/secrets/secrets.nix`
 - Create user ssh key called ~/.config/agenix/agenix_key
     - Since we don't have the user yet, we might need to move it around after first activation

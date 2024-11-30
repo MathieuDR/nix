@@ -9,5 +9,5 @@
     (builtins.readFile "${self}/data/secrets/certificates/hpi_ca.crt")
   ];
 
-  age.identityPaths = ["/etc/${hostname}/agenix/agenix_${hostname}_system"];
+  age.identityPaths = ["/etc/${hostname}/agenix_${hostname}_system"];
 }
