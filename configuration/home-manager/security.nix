@@ -7,16 +7,15 @@
 }: let
   secretsDir = "${self}/data/secrets";
   commonPub = "${secretsDir}/public_keys/gpg.pub";
+  gpgKeys = ["user/gpg"];
 
   # We create a trigger file on activation to make sure we only run once per activation
-  # triggerFile = "${config.home.homeDirectory}/.local/state/gpg-import-needed";
   versionFile = "${config.home.homeDirectory}/.local/state/gpg-import-version";
 
   # We create a version using a manual version and a hash
   # The manual version forces to reimport on key changes with the same name
   # Note, private keys will still not be imported, that's how GPG import works.
   manualVersion = "1";
-  gpgKeys = ["common/gpg"];
   gpgKeysHash = builtins.hashString "sha256" (builtins.toString gpgKeys);
   combinedVersion = "${manualVersion}-${gpgKeysHash}";
 
@@ -125,8 +124,8 @@ in {
   age = {
     identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
     secrets = {
-      "common/gpg" = {
-        file = "${secretsDir}/common/gpg.age";
+      "user/gpg" = {
+        file = "${secretsDir}/user/gpg.age";
         path = "${config.home.homeDirectory}/secrets/gpg/common.gpg.temp";
       };
     };

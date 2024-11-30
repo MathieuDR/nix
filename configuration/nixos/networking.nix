@@ -8,7 +8,7 @@
 in {
   age.secrets = {
     networks = {
-      file = "${self}/data/secrets/networks.age";
+      file = "${self}/data/secrets/system/networking.age";
       path = "/etc/${env_file}";
       mode = "0640";
     };
@@ -19,8 +19,8 @@ in {
 
     wireless = {
       networks.BeeConnected.pskRaw = "ext:psk_home";
-      # secretsFile = config.age.secrets.networks.path;
-      secretsFile = "/etc/secrets/wifi-secrets.conf";
+      secretsFile = config.age.secrets.networks.path;
+      # secretsFile = "/etc/secrets/wifi-secrets.conf";
     };
   };
 }
