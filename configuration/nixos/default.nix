@@ -1,6 +1,6 @@
 {
   imports = [
-    ./networking
+    ./networking.nix
     ./common-packages.nix
     ./security.nix
     ./sound.nix

@@ -4,4 +4,6 @@
     # HPI Certificate
     (builtins.readFile "${self}/data/secrets/hpi_ca.crt")
   ];
+
+  # age.identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
 }
