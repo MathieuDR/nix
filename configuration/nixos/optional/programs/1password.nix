@@ -9,7 +9,6 @@
   programs._1password-gui = {
     enable = true;
 
-    #TODO: Get user from homemngr
     polkitPolicyOwners = [user];
   };
 }

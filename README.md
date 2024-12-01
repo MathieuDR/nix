@@ -42,6 +42,17 @@ This repository contains a NixOS system configuration using the Flakes feature. 
   - Screenshot capabilities
   - Listing all files, useful for AI
 
+## 📝 Planned Improvements
+
+See [TODOs.md](./TODOs.md) for a list of planned improvements and additions to this configuration, including:
+- Automatic garbage collection
+- Backup configuration
+- System maintenance
+- Security enhancements
+- And more...
+
+These improvements are tracked and documented to maintain system health and add useful features over time.
+
 ## 🛠 Usage
 
 ### Prerequisites
