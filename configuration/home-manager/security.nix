@@ -141,10 +141,67 @@ in {
     ];
   };
 
-  services.gpg-agent = {
+  services.gpg-agent = let
+    pinentryRouter = pkgs.writeShellScriptBin "pinentry-router" ''
+      # Helper function to find a usable TTY
+      find_tty() {
+        # Try different methods to find TTY
+        if [ -n "$SSH_TTY" ]; then
+          echo "$SSH_TTY"
+        elif [ -n "$GPG_TTY" ]; then
+          echo "$GPG_TTY"
+        elif tty 2>/dev/null; then
+          tty
+        else
+          echo ""
+        fi
+      }
+
+      # Get TTY before we do anything else
+      USABLE_TTY=$(find_tty)
+
+      # Enhanced debugging
+      {
+        echo "=== New pinentry request ==="
+        echo "Date: $(date)"
+        echo "TERM: $TERM"
+        echo "NVIM: $NVIM"
+        echo "GPG_TTY: $GPG_TTY"
+        echo "SSH_TTY: $SSH_TTY"
+        echo "Found TTY: $USABLE_TTY"
+        echo "Parent Process: $(ps -o cmd= -p $PPID)"
+        echo "Current Process: $$"
+      } >> /tmp/pinentry-debug.log
+
+      if [ -n "$USABLE_TTY" ]; then
+        export GPG_TTY="$USABLE_TTY"
+      fi
+
+      # Enhanced detection logic
+      if [ -n "$NVIM" ] || ps -o cmd= -p $PPID | grep -q "nvim"; then
+        echo "Using gnome3 for Neovim session" >> /tmp/pinentry-debug.log
+        exec ${pkgs.pinentry-gnome3}/bin/pinentry-gnome3 "$@"
+      elif [ -z "$USABLE_TTY" ]; then
+        echo "No TTY available, forcing gnome3" >> /tmp/pinentry-debug.log
+        exec ${pkgs.pinentry-gnome3}/bin/pinentry-gnome3 "$@"
+      elif [ "$TERM" = "xterm-kitty" ]; then
+        echo "Using curses for Kitty terminal" >> /tmp/pinentry-debug.log
+        exec ${pkgs.pinentry-curses}/bin/pinentry-curses "$@"
+      else
+        echo "Default case: Using gnome3" >> /tmp/pinentry-debug.log
+        exec ${pkgs.pinentry-gnome3}/bin/pinentry-gnome3 "$@"
+      fi
+    '';
+  in {
     enable = true;
     enableBashIntegration = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentryPackage = pkgs.pinentry-gnome3;
+
+    extraConfig = ''
+      allow-emacs-pinentry
+      allow-loopback-pinentry
+      pinentry-program ${pinentryRouter}/bin/pinentry-router
+    '';
   };
 
   # Systemd services
