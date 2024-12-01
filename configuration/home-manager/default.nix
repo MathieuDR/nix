@@ -7,6 +7,7 @@
   imports = [
     ./shell.nix
     ./rofi.nix
+    ./security.nix
     ./scripts
   ];
 
@@ -18,7 +19,6 @@
     username = "thieu";
     homeDirectory = "/home/thieu";
 
-    # Home Manager can also manage your environment variables through
     sessionVariables = {
       EDITOR = "nvim";
     };

@@ -92,3 +92,15 @@ This configuration is inspired by and borrows from:
 - [Home Manager Manual](https://nix-community.github.io/home-manager/)
 - [Nix Flakes](https://nixos.wiki/wiki/Flakes)
 - [Hyprland Documentation](https://wiki.hyprland.org/)
+
+# Bootstrapping
+
+*Work in progress*
+- Create system agenix ssh key called /etc/HOSTNAME/agenix_HOSTNAME_system
+    - Copy public key in `data/secrets/secrets.nix`
+- Create user ssh key called ~/.config/agenix/agenix_key
+    - Since we don't have the user yet, we might need to move it around after first activation
+    - Add it to public keys here
+- Rekey all secrets so that the keys can read em
+- Get keepass bootstrap for Google PW + download keepass
+- Be able to use rsa_id

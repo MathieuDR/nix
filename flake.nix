@@ -6,6 +6,11 @@
     # global, so they can be `.follow`ed
     # systems.url = "github:nix-systems/default-linux";
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -43,7 +48,6 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    #Personal NIXVIM
     yvim = {
       url = "github:mathieudr/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,6 +69,7 @@
       perSystem = {
         config,
         pkgs,
+        system,
         ...
       }: {
         devShells.default = pkgs.mkShell {
@@ -75,6 +80,7 @@
             pkgs.fzf
             pkgs.nodePackages.prettier
             (config.packages.repl)
+            (inputs.agenix.packages.${system}.default)
           ];
           name = "dots";
           DIRENV_LOG_FORMAT = "";

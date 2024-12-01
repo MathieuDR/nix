@@ -21,11 +21,10 @@
       enable = true;
       userName = "MathieuDR";
       userEmail = "mathieu@deraedt.dev";
-
-      # signing = {
-      #   signByDefault = true;
-      #   #TODO: SECRET
-      # };
+      signing = {
+        key = "BB1B6AEC733F6F80";
+        signByDefault = true;
+      };
 
       extraConfig = {
         init.defaultBranch = "main";

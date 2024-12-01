@@ -16,6 +16,7 @@
       inherit extraSpecialArgs;
       modules = [
         self.homeManagerModules.default
+        inputs.agenix.homeManagerModules.default
         inputs.catppuccin.homeManagerModules.catppuccin
         config.home-manager.shared
         ./anchor
