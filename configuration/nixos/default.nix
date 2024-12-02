@@ -5,6 +5,7 @@
     ./security.nix
     ./sound.nix
     ./user.nix
+    ./auto-cleanup.nix
   ];
 
   # I imagine this is common...
