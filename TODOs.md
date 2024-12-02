@@ -6,7 +6,7 @@ This document outlines various improvements and additions that could be made to 
 NixOS stores multiple generations of system configurations and packages, which can consume significant disk space over time. Automated garbage collection helps maintain system health by removing unused packages and old generations while preserving recent history for rollbacks.
 
 **Ideas to include:**
-- [ ] Use [nix-profile-gc](https://git.scottworley.com/nix-profile-gc)
+- [x] Use [nix-profile-gc](https://git.scottworley.com/nix-profile-gc)
 
 ## 2. Backups
 A robust backup strategy is crucial for protecting important data. Using restic with Backblaze B2 provides encrypted, incremental backups with version history and deduplication capabilities.
