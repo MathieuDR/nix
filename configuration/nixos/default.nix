@@ -10,8 +10,8 @@
 
   hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    # driSupport = true;
+    # driSupport32Bit = true;
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
