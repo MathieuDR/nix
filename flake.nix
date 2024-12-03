@@ -50,7 +50,11 @@
 
     yvim = {
       url = "github:mathieudr/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        lexical.follows = "nixpkgs";
+        nixvim.follows = "nixpkgs";
+      };
     };
   };
 
