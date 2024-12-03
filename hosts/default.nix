@@ -27,6 +27,10 @@
       hostname = "anchor";
       user = "thieu";
     };
-    # wanderer = mkSystem "wanderer";
+
+    wanderer = mkSystem {
+      hostname = "wanderer";
+      user = "thieu";
+    };
   };
 }

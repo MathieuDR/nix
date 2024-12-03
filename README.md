@@ -97,6 +97,7 @@ Create new modules in `modules/` following the existing structure:
 This configuration is inspired by and borrows from:
 - [fufexan/dotfiles](https://github.com/fufexan/dotfiles/)
 - [allowed unfree polyfill](https://discourse.nixos.org/t/use-nixpkgs-config-allowunfreepredicate-in-multiple-nix-file/36590)
+- [Scott Worley's nix-profile-gc](https://git.scottworley.com/nix-profile-gc)
 
 ## 🔍 Useful Resources
 - [NixOS Wiki](https://nixos.wiki/)
@@ -115,3 +116,8 @@ This configuration is inspired by and borrows from:
 - Rekey all secrets so that the keys can read em
 - Get keepass bootstrap for Google PW + download keepass
 - Be able to use rsa_id
+
+## WANDERER
+- Installed using gnome installer
+- Copied /etc/nixos/* configuration
+- Imported in configuration
