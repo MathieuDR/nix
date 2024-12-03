@@ -25,7 +25,8 @@
 
     packages = with pkgs; [
       # fonts
-      (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+      # (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+      nerd-fonts.jetbrains-mono
       noto-fonts-emoji
 
       #dev
