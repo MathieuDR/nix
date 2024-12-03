@@ -3,10 +3,12 @@ default:
     @just --list
 
 _get_hosts:
+    #!/usr/bin/env bash
     nix flake show --json | jq -r '.nixosConfigurations | keys[]' 2>/dev/null || echo "anchor"
 
 # Helper recipe to get home-manager configurations
 _get_hm_combinations:
+    #!/usr/bin/env bash
     nix eval .#homeConfigurations --apply __attrNames | sed 's/[][",]//g' | tr ' ' '\n' | grep .
 
 # Rebuild NixOS with fzf selection
@@ -38,11 +40,11 @@ hm *ARGS:
     fi
 
 # Update flake and rebuild both nixos and home-manager
-update: rebuild hm
+update:
     nix flake update
 
 # Update yvim input and rebuild home-manager
-update_yvim: hm
+update_yvim: 
     nix flake lock --update-input yvim
 
 # Print diagnostic information
