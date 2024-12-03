@@ -5,8 +5,8 @@
 }: let
   cfg = config.ysomic.hardware.nvidia;
 in {
-  config = {
-    hardware.nvidia = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
+    hardware.nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
       open = false;
