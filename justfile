@@ -20,7 +20,7 @@ _get_hosts:
 # Helper recipe to get home-manager configurations
 _get_hm_combinations:
     #!/usr/bin/env bash
-    nix eval .#homeConfigurations --apply __attrNames | tr -d '[]' | tr -d '"' | tr ',' '\n' | tr -d ' '
+    nix eval .#homeConfigurations --apply __attrNames | sed 's/[][",]//g' | tr ' ' '\n' | grep .
 
 # Helper to get build options using fzf
 _get_build_options:
