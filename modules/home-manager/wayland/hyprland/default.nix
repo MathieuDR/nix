@@ -120,7 +120,9 @@ in {
             active_opacity = 0.97;
             inactive_opacity = 0.85;
             fullscreen_opacity = 1;
-            drop_shadow = true;
+            shadow = {
+              enabled = true;
+            };
           };
 
           input = {

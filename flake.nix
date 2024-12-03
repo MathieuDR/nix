@@ -52,8 +52,6 @@
       url = "github:mathieudr/nixvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        lexical.follows = "nixpkgs";
-        nixvim.follows = "nixpkgs";
       };
     };
   };
