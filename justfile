@@ -2,6 +2,7 @@
 default:
     @just --list
 
+# Helper recipe to get NixOS hosts
 _get_hosts:
     #!/usr/bin/env bash
     nix flake show --json | jq -r '.nixosConfigurations | keys[]' 2>/dev/null || echo "anchor"
@@ -11,11 +12,11 @@ _get_hm_combinations:
     #!/usr/bin/env bash
     nix eval .#homeConfigurations --apply __attrNames | sed 's/[][",]//g' | tr ' ' '\n' | grep .
 
-# Rebuild NixOS with fzf selection
+# Rebuild NixOS with fzf selection and hostname preselection
 rebuild *ARGS:
     #!/usr/bin/env bash
     echo "Selecting NixOS configuration..."
-    host=$(just _get_hosts | fzf --prompt="Select NixOS configuration: ")
+    host=$(just _get_hosts | fzf --prompt="Select NixOS configuration: " --query="$HOSTNAME" --select-1)
     if [ -n "$host" ]; then
         cmd="sudo nixos-rebuild switch --flake '.#$host' {{ARGS}}"
         echo "Executing: $cmd"
@@ -25,11 +26,11 @@ rebuild *ARGS:
         exit 1
     fi
 
-# Switch home-manager configuration
+# Switch home-manager configuration with username preselection
 hm *ARGS:
     #!/usr/bin/env bash
     echo "Selecting home-manager configuration..."
-    combination=$(just _get_hm_combinations | fzf --prompt="Select home-manager configuration: ")
+    combination=$(just _get_hm_combinations | fzf --prompt="Select home-manager configuration: " --query="$USER@$HOSTNAME" --select-1)
     if [ -n "$combination" ]; then
         cmd="home-manager switch --flake '.#$combination' -b backup {{ARGS}}"
         echo "Executing: $cmd"
@@ -39,30 +40,33 @@ hm *ARGS:
         exit 1
     fi
 
+# Generate and copy keys with updated naming convention
 generate-keys cp="":
     #!/usr/bin/env bash
     set -euo pipefail
     
-    HOST=$(just _get_hosts | fzf --prompt="Select host: ") || HOST=$(hostname)
+    HOST=$(just _get_hosts | fzf --prompt="Select host: " --query="$HOSTNAME" --select-1) || HOST=$HOSTNAME
     
     # Create directories
-    mkdir -p "/etc/${HOST}" ~/.config/agenix
+    sudo mkdir -p "/etc/${HOST}"
+    mkdir -p ~/.config/agenix
     
-    # Generate system key
+    # Generate system key with new naming convention
     sudo ssh-keygen -t ed25519 -C "agenix-${HOST}" -f "/etc/${HOST}/agenix_${HOST}_system" -N ""
     
-    # Generate user key
+    # Generate user key with new naming convention
     ssh-keygen -t ed25519 -C "agenix-${USER}@${HOST}" -f ~/.config/agenix/agenix-key -N ""
     
-    # Handle copy if specified
+    # Handle copying with new naming convention
     if [ "{{cp}}" = "cp" ]; then
-        sudo mkdir -p "/etc/${HOST}"
-        sudo cp "/etc/${HOST}/agenix_${HOST}_system.pub" "/etc/${HOST}/"
-        mkdir -p ~/.config/agenix
-        cp ~/.config/agenix/agenix-key.pub ~/.config/agenix/
+        # System key
+        sudo cp "/etc/${HOST}/agenix_${HOST}_system.pub" "/etc/${HOST}/agenix-${HOST}-system.pub"
+        
+        # User key
+        cp ~/.config/agenix/agenix-key.pub ~/.config/agenix/agenix-${HOST}-${USER}.pub
     fi
     
-    echo "SSH keys generated successfully for host: $HOST"
+    echo "SSH keys generated and copied successfully for host: $HOST"
 
 # Update flake and rebuild both nixos and home-manager
 update:
