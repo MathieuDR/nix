@@ -43,7 +43,7 @@ generate-keys cp="":
     #!/usr/bin/env bash
     set -euo pipefail
     
-    HOST=$(just *get*hosts | fzf --prompt="Select host: ") || HOST=$(hostname)
+    HOST=$(just _get_hosts | fzf --prompt="Select host: ") || HOST=$(hostname)
     
     # Create directories
     mkdir -p "/etc/${HOST}" ~/.config/agenix
