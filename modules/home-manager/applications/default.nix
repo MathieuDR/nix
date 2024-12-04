@@ -116,6 +116,9 @@ in {
           enable_audio_bell = false;
           scrollback_lines = 10000;
           disable_ligatures = "never";
+
+          symbol_map = "U+1F300-U+1F9FF Noto Color Emoji"; # Emoji range
+          font_features = "none";
         };
       };
     })
