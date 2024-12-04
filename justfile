@@ -40,30 +40,27 @@ hm *ARGS:
         exit 1
     fi
 
-# Generate and copy keys with updated naming convention
+# Generate and copy public keys with updated naming convention to `cp`
 generate-keys cp="":
     #!/usr/bin/env bash
     set -euo pipefail
     
     HOST=$(just _get_hosts | fzf --prompt="Select host: " --query="$HOSTNAME" --select-1) || HOST=$HOSTNAME
     
-    # Create directories
     sudo mkdir -p "/etc/${HOST}"
     mkdir -p ~/.config/agenix
     
-    # Generate system key with new naming convention
     sudo ssh-keygen -t ed25519 -C "agenix-${HOST}" -f "/etc/${HOST}/agenix_${HOST}_system" -N ""
-    
-    # Generate user key with new naming convention
     ssh-keygen -t ed25519 -C "agenix-${USER}@${HOST}" -f ~/.config/agenix/agenix-key -N ""
     
     # Handle copying with new naming convention
-    if [ "{{cp}}" = "cp" ]; then
-        # System key
-        sudo cp "/etc/${HOST}/agenix_${HOST}_system.pub" "/etc/${HOST}/agenix-${HOST}-system.pub"
+    if [ -n "{{cp}}" ]; then
+        mkdir -p "{{cp}}"
         
-        # User key
-        cp ~/.config/agenix/agenix-key.pub ~/.config/agenix/agenix-${HOST}-${USER}.pub
+        sudo cp "/etc/${HOST}/agenix_${HOST}_system.pub" "{{cp}}/agenix-${HOST}-system.pub"
+        cp ~/.config/agenix/agenix-key.pub "{{cp}}/agenix-${HOST}-${USER}.pub"
+        
+        echo "Public keys copied to {{cp}}"
     fi
     
     echo "SSH keys generated and copied successfully for host: $HOST"
