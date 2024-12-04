@@ -121,3 +121,5 @@ This configuration is inspired by and borrows from:
 - Installed using gnome installer
 - Copied /etc/nixos/* configuration
 - Imported in configuration
+- Create system key with `ssh-keygen -t ed25519 -C "agenix-${HOST}" -f /etc/HOST/agenix_HOST_system -N ""`
+- Create user key with `ssh-keygen -t ed25519 -C "agenix-${USER}@${HOST}" -f ~/.config/agenix/agenix-key -N ""` 
