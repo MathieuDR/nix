@@ -121,5 +121,8 @@ This configuration is inspired by and borrows from:
 - Installed using gnome installer
 - Copied /etc/nixos/* configuration
 - Imported in configuration
-- Create system key with `ssh-keygen -t ed25519 -C "agenix-${HOST}" -f /etc/HOST/agenix_HOST_system -N ""`
-- Create user key with `ssh-keygen -t ed25519 -C "agenix-${USER}@${HOST}" -f ~/.config/agenix/agenix-key -N ""` 
+- Activate using flake
+    - `sudo nixos-rebuild switch --flake github:MathieuDR/nix#HOST --refresh`
+    - `sudo home-manager switch --flake github:MathieuDR/nix#USER@HOST --refresh`
+- Create system keys with `just generate-keys`
+    - Use the CP argument to copy the public keys, ready to be added to the config

@@ -39,6 +39,31 @@ hm *ARGS:
         exit 1
     fi
 
+generate-keys cp="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    
+    HOST=$(just *get*hosts | fzf --prompt="Select host: ") || HOST=$(hostname)
+    
+    # Create directories
+    mkdir -p "/etc/${HOST}" ~/.config/agenix
+    
+    # Generate system key
+    sudo ssh-keygen -t ed25519 -C "agenix-${HOST}" -f "/etc/${HOST}/agenix_${HOST}_system" -N ""
+    
+    # Generate user key
+    ssh-keygen -t ed25519 -C "agenix-${USER}@${HOST}" -f ~/.config/agenix/agenix-key -N ""
+    
+    # Handle copy if specified
+    if [ "{{cp}}" = "cp" ]; then
+        sudo mkdir -p "/etc/${HOST}"
+        sudo cp "/etc/${HOST}/agenix_${HOST}_system.pub" "/etc/${HOST}/"
+        mkdir -p ~/.config/agenix
+        cp ~/.config/agenix/agenix-key.pub ~/.config/agenix/
+    fi
+    
+    echo "SSH keys generated successfully for host: $HOST"
+
 # Update flake and rebuild both nixos and home-manager
 update:
     nix flake update
