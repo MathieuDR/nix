@@ -4,9 +4,10 @@
 
     settings = {
       folders = {
-        "secrets/shared" = {
+        "secrets" = {
+          enable = true;
           path = "${config.home.homeDirectory}/secrets/shared";
-          id = "shared_secrets";
+          id = "shared-secrets";
           label = "Shared Secrets";
           type = "sendreceive";
           devices = ["anchor" "wanderer" "mobile"];
@@ -36,7 +37,7 @@
 
         "mobile" = {
           name = "mobile";
-          id = "ID3";
+          id = "WT572IB-2LCXROQ-RKPC5CC-2GDP2KW-47EDGGP-KWCUJCE-XQBVUCB-3DNHLAS";
         };
       };
 
