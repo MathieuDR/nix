@@ -31,7 +31,7 @@
 
         "wanderer" = {
           name = "wanderer";
-          id = "ID2";
+          id = "T2XOMWT-YVBHI37-HLXNXCL-6QHD74T-62GBINX-IXKQKFI-SD3QOOH-4XFDLAI";
         };
 
         "mobile" = {
