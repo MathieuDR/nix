@@ -143,6 +143,10 @@ in {
 
   services.gpg-agent = {
     enable = true;
+    # 2 hours
+    defaultCacheTtl = 7200;
+    # 8 hours
+    maxCacheTtl = 28800;
     enableBashIntegration = true;
     pinentryPackage = pkgs.pinentry-gnome3;
 

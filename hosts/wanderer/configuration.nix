@@ -15,6 +15,10 @@
     hyprlock.enable = true;
   };
 
+  # Laptop stuff
+  # Letting it on when it's closed but on external power
+  services.logind.lidSwitchDocked = "ignore";
+
   # AMD
   # https://wiki.nixos.org/wiki/AMD_GPU
 
