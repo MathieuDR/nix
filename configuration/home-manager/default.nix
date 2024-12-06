@@ -8,6 +8,7 @@
     ./shell.nix
     ./rofi.nix
     ./security.nix
+    ./syncthing.nix
     ./scripts
   ];
 

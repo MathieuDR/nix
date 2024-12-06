@@ -16,7 +16,7 @@
   };
 
   # Laptop stuff
-  # Letting it on when it's closed but on external power
+  # Letting it on when it's closed but with external screen on
   services.logind.lidSwitchDocked = "ignore";
 
   # AMD

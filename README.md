@@ -126,3 +126,6 @@ This configuration is inspired by and borrows from:
     - `sudo home-manager switch --flake github:MathieuDR/nix#USER@HOST --refresh`
 - Create system keys with `just generate-keys`
     - Use the CP argument to copy the public keys, ready to be added to the config
+- Syncthing
+    - Gather device id `syncthing -device-id`
+    - add it to `configuration/home-manager/syncthing.nix`
