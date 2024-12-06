@@ -8,6 +8,8 @@
     ./auto-cleanup.nix
   ];
 
+  boot.loader.systemd-boot.configurationLimit = 15;
+
   hardware.graphics = {
     enable = true;
     # driSupport = true;
