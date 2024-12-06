@@ -1,4 +1,4 @@
-{config}: {
+{config, ...}: {
   services.syncthing = {
     enable = true;
 
@@ -24,20 +24,20 @@
       };
 
       devices = {
-        # "anchor" = {
-        #   name = "anchor";
-        #   id = "ID";
-        # };
-        #
-        # "wanderer" = {
-        #   name = "wanderer";
-        #   id = "ID2";
-        # };
-        #
-        # "mobile" = {
-        #   name = "mobile";
-        #   id = "ID3";
-        # };
+        "anchor" = {
+          name = "anchor";
+          id = "6KVYXUZ-R7Q7CVU-WXHWUDL-UFK6I3X-YG5IMU5-LBFJZ3F-BND4RQH-QZYAGAZ";
+        };
+
+        "wanderer" = {
+          name = "wanderer";
+          id = "ID2";
+        };
+
+        "mobile" = {
+          name = "mobile";
+          id = "ID3";
+        };
       };
 
       options = {
