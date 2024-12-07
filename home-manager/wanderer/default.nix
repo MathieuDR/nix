@@ -6,7 +6,7 @@ in {
 
     optional.theming.general
     optional.theming.spotify
-    optional.fixes.discord
+    # optional.fixes.discord
     optional.programs.copyq
   ];
 

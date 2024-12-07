@@ -239,7 +239,7 @@ in {
     # Power menu specific configuration
     (mkIf (cfg.enable && powerMenu.enable) {
       programs.waybar.settings.mainBar."custom/power" = {
-        format = " ";
+        format = " ";
         tooltip = false;
         "on-click" = lib.getExe powerMenu.package;
       };

@@ -188,6 +188,7 @@ in {
             "$mainMod, b, exec, ${lib.getExe defaultsCfg.browser}"
             "$mainMod, t, exec, ${lib.getExe defaultsCfg.supported.terminals.${defaultsCfg.terminal}}"
             "$mainMod, f, exec, ${lib.getExe defaultsCfg.supported.fileManagers.${defaultsCfg.fileManager}}"
+            "$mainMod, s, exec, rofi-systemd"
             "$mainMod, e, fullscreen"
             "$mainMod, SLASH, exec, rofi -modes combi,calc -show combi -combi-modes window,drun"
             "$mainMod SHIFT, SLASH, exec, rofi -show drun"
