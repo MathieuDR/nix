@@ -24,7 +24,7 @@
   parse-duration = duration:
     pkgs.runCommand "duration" {buildInputs = with pkgs; [systemd];} ''
       set -euo pipefail
-      parsed=$(systemd-analyze timespan ${escapeShellArg duration} | awk '$1 == "Î¼s:" { print $2 }')
+      parsed=$(systemd-analyze timespan ${escapeShellArg duration} | awk '$1 == "μs:" { print $2 }')
       echo "$parsed" > "$out"
     '';
 in {
@@ -111,6 +111,11 @@ in {
       {
         assertion = cfg.enable -> config.nix.gc.automatic;
         message = ''nix.profile-gc.enable requires nix.gc.automatic'';
+      }
+
+      {
+        assertion = cfg.activeMeasurementGranularity != "0" && cfg.activeThreshold != "0";
+        message = "activeMeasurementGranularity and activeThreshold must not be zero";
       }
     ];
     systemd.services.nix-gc.serviceConfig.ExecStartPre = pkgs.writeShellScript "nix-profile-gc" ''

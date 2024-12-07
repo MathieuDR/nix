@@ -21,7 +21,7 @@
       keepLastActiveBoot = 3;
       keepLatest = "14 days";
       activeThreshold = "4 days";
-      activeMeasurementGranularity = "6 hour";
+      activeMeasurementGranularity = "6 hours";
     };
   };
 }
