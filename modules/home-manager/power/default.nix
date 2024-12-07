@@ -34,7 +34,7 @@ in {
         EOF
         )
 
-        opt=$(echo "$menuItems" | ${cfg.menu.package}/bin/rofi -dmenu -i -p "Power menu")
+        opt=$(echo "$menuItems" | ${cfg.menu.launcherPackage}/bin/rofi -dmenu -i -p "Power menu")
 
         case $opt in
           "Lock Hyprland")
