@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.ysomic.power;
+  cfg = config.ysomic.power.menu;
 in {
   options.ysomic.power.menu = {
     enable = mkEnableOption "Power management utilities";
