@@ -30,11 +30,11 @@ in {
         Reboot
         ${optionalString config.ysomic.wayland.hyprland.enable "Quit Hyprland"}
         ${optionalString config.ysomic.wayland.hyprland.hyprlock.enable "Lock Hyprland"}
-        ${optionalString cfg.menu.suspend "Suspend"}
+        ${optionalString cfg.suspend "Suspend"}
         EOF
         )
 
-        opt=$(echo "$menuItems" | ${cfg.menu.launcherPackage}/bin/rofi -dmenu -i -p "Power menu")
+        opt=$(echo "$menuItems" | ${cfg.launcherPackage}/bin/rofi -dmenu -i -p "Power menu")
 
         case $opt in
           "Lock Hyprland")
@@ -60,6 +60,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [cfg.menu.package];
+    home.packages = [cfg.package];
   };
 }
