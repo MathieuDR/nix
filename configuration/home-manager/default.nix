@@ -1,6 +1,6 @@
 {
   pkgs,
-  lib,
+  config,
   inputs,
   ...
 }: {
@@ -60,6 +60,7 @@
       dnsutils
       nmap
       rsync
+      rclone
 
       #Productive programs
       obsidian
@@ -89,14 +90,16 @@
       pavucontrol
     ];
 
-    activation = {
-      dirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        run mkdir -p "./development/sources"
-        run mkdir -p "./development/sources/sevenmind"
-        run mkdir -p "./notes"
-        run mkdir -p "./pictures/screenshots"
-        run mkdir -p "./secrets/keepass"
-      '';
-    };
+    systemd.user.tmpfiles.rules = [
+      # d /path/to/directory MODE USER GROUP AGE ARGUMENT
+      "d ${config.home.homeDirectory}/downloads 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/development 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/development/sources 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/development/courses 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/development/sources/sevenmind 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/pictures 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/pictures/screenshots 0755 ${config.home.username} users - -"
+      "d ${config.home.homeDirectory}/notes 0755 ${config.home.username} users - -"
+    ];
   };
 }
