@@ -36,7 +36,10 @@ in {
         # };
       };
 
-      waybar.enable = true;
+      waybar = {
+        enable = true;
+        battery = true;
+      };
     };
   };
 
