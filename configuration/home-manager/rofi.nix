@@ -21,4 +21,9 @@
     rofimoji
     rofi-bluetooth
   ];
+
+  ysomic.power.menu = {
+    enable = true;
+    launcherPackage = pkgs.rofi-wayland;
+  };
 }

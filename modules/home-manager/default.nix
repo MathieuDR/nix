@@ -4,5 +4,6 @@
     ./applications
     ./wayland/hyprland
     ./wayland/waybar
+    ./power
   ];
 }
