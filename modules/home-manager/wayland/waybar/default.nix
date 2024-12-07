@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  hostname,
   ...
 }:
 with lib; let
@@ -59,6 +60,7 @@ in {
               "hyprland/window"
             ];
             modules-center = [
+              # "mpris"
               "clock"
             ];
             modules-right =
@@ -66,15 +68,33 @@ in {
                 "group/info"
                 "wireplumber"
                 "network"
-                "custom/power"
+                "group/tray"
+                "systemd-failed-units"
               ]
               ++ optional powerMenu.enable "custom/power"
               ++ optional cfg.battery "battery";
 
+            "group/tray" = {
+              orientation = "horizontal";
+              drawer = {
+                children-class = "grouped-module";
+                transition-left-to-right = false;
+              };
+              modules = [
+                "custom/tray-icon"
+                "tray"
+              ];
+            };
+
+            "custom/tray-icon" = {
+              format = "󱊔 ";
+              tooltip = false;
+            };
+
             "group/info" = {
               orientation = "horizontal";
               drawer = {
-                children-class = "group-info";
+                children-class = "grouped-module";
                 transition-left-to-right = false;
               };
               modules = [
@@ -82,6 +102,34 @@ in {
                 "cpu"
                 "disk"
               ];
+            };
+
+            mpris = {
+              format = "{player_icon} {dynamic}";
+              format-paused = "{status_icon} {dynamic}";
+              format-stopped = "";
+
+              dynamic-order = ["title" "artist"];
+
+              player-icons = {
+                default = "▶";
+                spotify = "󰝚 ";
+              };
+
+              status-icons = {
+                paused = "";
+              };
+
+              tooltip = false;
+            };
+
+            systemd-failed-units = {
+              hide-on-ok = true;
+              format = "󰋔 ";
+              # format-ok = "✓";
+              system = true;
+              user = true;
+              on-click = "kitty --hold -e systemctl list-units --state=failed --all";
             };
 
             clock = {
@@ -94,11 +142,12 @@ in {
             };
 
             "hyprland/window" = {
-              format = "{title}";
+              format = "{class} >>> {title}";
               rewrite = {
-                "(.*) — Ablaze Floorp" = "󰈹 $1";
-                "(.*) - Discord" = "  $1";
-                ".*thieu\@anchor: (.*)" = "  $1";
+                "floorp >>> (.*) — Ablaze Floorp" = "󰈹 $1";
+                "discord >>> (.*) - Discord" = "  $1";
+                "kitty >>> (.*)" = "  ${config.home.username}@${hostname} $1";
+                "(?!floorp|discord|kitty).* >>> (.*)" = "$1";
               };
               separate-outputs = true;
             };
@@ -137,9 +186,9 @@ in {
 
             wireplumber = {
               format = "{icon} {volume}%";
-              format-muted = "󰖁 ";
+              format-muted = "󰖁";
               format-icons = {
-                default = ["  "];
+                default = [" "];
               };
               scroll-step = 5;
             };
@@ -158,80 +207,79 @@ in {
         };
 
         style = ''
+          /* Base styles */
           * {
               border: none;
               border-radius: 0px;
-              padding: 0;
-              margin: 0;
-              min-height: 0px;
               font-family: ${cfg.theme.font};
               font-weight: ${cfg.theme.font_weight};
+              font-size: ${cfg.theme.font_size};
+              color: @text;
           }
 
           window#waybar {
               background: none;
           }
 
-          .group-info, #window, #wireplumber, #network, #cpu, #memory, #disk, #clock, .group-power, #custom-power, #battery{
-              font-size: ${cfg.theme.font_size};
-              color: @text;
+          /* Parent containers basic spacing */
+          .modules-left,
+          .modules-center,
+          .modules-right {
+              margin: 0;
+              padding: 0;
           }
 
-          #custom-power{
-          	padding-left: 2px;
-          	padding-right: 8px;
+          /* All direct children of the modules get consistent margins */
+          .modules-left > widget > *,
+          .modules-center > widget > *,
+          .modules-right > widget > * {
+              margin: 0 4px;
+              padding: 0 4px;
+          }
+          .modules-left > widget > * {
+            margin-left: -3px;
           }
 
-          #custom-power:hover, #network:hover, #cpu:hover, #memory:hover, #disk:hover, #clock:hover, #wireplumber:hover, #window:hover {
-          	color: @mauve;
+          /* Target the drawer container */
+          .modules-right box revealer.drawer box.horizontal {
+              padding: 0 4px;
           }
 
-          #cpu {
-              padding-left: 15px;
-              padding-right: 9px;
-              margin-left: 7px;
+          /* Target the actual modules inside grouped sections */
+          .modules-right box revealer.drawer widget.grouped-module label.module {
+              margin: 0 3px;
+              padding: 0 3px;
           }
 
-          #memory {
-              padding-left: 4px;
-              padding-right: 9px;
+          /* Remove left margin from first widget */
+          .modules-left > widget:first-child > *,
+          .modules-center > widget:first-child > *,
+          .modules-right > widget:first-child > *,
+          .grouped-module:first-child {
+              /* margin-left: 0;
+              padding-left: 0; */
           }
 
-          #disk {
-              padding-left: 9px;
-              padding-right: 10px;
+          /* Remove right margin from last widget */
+          .modules-left > widget:last-child > *,
+          .modules-center > widget:last-child > *,
+          .modules-right > widget:last-child > * {
+              /* margin-right: 0;
+              padding-right: 0; */
           }
 
-          #wireplumber {
-              padding-left: 4px;
-              padding-right: 6px;
+          /* All module contents get hover effects */
+          .modules-left > widget > *:hover,
+          .modules-center > widget > *:hover,
+          .modules-right > widget > *:hover {
+              color: @mauve;
           }
 
-          #window {
-          	padding-left: 4px;
-          }
-
-          #network {
-              padding-left: 5px;
-              padding-right: 8px;
-          }
-
-          #battery {
-            padding-left: 5px;
-            padding-right: 8px;
-          }
-
-          #battery.warning {
-            color: @peach;
-          }
-
-          #battery.critical {
-            color: @red;
-          }
-
-          #battery.charging {
-            color: @green;
-          }
+          /* Status-specific styles that need to override the defaults */
+          #battery.warning { color: @peach; }
+          #battery.critical { color: @red; }
+          #battery.charging { color: @green; }
+          #systemd-failed-units.degraded { color: @red; }
         '';
       };
     })

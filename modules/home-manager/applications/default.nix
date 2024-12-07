@@ -108,6 +108,7 @@ in {
         font.name = "JetBrainsMono Nerd Font";
         font.size = 12;
         settings = {
+          window_title = "{title} - Kitty";
           tab_bar_min_tabs = 1;
           tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
           tab_bar_edge = "bottom";
