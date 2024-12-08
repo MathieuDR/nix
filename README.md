@@ -129,3 +129,7 @@ This configuration is inspired by and borrows from:
 - Syncthing
     - Gather device id `syncthing generate`
     - add it to `configuration/home-manager/syncthing.nix`
+- Firefox
+    - Install [firefox](https://github.com/catppuccin/firefox) colour theme
+    - User styles, sync from cloud
+    - STG, import latest backup under `~/.config/<HOST>/firefox/STG.backup`

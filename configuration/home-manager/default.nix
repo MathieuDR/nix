@@ -1,7 +1,9 @@
 {
+  self,
   pkgs,
   config,
   inputs,
+  hostname,
   ...
 }: {
   imports = [
@@ -102,4 +104,9 @@
     "d ${config.home.homeDirectory}/pictures/screenshots 0755 ${config.home.username} users - -"
     "d ${config.home.homeDirectory}/notes 0755 ${config.home.username} users - -"
   ];
+
+  xdg.configFile."${hostname}" = {
+    source = "${self}/data/config/";
+    recursive = true;
+  };
 }
