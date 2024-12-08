@@ -7,5 +7,6 @@ in {
     optional.gaming
     optional.programs.onepassword
     optional.programs.docker
+    optional.wake-up
   ];
 }
