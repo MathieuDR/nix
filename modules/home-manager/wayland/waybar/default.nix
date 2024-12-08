@@ -147,7 +147,8 @@ in {
                 "floorp >>> (.*) — Ablaze Floorp" = "󰈹 $1";
                 "discord >>> (.*) - Discord" = "  $1";
                 "kitty >>> (.*)" = "  ${config.home.username}@${hostname} $1";
-                "(?!floorp|discord|kitty).* >>> (.*)" = "$1";
+                "spotify >>> (.*)" = "󰝚 $1";
+                "(?!floorp|spotify|discord|kitty).* >>> (.*)" = "$1";
               };
               separate-outputs = true;
             };
