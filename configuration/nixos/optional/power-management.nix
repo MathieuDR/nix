@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   services.tlp = {
     enable = true;
     settings = {
@@ -51,4 +51,9 @@
   # Power consumption analysis + auto-tuning on startup
   powerManagement.powertop.enable = true;
   services.acpid.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    powertop
+    acpi
+  ];
 }

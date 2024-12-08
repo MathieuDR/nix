@@ -35,6 +35,7 @@ This repository contains a NixOS system configuration using the Flakes feature. 
   - Git configuration
   - Custom terminal setup (Kitty)
 - **Gaming Support** with Steam and Prismlauncher
+- [**Power management**](POWER.md)
 - **Custom Scripts** for:
   - Power management
   - Window management

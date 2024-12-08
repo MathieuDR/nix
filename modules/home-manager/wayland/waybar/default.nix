@@ -64,15 +64,15 @@ in {
               "clock"
             ];
             modules-right =
-              [
+              optional cfg.battery "battery"
+              ++ [
                 "group/info"
                 "wireplumber"
                 "network"
                 "group/tray"
                 "systemd-failed-units"
               ]
-              ++ optional powerMenu.enable "custom/power"
-              ++ optional cfg.battery "battery";
+              ++ optional powerMenu.enable "custom/power";
 
             "group/tray" = {
               orientation = "horizontal";
@@ -196,11 +196,11 @@ in {
 
             battery = mkIf cfg.battery {
               format = "{icon} {capacity}%";
-              format-icons = ["" "" "" "" ""];
-              format-charging = "⚡ {capacity}%";
+              format-icons = ["󰂃" "󰁺" "󰁾" "󰂁" "󰁹"];
+              format-charging = "󰂄 {capacity}%";
               interval = 30;
               states = {
-                warning = 30;
+                warning = 25;
                 critical = 15;
               };
             };
