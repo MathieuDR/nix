@@ -16,6 +16,7 @@
 
         extraSpecialArgs = {
           inherit inputs self user hostname;
+          nixosConfig = self.nixosConfigurations.${hostname}.config;
           nixpkgs = inputs.nixpkgs;
         };
 

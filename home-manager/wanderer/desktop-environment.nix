@@ -14,7 +14,10 @@ in {
       fileManager = "thunar";
     };
 
-    power.menu.suspend = true;
+    power.menu = {
+      suspend = true;
+      tlpControl = true;
+    };
 
     wayland = {
       hyprland = {
