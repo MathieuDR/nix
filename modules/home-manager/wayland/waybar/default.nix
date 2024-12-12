@@ -149,7 +149,9 @@ in {
                 "discord >>> (.*) - Discord" = "  $1";
                 "kitty >>> (.*)" = "  ${config.home.username}@${hostname} $1";
                 "spotify >>> (.*)" = "󰝚 $1";
-                "(?!floorp|spotify|discord|Slack|kitty).* >>> (.*)" = "$1";
+                "org.keepassxc.KeePassXC >>> (.*) - KeePassXC" = "󰌾 $1";
+                "1Password >>> (.*) — 1Password" = "󰌾 $1";
+                "(?!floorp|spotify|discord|Slack|kitty|1Password|org\.keepassxc.*).* >>> (.*)" = "$1";
               };
               separate-outputs = true;
             };
