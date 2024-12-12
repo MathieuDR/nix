@@ -141,18 +141,72 @@ in {
               tooltip = "false";
             };
 
-            "hyprland/window" = {
-              format = "{class} >>> {title}";
-              rewrite = {
-                "floorp >>> (.*) — Ablaze Floorp" = "󰈹 $1";
-                "Slack >>> (.*) - Slack" = " $1";
-                "discord >>> (.*) - Discord" = "  $1";
-                "kitty >>> (.*)" = "  ${config.home.username}@${hostname} $1";
-                "spotify >>> (.*)" = "󰝚 $1";
-                "org.keepassxc.KeePassXC >>> (.*) - KeePassXC" = "󰌾 $1";
-                "1Password >>> (.*) — 1Password" = "󰌾 $1";
-                "(?!floorp|spotify|discord|Slack|kitty|1Password|org\.keepassxc.*).* >>> (.*)" = "$1";
+            "hyprland/window" = let
+              mkRewrite = {
+                class,
+                suffix ? "",
+                icon ? "",
+                match ? null,
+                rewrite ? null,
+              }: {
+                name =
+                  if match != null
+                  then match
+                  else "${class} >>> ${
+                    if suffix == ""
+                    then "(.*)"
+                    else ''(.*) ${suffix}''
+                  }";
+                value =
+                  if rewrite != null
+                  then rewrite
+                  else "${icon} $1";
               };
+
+              apps = [
+                {
+                  class = "floorp";
+                  suffix = "— Ablaze Floorp";
+                  icon = "󰈹 ";
+                }
+                {
+                  class = "Slack";
+                  suffix = "- Slack";
+                  icon = " ";
+                }
+                {
+                  class = "discord";
+                  suffix = "- Discord";
+                  icon = " ";
+                }
+                {
+                  class = "kitty";
+                  rewrite = "  ${config.home.username}@${hostname} $1";
+                }
+                {
+                  class = "spotify";
+                  icon = "󰝚 ";
+                }
+                {
+                  class = "org.keepassxc.KeePassXC";
+                  suffix = "- KeePassXC";
+                  icon = "󰌾";
+                }
+                {
+                  class = "1Password";
+                  suffix = "— 1Password";
+                  icon = "󰌾";
+                }
+              ];
+
+              rewrites =
+                builtins.listToAttrs (map mkRewrite apps)
+                // {
+                  "(?!${builtins.concatStringsSep "|" (map (app: app.class) apps)}).* >>> (.*)" = "$1";
+                };
+            in {
+              format = "{class} >>> {title}";
+              rewrite = rewrites;
               separate-outputs = true;
             };
 
