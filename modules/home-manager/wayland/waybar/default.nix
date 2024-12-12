@@ -145,10 +145,11 @@ in {
               format = "{class} >>> {title}";
               rewrite = {
                 "floorp >>> (.*) — Ablaze Floorp" = "󰈹 $1";
+                "Slack >>> (.*) - Slack" = " $1";
                 "discord >>> (.*) - Discord" = "  $1";
                 "kitty >>> (.*)" = "  ${config.home.username}@${hostname} $1";
                 "spotify >>> (.*)" = "󰝚 $1";
-                "(?!floorp|spotify|discord|kitty).* >>> (.*)" = "$1";
+                "(?!floorp|spotify|discord|Slack|kitty).* >>> (.*)" = "$1";
               };
               separate-outputs = true;
             };
