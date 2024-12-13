@@ -49,6 +49,7 @@
     bash = {
       enable = true;
       historySize = 2500;
+      historyControl = ["ignoredups" "erasedups"];
       bashrcExtra = ''
         function gfp() {
         	git fetch && git pull
