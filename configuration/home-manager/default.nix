@@ -68,7 +68,7 @@
       obsidian
       libreoffice
       okular
-      sumatra
+      zathura
 
       #Social programs
       slack

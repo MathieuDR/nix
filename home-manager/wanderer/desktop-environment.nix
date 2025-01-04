@@ -9,7 +9,7 @@ in {
     applications.defaults = {
       enable = true;
       browser = pkgs.floorp;
-      pdfReader = pkgs.sumatra;
+      pdfReader = pkgs.zathura;
       terminal = "kitty";
       fileManager = "thunar";
     };
