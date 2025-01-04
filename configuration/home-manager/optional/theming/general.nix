@@ -3,21 +3,67 @@
   pkgs,
   ...
 }: let
-  # accent = "Mauve";
   accent = "mauve";
   flavor = "mocha";
-  # variant = "Mocha";
   cursorSize = 24;
   cursorPackage = pkgs.catppuccin-cursors.mochaMauve;
   cursorName = "catppuccin-mocha-mauve-cursors";
-  # kvantumThemePackage = pkgs.catppuccin-kvantum.override {
-  #   inherit variant accent;
-  # };
 in {
   catppuccin = {
     enable = true;
     accent = accent;
     flavor = flavor;
+
+    waybar = {
+      enable = true;
+      flavor = flavor;
+    };
+
+    rofi = {
+      enable = true;
+      flavor = flavor;
+    };
+
+    kitty = {
+      enable = true;
+      flavor = flavor;
+    };
+
+    k9s = {
+      enable = true;
+      flavor = flavor;
+    };
+
+    fzf = {
+      enable = true;
+      flavor = flavor;
+    };
+
+    kvantum = {
+      apply = true;
+      accent = accent;
+      flavor = flavor;
+      enable = true;
+    };
+
+    # Deprecated soon
+    gtk = {
+      enable = true;
+      accent = accent;
+      flavor = flavor;
+      icon = {
+        enable = true;
+        accent = accent;
+        flavor = flavor;
+      };
+      size = "standard";
+      tweaks = ["rimless" "normal"];
+    };
+
+    dunst = {
+      enable = true;
+      flavor = flavor;
+    };
   };
 
   home.pointerCursor = {
@@ -31,17 +77,12 @@ in {
     };
   };
 
+  # Might be able to remove this.
   qt = {
     enable = true;
     platformTheme.name = "kvantum";
     style = {
       name = "kvantum";
-      catppuccin = {
-        enable = true;
-        flavor = flavor;
-        accent = accent;
-        apply = true;
-      };
     };
   };
 
@@ -58,19 +99,6 @@ in {
     enable = true;
     font = {
       name = "JetBrainsMono Nerd Font";
-    };
-
-    catppuccin = {
-      enable = true;
-      accent = accent;
-      flavor = flavor;
-      icon = {
-        enable = true;
-        accent = accent;
-        flavor = flavor;
-      };
-      size = "standard";
-      tweaks = ["rimless" "normal"];
     };
 
     # cursorTheme = {
@@ -96,39 +124,5 @@ in {
     #   name = "Papirus-Dark";
     #   package = pkgs.catppuccin-papirus-folders.override {inherit accent flavor;};
     # };
-  };
-
-  programs = {
-    waybar.catppuccin = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    rofi.catppuccin = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    kitty.catppuccin = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    k9s.catppuccin = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    fzf.catppuccin = {
-      enable = true;
-      flavor = flavor;
-    };
-  };
-
-  services = {
-    dunst.catppuccin = {
-      enable = true;
-      flavor = flavor;
-    };
   };
 }

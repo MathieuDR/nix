@@ -295,7 +295,7 @@ in {
     # This uses the catppuccin plugin.
     # which is not necessarily 'imported'
     (lib.mkIf (cfg.enable && cfg.theming.enabled) {
-      wayland.windowManager.hyprland.catppuccin = {
+      catppuccin.hyprland = {
         enable = true;
         accent = cfg.theming.accent;
         flavor = cfg.theming.flavor;
