@@ -9,7 +9,7 @@
       type = lib.types.attrs;
       internal = true;
       default = {
-        thunar = pkgs.xfce.thunar;
+        "thunar" = pkgs.xfce.thunar;
       };
     };
 
