@@ -59,12 +59,13 @@ in {
       #   "name:8, monitor:DP-2, persistent:true"
       # ];
       #
-      # monitor = [
-      #   # Left screen
-      #   "DP-1, 2560x1440, 0x0, 1"
-      #   # Main screen
-      #   "DP-2, 2560x1440@165, 2560x0, 1"
-      # ];
+      monitor = [
+        # Left screen
+        "DP-1, 2560x1440, 0x0, 1"
+        # Main screen
+        "HDMI-A-1, 2560x1440@120, 2560x0, 1"
+        # "eDP-1, disable"
+      ];
     };
   };
 }

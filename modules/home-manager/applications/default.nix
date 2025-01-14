@@ -108,6 +108,8 @@ in {
         font.name = "JetBrainsMono Nerd Font";
         font.size = 12;
         settings = {
+          # Seems to be crashing hyprland sometimes
+          # cursor_trail = 4;
           window_title = "{title} - Kitty";
           tab_bar_min_tabs = 1;
           tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
