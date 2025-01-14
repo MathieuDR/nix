@@ -1271,11 +1271,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1736086227,
-        "narHash": "sha256-1yn3ylb9k73vYF6zbdAXU3+HAAxmVFNDlFbLYBcp34s=",
+        "lastModified": 1736816116,
+        "narHash": "sha256-ibOul5u9SJAsfGDGa7mkBzgLw764l84jmPNqiyYdkHc=",
         "owner": "mathieudr",
         "repo": "nixvim",
-        "rev": "fb65ecc466eaa3699c0a56d6fe10c5574f318897",
+        "rev": "693e64797889c0e8fb898a706bbc0fb2bfff53b1",
         "type": "github"
       },
       "original": {

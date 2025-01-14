@@ -87,7 +87,7 @@
          }
 
          function :q() {
-         	exit
+          exit
          }
       '';
     };
