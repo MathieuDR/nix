@@ -3,6 +3,7 @@
 in {
   imports = [
     ./desktop-environment.nix
+    ./monitors.nix
 
     optional.theming.general
     optional.theming.spotify

@@ -45,27 +45,4 @@ in {
       };
     };
   };
-
-  wayland.windowManager.hyprland = {
-    settings = {
-      # workspace = [
-      #   "name:1, monitor:DP-1, persistent:true"
-      #   "name:2, monitor:DP-2, persistent:true"
-      #   "name:3, monitor:DP-1, persistent:true"
-      #   "name:4, monitor:DP-2, persistent:true"
-      #   "name:5, monitor:DP-1, persistent:true"
-      #   "name:6, monitor:DP-2, persistent:true"
-      #   "name:7, monitor:DP-1, persistent:true"
-      #   "name:8, monitor:DP-2, persistent:true"
-      # ];
-      #
-      monitor = [
-        # Left screen
-        "DP-1, 2560x1440, 0x0, 1"
-        # Main screen
-        "HDMI-A-1, 2560x1440@120, 2560x0, 1"
-        # "eDP-1, disable"
-      ];
-    };
-  };
 }
