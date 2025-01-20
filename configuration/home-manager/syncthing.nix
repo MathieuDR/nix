@@ -27,7 +27,7 @@
       devices = {
         "anchor" = {
           name = "anchor";
-          id = "6KVYXUZ-R7Q7CVU-WXHWUDL-UFK6I3X-YG5IMU5-LBFJZ3F-BND4RQH-QZYAGAZ";
+          id = "QUED2XA-4E3KEYW-IXGOYIT-3YBTXEV-5XTH43E-IUNCXP6-7KQBAQ6-IO4R6QH";
         };
 
         "wanderer" = {
