@@ -25,7 +25,7 @@
       # WiFi Power Management
       # Full power on AC, power saving on battery
       WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "on";
+      WIFI_PWR_ON_BAT = "off";
 
       # USB Power Management
       # Enable autosuspend but with a longer timeout on AC

@@ -73,8 +73,8 @@ in {
         "eDP-1, 1920x1200@60, 0x0, 1"
 
         # Your dock monitors - these rules need to come after eDP-1
-        "desc:AOC 2778X, 2560x1440@60, 1920x0, 1"
-        "desc:Microstep MAG274QRF-QD, 2560x1440@60, 4480x0, 1"
+        "DP-1, 2560x1440@60, 1920x0, 1"
+        "HDMI-A-1, 2560x1440@60, 4480x0, 1"
 
         # Fallback rule for any other monitors
         ", preferred, auto, 1"
