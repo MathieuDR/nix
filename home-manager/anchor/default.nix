@@ -14,4 +14,6 @@ in {
   home = {
     stateVersion = "23.11"; # Please read the comment before changing.
   };
+
+  ysomic.hardware.nvidia.enable = true;
 }

@@ -6,12 +6,13 @@
   cfg = config.ysomic.hardware.nvidia;
 in {
   config = lib.mkIf cfg.enable {
+    hardware.graphics.enable = true;
     hardware.nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     allowedUnfree = [

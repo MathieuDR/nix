@@ -1,4 +1,3 @@
-# ./modules/home-manager/wayland/hyprland/default.nix
 {
   pkgs,
   lib,
@@ -6,6 +5,7 @@
   ...
 }: let
   cfg = config.ysomic.wayland.hyprland;
+  nvidia = config.ysomic.hardware.nvidia;
   defaultsCfg = config.ysomic.applications.defaults;
   startupScript = pkgs.writeShellScriptBin "ysomic_hyprland_init" ''
     waybar &
@@ -281,6 +281,15 @@ in {
 
       services.dunst = {
         enable = true;
+      };
+    })
+
+    (lib.mkIf (cfg.enable && nvidia.enable) {
+      wayland.windowManager.hyprland.settings = {
+        env = [
+          "LIBVA_DRIVER_NAME,nvidia"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        ];
       };
     })
 

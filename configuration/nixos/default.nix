@@ -9,12 +9,7 @@
   ];
 
   boot.loader.systemd-boot.configurationLimit = 15;
-
-  hardware.graphics = {
-    enable = true;
-    # driSupport = true;
-    # driSupport32Bit = true;
-  };
+  hardware.graphics.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   time.timeZone = "Europe/Berlin";
