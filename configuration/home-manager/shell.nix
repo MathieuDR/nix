@@ -1,4 +1,9 @@
-{self, ...}: {
+{
+  self,
+  pkgs,
+  lib,
+  ...
+}: {
   programs = {
     direnv = {
       enable = true;
@@ -43,13 +48,19 @@
       options = [
         "--cmd cd"
       ];
-      enableBashIntegration = true;
+      # We're doing this solo to put it at the end
+      enableBashIntegration = false;
     };
 
     bash = {
       enable = true;
       historySize = 2500;
       historyControl = ["ignoredups" "erasedups"];
+
+      initExtra = lib.mkOrder 2000 ''
+        eval "$(${pkgs.zoxide}/bin/zoxide init bash --cmd cd)"
+      '';
+
       bashrcExtra = ''
         function gfp() {
         	git fetch && git pull
@@ -82,8 +93,12 @@
           command docker compose
         }
 
-         function :wq() {
+         function :qa() {
          	exit
+         }
+
+         function :wq() {
+          exit
          }
 
          function :q() {
