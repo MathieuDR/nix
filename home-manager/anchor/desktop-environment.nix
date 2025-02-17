@@ -54,10 +54,10 @@ in {
 
       bind = [
         # workspaces
-        "$mainMod_CTRL, down, split-workspace, +1"
-        "$mainMod_CTRL, up, split-workspace, -1"
-        "$mainMod_SHIFT, down, split-movetoworkspace, +1"
-        "$mainMod_SHIFT, up, split-movetoworkspace, -1"
+        # "$mainMod_CTRL, down, split-workspace, +1"
+        # "$mainMod_CTRL, up, split-workspace, -1"
+        # "$mainMod_SHIFT, down, split-movetoworkspace, +1"
+        # "$mainMod_SHIFT, up, split-movetoworkspace, -1"
       ];
 
       # workspace = [
