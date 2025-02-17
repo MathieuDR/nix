@@ -100,7 +100,7 @@ in {
         enable = true;
 
         settings = {
-          exec-once = ''${startupScript}/bin/ysomic_hyprland_init'';
+          # exec-once = ''${startupScript}/bin/ysomic_hyprland_init'';
 
           general = {
             layout = "dwindle";
@@ -215,12 +215,6 @@ in {
             "$mainMod SHIFT, k, movewindow, u"
             "$mainMod SHIFT, h, movewindow, l"
             "$mainMod SHIFT, l, movewindow, r"
-
-            # workspaces
-            "$mainMod_CTRL, down, workspace, r+1"
-            "$mainMod_CTRL, up, workspace, r-1"
-            "$mainMod_SHIFT, down, movetoworkspace, r+1"
-            "$mainMod_SHIFT, up, movetoworkspace, r-1"
 
             # utilities
             ", Print, exec, grimblast save area - | swappy -f -"

@@ -41,7 +41,6 @@
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.system.follows = "system";
     };
 
     hyprland-plugins = {
@@ -61,6 +60,11 @@
     highlight-exporter = {
       url = "github:MathieuDR/readdeck-highlight-exporter";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
     };
   };
 
