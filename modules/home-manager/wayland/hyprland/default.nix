@@ -2,25 +2,32 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   cfg = config.ysomic.wayland.hyprland;
   nvidia = config.ysomic.hardware.nvidia;
   defaultsCfg = config.ysomic.applications.defaults;
+
+  formatScript = script:
+    if builtins.isList script
+    then builtins.concatStringsSep "\n" (map (line: line + " & ") script)
+    else script;
+
   startupScript = pkgs.writeShellScriptBin "ysomic_hyprland_init" ''
     waybar &
     swww-daemon &
     copyq --start-server &
-    ${cfg.startupScript.preInit}
+    ${formatScript cfg.startupScript.preInit}
     sleep 0.5 &
 
-    ${cfg.startupScript.init}
+    ${formatScript cfg.startupScript.init}
     sleep 0.5 &
 
     ${pkgs.swww}/bin/swww img ${cfg.wallpaper} &
     sleep 0.5 &
 
-    ${cfg.startupScript.postInit}
+    ${formatScript cfg.startupScript.postInit}
   '';
 in {
   imports = [
@@ -64,7 +71,7 @@ in {
 
     startupScript = {
       preInit = lib.mkOption {
-        type = lib.types.lines;
+        type = lib.types.either (lib.types.lines) (lib.types.listOf lib.types.str);
         default = "";
         description = "PreInit script to run at startup";
         example = ''
@@ -75,7 +82,7 @@ in {
       };
 
       init = lib.mkOption {
-        type = lib.types.lines;
+        type = lib.types.either (lib.types.lines) (lib.types.listOf lib.types.str);
         default = "";
         description = "The init script to run at startup";
         example = ''
@@ -84,7 +91,7 @@ in {
       };
 
       postInit = lib.mkOption {
-        type = lib.types.lines;
+        type = lib.types.either (lib.types.lines) (lib.types.listOf lib.types.str);
         default = "";
         description = "postInit script to run at startup";
         example = ''
@@ -97,10 +104,11 @@ in {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland = {
+        package = inputs.hyprland.packages."${pkgs.system}".hyprland;
         enable = true;
 
         settings = {
-          # exec-once = ''${startupScript}/bin/ysomic_hyprland_init'';
+          exec-once = ''${startupScript}/bin/ysomic_hyprland_init'';
 
           general = {
             layout = "dwindle";
@@ -215,6 +223,12 @@ in {
             "$mainMod SHIFT, k, movewindow, u"
             "$mainMod SHIFT, h, movewindow, l"
             "$mainMod SHIFT, l, movewindow, r"
+
+            # workspaces
+            "$mainMod_CTRL, down, split:workspace, +1"
+            "$mainMod_CTRL, up, split:workspace, -1"
+            "$mainMod_SHIFT, down, split:movetoworkspace, +1"
+            "$mainMod_SHIFT, up, split:movetoworkspace, -1"
 
             # utilities
             ", Print, exec, grimblast save area - | swappy -f -"

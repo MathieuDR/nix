@@ -1,6 +1,7 @@
 {
   self,
   pkgs,
+  config,
   inputs,
   ...
 }: let
@@ -24,7 +25,7 @@ in {
         startupScript = {
           init = [
             "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
-            "${pkgs.spotify}/bin/spotify"
+            "${config.programs.spicetify.spicedSpotify}/bin/spotify"
             "${pkgs.floorp}/bin/floorp"
             "${pkgs.kitty}/bin/kitty"
           ];
@@ -45,20 +46,15 @@ in {
     ];
 
     settings = {
-      exec-once = [
-        "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
-        "${pkgs.spotify}/bin/spotify"
-        "${pkgs.floorp}/bin/floorp"
-        "${pkgs.kitty}/bin/kitty"
-      ];
+      # exec-once = [
+      #   "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
+      #   "${pkgs.spotify}/bin/spotify"
+      #   "${pkgs.floorp}/bin/floorp"
+      #   "${pkgs.kitty}/bin/kitty"
+      # ];
 
-      bind = [
-        # workspaces
-        # "$mainMod_CTRL, down, split-workspace, +1"
-        # "$mainMod_CTRL, up, split-workspace, -1"
-        # "$mainMod_SHIFT, down, split-movetoworkspace, +1"
-        # "$mainMod_SHIFT, up, split-movetoworkspace, -1"
-      ];
+      # bind = [
+      # ];
 
       # workspace = [
       #   "name:1, monitor:DP-1, persistent:true"
