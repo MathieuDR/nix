@@ -63,7 +63,7 @@ in {
             poweroff -p
             ;;
           "Battery: Full Charge Mode")
-            pkexec tlp setcharge 5 100 BAT0
+            pkexec tlp setcharge 95 100 BAT0
             ;;
           "Battery: Docked Mode")
             pkexec tlp setcharge 60 80 BAT0

@@ -31,6 +31,12 @@
         push.autoSetupRemote = true;
         pull.rebase = true;
       };
+
+      difftastic = {
+        enable = true;
+        display = "side-by-side";
+        background = "dark";
+      };
     };
 
     lsd = {

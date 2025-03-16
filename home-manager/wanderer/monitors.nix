@@ -31,6 +31,7 @@
 in {
   home.packages = [
     monitorScript
+    pkgs.brightnessctl
   ];
 
   # services.udev.extraRules = ''
