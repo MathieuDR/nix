@@ -69,13 +69,14 @@ in {
       bind = [
         "$mainMod, m, exec, ${scriptName}"
       ];
+      # I should work on names and not connections. Kind of suck when I use other monitors
       monitor = [
         # Laptop screen - enabled by default but disabled if dock monitors connected
         "eDP-1, 1920x1200@60, 0x0, 1"
 
         # Your dock monitors - these rules need to come after eDP-1
         "DP-1, 2560x1440@60, 1920x0, 1"
-        "HDMI-A-1, 2560x1440@60, 4480x0, 1"
+        # "HDMI-A-1, 2560x1440@60, 4480x0, 1"
 
         # Fallback rule for any other monitors
         ", preferred, auto, 1"

@@ -33,9 +33,6 @@
 
       #dev
       vscode
-      httpie
-      httpie-desktop
-      postman
 
       #nixvim package
       (inputs.yvim.packages.x86_64-linux.default)

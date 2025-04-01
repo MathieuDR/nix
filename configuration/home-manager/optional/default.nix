@@ -12,5 +12,6 @@
 
   programs = {
     copyq = import ./programs/copyq.nix;
+    dev = import ./programs/dev.nix;
   };
 }

@@ -4,6 +4,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
+    ./thinkfan.nix
     optional.programs.onepassword
     optional.programs.docker
     optional.power-management
