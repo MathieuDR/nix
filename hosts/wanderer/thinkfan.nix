@@ -7,20 +7,20 @@
   services.thinkfan = {
     enable = true;
 
-    sensors = [
-      {
-        type = "hwmon";
-        query = "/sys/class/hwmon/hwmon5/temp1_input"; # CPU temperature
-      }
-      {
-        type = "hwmon";
-        query = "/sys/class/hwmon/hwmon5/temp3_input"; # Additional sensor
-      }
-      {
-        type = "hwmon";
-        query = "/sys/class/hwmon/hwmon7/temp1_input"; # GPU temperature (amdgpu)
-      }
-    ];
+    # sensors = [
+    #   {
+    #     type = "hwmon";
+    #     query = "/sys/class/hwmon/hwmon5/temp1_input"; # CPU temperature
+    #   }
+    #   {
+    #     type = "hwmon";
+    #     query = "/sys/class/hwmon/hwmon5/temp3_input"; # Additional sensor
+    #   }
+    #   {
+    #     type = "hwmon";
+    #     query = "/sys/class/hwmon/hwmon7/temp1_input"; # GPU temperature (amdgpu)
+    #   }
+    # ];
 
     # Balanced fan curve
     levels = [
