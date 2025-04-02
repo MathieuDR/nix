@@ -1,11 +1,11 @@
 {pkgs, ...}: {
   nixpkgs.overlays = [
-    (final: prev: {
-      rofi-calc = prev.rofi-calc.override {rofi-unwrapped = prev.rofi-wayland-unwrapped;};
-    })
-    (final: prev: {
-      rofimoji = prev.rofimoji.override {rofi = prev.rofi-wayland;};
-    })
+    # (final: prev: {
+    #   rofi-calc = prev.rofi-calc.override {rofi-unwrapped = prev.rofi-wayland-unwrapped;};
+    # })
+    # (final: prev: {
+    #   rofimoji = prev.rofimoji.override {rofi = prev.rofi-wayland;};
+    # })
   ];
   programs.rofi = {
     enable = true;
@@ -18,8 +18,8 @@
   };
 
   home.packages = with pkgs; [
-    rofimoji
-    rofi-bluetooth
+    # rofimoji
+    # rofi-bluetooth
   ];
 
   ysomic.power.menu = {

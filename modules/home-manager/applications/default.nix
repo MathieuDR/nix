@@ -40,7 +40,7 @@ in {
 
     pdfReader = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.okular;
+      default = pkgs.kdePackages.okular;
       description = "Default PDF reader";
     };
 
