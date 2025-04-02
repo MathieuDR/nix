@@ -11,6 +11,7 @@
     ./rofi.nix
     ./security.nix
     ./syncthing.nix
+    ./signal.nix
     ./scripts
   ];
 
@@ -64,7 +65,7 @@
       #Productive programs
       obsidian
       libreoffice
-      okular
+      pkgs.kdePackages.okular
       zathura
 
       #Social programs
