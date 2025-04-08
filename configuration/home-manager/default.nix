@@ -88,6 +88,9 @@
       #Necessary
       blueman
       pavucontrol
+
+      #Custom
+      self.packages.${pkgs.system}.highlight-exporter
     ];
   };
 

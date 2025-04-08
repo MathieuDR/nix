@@ -48,11 +48,15 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Custom packages / tools
     yvim = {
       url = "github:mathieudr/nixvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    highlight-exporter = {
+      url = "github:MathieuDR/readdeck-highlight-exporter";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

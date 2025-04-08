@@ -1,10 +1,14 @@
 {
   systems = ["x86_64-linux"];
 
-  perSystem = {pkgs, ...}: {
+  perSystem = {
+    pkgs,
+    inputs',
+    ...
+  }: {
     packages = {
-      # instant repl with automatic flake loading
       repl = pkgs.callPackage ./repl {};
+      highlight-exporter = inputs'.highlight-exporter.packages.default;
     };
   };
 }
