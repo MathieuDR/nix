@@ -9,6 +9,10 @@
     };
   };
 
+  services.fwupd = {
+    enable = true;
+  };
+
   ysomic.applications.defaults.fileManager = "thunar";
   ysomic.wayland.hyprland = {
     enable = true;
