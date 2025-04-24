@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  wallpaper = "${self}/data/wallpapers/firewatch.jpg";
+  wallpaper = "${self}/data/wallpapers/planet.jpg";
 in {
   ysomic = {
     applications.defaults = {
@@ -22,7 +22,7 @@ in {
     wayland = {
       hyprland = {
         enable = true;
-        hyprlock.enable = true;
+        #hyprlock.enable = true;
         wallpaper = wallpaper;
 
         # startupScript = {
