@@ -32,18 +32,21 @@ in {
     package = mkOption {
       type = types.package;
       default = pkgs.writeShellScriptBin "powermenu" ''
-        menuItems=$(cat << EOF
-        Shutdown
-        Reboot
-        ${optionalString config.ysomic.wayland.hyprland.enable "Quit Hyprland"}
-        ${optionalString config.ysomic.wayland.hyprland.hyprlock.enable "Lock Hyprland"}
-        ${optionalString cfg.suspend "Suspend"}
-        ${optionalString cfg.tlpControl "Battery: Full Charge Mode"}
-        ${optionalString cfg.tlpControl "Battery: Docked Mode"}
-        EOF
-        )
+        menuItems=()
 
-        opt=$(echo "$menuItems" | ${cfg.launcherPackage}/bin/rofi -dmenu -i -p "Power menu")
+        menuItems+=("Shutdown")
+        menuItems+=("Reboot")
+
+        ${optionalString config.ysomic.wayland.hyprland.enable "menuItems+=(\"Quit Hyprland\")"}
+        ${optionalString config.ysomic.wayland.hyprland.hyprlock.enable "menuItems+=(\"Lock Hyprland\")"}
+        ${optionalString cfg.suspend "menuItems+=(\"Suspend\")"}
+        ${optionalString cfg.tlpControl "menuItems+=(\"Battery: Full Charge Mode\")"}
+        ${optionalString cfg.tlpControl "menuItems+=(\"Battery: Docked Mode\")"}
+
+        # Convert array to newline-separated string for rofi
+        menuString=$(printf "%s\n" "''${menuItems[@]}")
+
+        opt=$(echo "$menuString" | ${cfg.launcherPackage}/bin/rofi -dmenu -i -p "Power menu")
 
         case $opt in
           "Lock Hyprland")
