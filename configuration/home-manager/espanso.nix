@@ -71,9 +71,10 @@
           }
           {
             trigger = ";ddd";
+            force_mode = "clipboard";
             replace = ''
-              ``````$|$
-              ``````
+              ```$|$
+              ```
             '';
           }
           {
