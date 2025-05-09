@@ -14,13 +14,10 @@ This repository contains a NixOS system configuration using the Flakes feature. 
 │   └── wanderer/       # Configuration for 'wanderer' machine (WIP)
 ├── home-manager/       # Host-specific Home Manager configurations
 │   └── anchor/        # Configuration for the user on 'anchor'
-├── modules/           # Custom NixOS and Home Manager modules
-│   ├── nixos/        # NixOS-specific modules
-│   ├── home-manager/ # Home Manager-specific modules
-│   └── shared/       # Shared module definitions
-├── pkgs/             # Custom package definitions
-└── lib/              # Helper functions and documentation
-    └── repl.md       # Guide for using the Nix REPL with this configuration
+└── modules/           # Custom NixOS and Home Manager modules
+    ├── nixos/        # NixOS-specific modules
+    ├── home-manager/ # Home Manager-specific modules
+    └── shared/       # Shared module definitions
 ```
 
 ## 🚀 Features
@@ -64,7 +61,6 @@ These improvements are tracked and documented to maintain system health and add 
 ### Development
 
 For development and debugging, you can use the provided REPL setup:
-- Check out the [REPL Guide](./lib/repl.md) for detailed usage instructions
 - Use the `just -l` command for common operations:
   ```bash
   just         # Show available commands

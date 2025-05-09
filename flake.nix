@@ -72,7 +72,6 @@
         ./hosts
         ./home-manager
         ./modules
-        ./pkgs
         ./pre-commit-hooks.nix
       ];
 
@@ -89,7 +88,6 @@
             pkgs.just
             pkgs.fzf
             pkgs.nodePackages.prettier
-            (config.packages.repl)
             (inputs.agenix.packages.${system}.default)
           ];
           name = "dots";
