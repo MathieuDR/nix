@@ -14,10 +14,11 @@ This repository contains a NixOS system configuration using the Flakes feature. 
 │   └── wanderer/       # Configuration for 'wanderer' machine (WIP)
 ├── home-manager/       # Host-specific Home Manager configurations
 │   └── anchor/        # Configuration for the user on 'anchor'
-└── modules/           # Custom NixOS and Home Manager modules
-    ├── nixos/        # NixOS-specific modules
-    ├── home-manager/ # Home Manager-specific modules
-    └── shared/       # Shared module definitions
+├── modules/           # Custom NixOS and Home Manager modules
+│   ├── nixos/        # NixOS-specific modules
+│   ├── home-manager/ # Home Manager-specific modules
+│   └── shared/       # Shared module definitions
+└── pkgs/             # Custom package definitions
 ```
 
 ## 🚀 Features

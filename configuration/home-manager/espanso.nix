@@ -50,6 +50,11 @@
             replace = "https://mathieu.deraedt.dev";
           }
           {
+            trigger = ";@dev";
+            replace = "mathieu@deraedt.dev";
+          }
+
+          {
             trigger = ";@g";
             replace = "mathieuderaedt@gmail.com";
           }
@@ -67,38 +72,30 @@
           {
             trigger = ";ddd";
             replace = ''
-              ```$|$
-              ```
+              ``````$|$
+              ``````
             '';
           }
           {
-            trigger = ";@dev";
-            replace = "mathieu@deraedt.dev";
-          }
-          {
-            trigger = ";sig";
+            trigger = ";mfg";
             replace = ''
               Mit freundlichen Grüßen
               Mathieu De Raedt
             '';
           }
           {
-            trigger = ";sig";
+            trigger = ";mvg";
             replace = ''
               Met vriendelijke groeten
               Mathieu De Raedt
             '';
           }
           {
-            trigger = ";sig";
+            trigger = ";kr";
             replace = ''
               Kind Regards
               Mathieu De Raedt
             '';
-          }
-          {
-            trigger = ";uuid";
-            replace = "{{uuid}}";
           }
         ];
       };
