@@ -50,10 +50,7 @@
     };
 
     # Fixes
-    espanso-fix = {
-      url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    espanso-fix.url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
 
     # Custom packages / tools
     yvim = {

@@ -1,7 +1,20 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  nixosConfig,
+  ...
+}: {
+  nixpkgs.overlays = [
+    (final: prev: {
+      _espanso-wayland-orig = prev.espanso-wayland;
+      espanso-wayland = pkgs.callPackage ./overrides/espanso.nix {
+        capDacOverrideWrapperDir = "${nixosConfig.security.wrapperDir}";
+        espanso = prev.espanso-wayland;
+      };
+    })
+  ];
   services.espanso = {
     enable = true;
-    capdacoverride.package = pkgs.espanso-wayland;
+    package = pkgs.espanso-wayland;
 
     configs = {
       default = {

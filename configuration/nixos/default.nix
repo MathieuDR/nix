@@ -49,7 +49,6 @@
   # espanso
   services.espanso = {
     enable = true;
-    capdacoverride.package = pkgs.espanso-wayland;
   };
 
   #Bluetooth
