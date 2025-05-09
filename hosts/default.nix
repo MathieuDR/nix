@@ -16,6 +16,7 @@
           inherit inputs self hostname user;
         };
         modules = [
+          inputs.espanso-fix.nixosModules.espanso-capdacoverride
           inputs.agenix.nixosModules.default
           self.nixosModules.default
           config.nixos.shared

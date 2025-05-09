@@ -11,7 +11,8 @@
     ./rofi.nix
     ./security.nix
     ./syncthing.nix
-    # ./signal.nix
+    ./signal.nix
+    ./espanso.nix
     ./scripts
   ];
 

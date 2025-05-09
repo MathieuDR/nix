@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./networking.nix
     ./common-packages.nix
@@ -45,6 +45,12 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # espanso
+  services.espanso = {
+    enable = true;
+    capdacoverride.package = pkgs.espanso-wayland;
+  };
 
   #Bluetooth
   hardware.bluetooth = {

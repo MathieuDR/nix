@@ -23,7 +23,7 @@
         modules = [
           self.homeManagerModules.default
           inputs.agenix.homeManagerModules.default
-          inputs.catppuccin.homeManagerModules.catppuccin
+          inputs.catppuccin.homeModules.catppuccin
           config.home-manager.shared
           ./${hostname}
         ];

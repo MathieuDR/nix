@@ -6,7 +6,7 @@
   };
 in {
   home.packages = [
-    (pkgs.signal-desktop.overrideAttrs (finalAttrs: previousAttrs: {
+    (pkgs.signal-desktop-bin.overrideAttrs (finalAttrs: previousAttrs: {
       buildInputs = previousAttrs.buildInputs ++ [pkgs.asar];
       postInstall = ''
         asar extract $out/lib/signal-desktop/resources/app.asar temp/

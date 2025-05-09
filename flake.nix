@@ -49,6 +49,12 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    # Fixes
+    espanso-fix = {
+      url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Custom packages / tools
     yvim = {
       url = "github:mathieudr/nixvim";
