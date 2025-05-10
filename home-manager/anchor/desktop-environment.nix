@@ -1,6 +1,8 @@
 {
   self,
   pkgs,
+  config,
+  inputs,
   ...
 }: let
   wallpaper = "${self}/data/wallpapers/firewatch.jpg";
@@ -21,16 +23,16 @@ in {
         wallpaper = wallpaper;
 
         startupScript = {
-          init = ''
-            open_in_workspace "discord --in-progress-gpu --use-gl=desktop" 1 &
-            open_in_workspace "spotify" 2 &
-            open_in_workspace "floorp" 3 &
-            open_in_workspace "kitty" 4 &
-          '';
+          init = [
+            "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
+            "${config.programs.spicetify.spicedSpotify}/bin/spotify"
+            "${pkgs.floorp}/bin/floorp"
+            "${pkgs.kitty}/bin/kitty"
+          ];
 
-          postInit = ''
-            hyprctl dispatch workspace 4 &
-          '';
+          # postInit = ''
+          #   # hyprctl dispatch workspace 4 &
+          # '';
         };
       };
 
@@ -39,17 +41,31 @@ in {
   };
 
   wayland.windowManager.hyprland = {
+    plugins = [
+      inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
+    ];
+
     settings = {
-      workspace = [
-        "name:1, monitor:DP-1, persistent:true"
-        "name:2, monitor:DP-2, persistent:true"
-        "name:3, monitor:DP-1, persistent:true"
-        "name:4, monitor:DP-2, persistent:true"
-        "name:5, monitor:DP-1, persistent:true"
-        "name:6, monitor:DP-2, persistent:true"
-        "name:7, monitor:DP-1, persistent:true"
-        "name:8, monitor:DP-2, persistent:true"
-      ];
+      # exec-once = [
+      #   "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
+      #   "${pkgs.spotify}/bin/spotify"
+      #   "${pkgs.floorp}/bin/floorp"
+      #   "${pkgs.kitty}/bin/kitty"
+      # ];
+
+      # bind = [
+      # ];
+
+      # workspace = [
+      #   "name:1, monitor:DP-1, persistent:true"
+      #   "name:2, monitor:DP-2, persistent:true"
+      #   "name:3, monitor:DP-1, persistent:true"
+      #   "name:4, monitor:DP-2, persistent:true"
+      #   "name:5, monitor:DP-1, persistent:true"
+      #   "name:6, monitor:DP-2, persistent:true"
+      #   "name:7, monitor:DP-1, persistent:true"
+      #   "name:8, monitor:DP-2, persistent:true"
+      # ];
 
       monitor = [
         # Left screen

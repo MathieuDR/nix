@@ -57,4 +57,6 @@
     powerOnBoot = true;
     settings.General.Experimental = true; # Show battery level
   };
+
+  hardware.keyboard.zsa.enable = true;
 }
