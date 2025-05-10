@@ -73,6 +73,9 @@ update:
 update_yvim: 
     nix flake lock --update-input yvim
 
+update_exporter: 
+    nix flake lock --update-input highlight-exporter
+
 # Print diagnostic information
 diagnose:
     @echo "=== NixOS Configurations ==="
