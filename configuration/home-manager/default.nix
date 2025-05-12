@@ -98,6 +98,7 @@
 
       #Custom
       self.packages.${pkgs.system}.highlight-exporter
+      self.packages.${pkgs.system}.zeit
     ];
   };
 

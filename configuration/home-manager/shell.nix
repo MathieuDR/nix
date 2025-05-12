@@ -2,6 +2,7 @@
   self,
   pkgs,
   lib,
+  config,
   ...
 }: {
   programs = {
@@ -99,18 +100,22 @@
           command docker compose
         }
 
-         function :qa() {
-         	exit
-         }
-
-         function :wq() {
+        function :qa() {
           exit
-         }
+        }
 
-         function :q() {
+        function :wq() {
           exit
-         }
+        }
+
+        function :q() {
+          exit
+        }
       '';
     };
+  };
+
+  home.sessionVariables = {
+    ZEIT_DB = "${config.xdg.dataHome}/zeit.db";
   };
 }
