@@ -42,6 +42,10 @@
             replace = "{{filedate}}";
           }
           {
+            trigger = ";lutm";
+            replace = "?utm_source=linkedin&utm_medium=social&utm_campaign=manual%20posts";
+          }
+          {
             trigger = ";utm";
             replace = "?utm_source=self&utm_medium=direct&utm_campaign=personal_share";
           }
@@ -97,6 +101,10 @@
               Kind Regards
               Mathieu De Raedt
             '';
+          }
+          {
+            trigger = ";ctac";
+            replace = "Find the full set of connected notes in the comments.";
           }
         ];
       };
