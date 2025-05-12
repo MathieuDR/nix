@@ -79,9 +79,11 @@
       discord
       # whatsapp-for-linux
       tutanota-desktop
+      element-desktop
 
       #Common programs
       floorp
+      ungoogled-chromium
       firefox
       keepassxc
       calibre
@@ -110,6 +112,15 @@
     "d ${config.home.homeDirectory}/pictures/screenshots 0755 ${config.home.username} users - -"
     "d ${config.home.homeDirectory}/notes 0755 ${config.home.username} users - -"
   ];
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/matrix" = ["${pkgs.element-desktop.pname}.desktop"];
+      "x-scheme-handler/io.element.desktop" = ["${pkgs.element-desktop.pname}.desktop"];
+      "x-scheme-handler/elements" = ["${pkgs.element-desktop.pname}.desktop"];
+    };
+  };
 
   xdg.configFile."${hostname}" = {
     source = "${self}/data/config/";
