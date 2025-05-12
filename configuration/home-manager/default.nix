@@ -117,9 +117,7 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "x-scheme-handler/matrix" = ["${pkgs.element-desktop.pname}.desktop"];
       "x-scheme-handler/io.element.desktop" = ["${pkgs.element-desktop.pname}.desktop"];
-      "x-scheme-handler/elements" = ["${pkgs.element-desktop.pname}.desktop"];
     };
   };
 
