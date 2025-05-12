@@ -32,6 +32,10 @@
       # fonts
       nerd-fonts.jetbrains-mono
       noto-fonts-emoji
+      roboto
+      ubuntu_font_family
+      ubuntu-sans
+      ubuntu-classic
 
       #dev
       vscode
@@ -75,9 +79,11 @@
       discord
       # whatsapp-for-linux
       tutanota-desktop
+      element-desktop
 
       #Common programs
       floorp
+      ungoogled-chromium
       firefox
       keepassxc
       calibre
@@ -92,6 +98,7 @@
 
       #Custom
       self.packages.${pkgs.system}.highlight-exporter
+      self.packages.${pkgs.system}.zeit
     ];
   };
 
@@ -106,6 +113,13 @@
     "d ${config.home.homeDirectory}/pictures/screenshots 0755 ${config.home.username} users - -"
     "d ${config.home.homeDirectory}/notes 0755 ${config.home.username} users - -"
   ];
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/io.element.desktop" = ["${pkgs.element-desktop.pname}.desktop"];
+    };
+  };
 
   xdg.configFile."${hostname}" = {
     source = "${self}/data/config/";

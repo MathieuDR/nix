@@ -406,11 +406,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1746794848,
-        "narHash": "sha256-lrJeeV5W1DbPxtdQsWrEv5ptOU3U7+vSkvhz/4fqFMk=",
+        "lastModified": 1746825381,
+        "narHash": "sha256-v2qMi18KHf8BZ7mltxx2nymeF55IzLwXPBGlcbRo0oo=",
         "ref": "refs/heads/main",
-        "rev": "25cf06f6cfe1b23b97d9beae91247413a3683803",
-        "revCount": 6101,
+        "rev": "60cd5b7a48af4a23717201d70395161a3bb4ab24",
+        "revCount": 6102,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -570,6 +570,26 @@
       "original": {
         "owner": "hyprwm",
         "repo": "hyprlang",
+        "type": "github"
+      }
+    },
+    "hyprsplit": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746225255,
+        "narHash": "sha256-NJTCUa8kHXzQDpUmSifXrHMheR5yejigG2vPBepHolA=",
+        "owner": "shezdy",
+        "repo": "hyprsplit",
+        "rev": "9a65a4d33cc86703d2ac1f349de9697c8fc7a4b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shezdy",
+        "repo": "hyprsplit",
         "type": "github"
       }
     },
@@ -790,6 +810,7 @@
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
+        "hyprsplit": "hyprsplit",
         "nixpkgs": "nixpkgs_2",
         "pre-commit-hooks": "pre-commit-hooks_2",
         "spicetify-nix": "spicetify-nix",
