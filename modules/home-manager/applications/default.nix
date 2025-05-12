@@ -107,6 +107,7 @@ in {
         enable = true;
         font.name = "JetBrainsMono Nerd Font";
         font.size = 12;
+        shellIntegration.enableBashIntegration = true;
         settings = {
           # Seems to be crashing hyprland sometimes
           # cursor_trail = 4;
