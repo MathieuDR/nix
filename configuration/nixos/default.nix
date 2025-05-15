@@ -58,5 +58,8 @@
     settings.General.Experimental = true; # Show battery level
   };
 
-  hardware.keyboard.zsa.enable = true;
+  hardware.sane = {
+    enable = true;
+    extraBackends = [pkgs.sane-backends];
+  };
 }

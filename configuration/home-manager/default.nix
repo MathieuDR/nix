@@ -66,12 +66,14 @@
       nmap
       rsync
       rclone
+      file
 
       #Productive programs
       obsidian
       libreoffice
       pkgs.kdePackages.okular
       zathura
+      simple-scan
 
       #Social programs
       slack
