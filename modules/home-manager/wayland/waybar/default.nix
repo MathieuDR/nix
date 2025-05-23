@@ -57,7 +57,7 @@ in {
             margin-left = 8;
             margin-right = 0;
             modules-left = [
-              "hyprland/window"
+              # "hyprland/window"
             ];
             modules-center = [
               # "mpris"
