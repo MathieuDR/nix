@@ -712,14 +712,15 @@
           "yvim",
           "nixpkgs"
         ],
-        "nuschtosSearch": "nuschtosSearch"
+        "nuschtosSearch": "nuschtosSearch",
+        "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1745496969,
-        "narHash": "sha256-04ZWtuPFXc/aRklrWs9FY+Gcb9Ct5lmv84Livgafd84=",
+        "lastModified": 1748034126,
+        "narHash": "sha256-7nPv+Qi3PKxgeE4i9c4ErMCaBjVhnVYEzDmWA+8Kalw=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "62ecd39b40bf8a61fa428d026bb7061e1350f456",
+        "rev": "2f610f97541a9cdebcdb485fe8f41e09bd46420d",
         "type": "github"
       },
       "original": {
@@ -913,6 +914,21 @@
         "type": "github"
       }
     },
+    "systems_6": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -984,11 +1000,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1745498258,
-        "narHash": "sha256-uvy4vFnBEMtKy/aw9nHb8OkVH6tD727CcKvsP0T8iqo=",
+        "lastModified": 1748037280,
+        "narHash": "sha256-uS4iP9ym5zEZBdyTIwPFYps/4G3Lv7b9qkvzCTOWENU=",
         "owner": "mathieudr",
         "repo": "nixvim",
-        "rev": "7424042d6e7911986a0fa2cf3e685a13c49c19ed",
+        "rev": "7263753120ca8b0ea2ff8617cc1987cacf59fa57",
         "type": "github"
       },
       "original": {
