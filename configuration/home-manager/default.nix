@@ -93,6 +93,7 @@
       gzip
       filezilla
       file-roller
+      kooha
 
       #Necessary
       blueman
