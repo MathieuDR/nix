@@ -14,5 +14,6 @@
     copyq = import ./programs/copyq.nix;
     dev = import ./programs/dev.nix;
     zen = import ./programs/zen.nix;
+    mpv = import ./programs/mpv.nix;
   };
 }

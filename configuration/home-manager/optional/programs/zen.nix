@@ -18,6 +18,15 @@ in {
     inputs.zen-browser.homeModules.twilight
   ];
 
+  home.file = {
+    "${config.programs.zen-browser.configPath}/${config.programs.zen-browser.profiles.default.path}/chrome/zen-logo-mocha.svg" = {
+      source = "${catppuccin-css}/themes/Mocha/Mauve/zen-logo-mocha.svg";
+    };
+    "${config.programs.zen-browser.configPath}/${config.programs.zen-browser.profiles.default.path}/chrome/zen-logo-latte.svg" = {
+      source = "${catppuccin-css}/themes/Latte/Mauve/zen-logo-latte.svg";
+    };
+  };
+
   programs.zen-browser = {
     enable = true;
 
@@ -189,15 +198,6 @@ in {
           ${builtins.readFile "${catppuccin-css}/themes/Mocha/Mauve/userContent.css"}
         '';
       };
-    };
-  };
-
-  home.file = {
-    "${config.programs.zen-browser.configPath}/${config.programs.zen-browser.profiles.default.path}/chrome/zen-logo-mocha.svg" = {
-      source = "${catppuccin-css}/themes/Mocha/Mauve/zen-logo-mocha.svg";
-    };
-    "${config.programs.zen-browser.configPath}/${config.programs.zen-browser.profiles.default.path}/chrome/zen-logo-latte.svg" = {
-      source = "${catppuccin-css}/themes/Latte/Mauve/zen-logo-latte.svg";
     };
   };
 }

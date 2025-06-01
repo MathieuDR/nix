@@ -8,7 +8,26 @@
 
   terminalPackage = config.ysomic.applications.defaults.supported.terminals.${cfg.terminal};
   fileManagerPackage = config.ysomic.applications.defaults.supported.fileManagers.${cfg.fileManager};
-  getDesktopFile = app: "${app}.desktop";
+  getDesktopFile = app: let
+    pname = app.pname or null;
+    mainProgram = app.meta.mainProgram or null;
+    name = app.name or null;
+
+    # Extract basename from name if it contains derivation info
+    extractBaseName = fullName:
+      if fullName != null
+      then builtins.head (lib.splitString "-" fullName)
+      else null;
+
+    desktopName =
+      if pname != null
+      then pname
+      else if mainProgram != null
+      then mainProgram
+      else if name != null
+      then extractBaseName name
+      else throw "Package ${app} has no pname, mainProgram, or name attribute";
+  in "${desktopName}.desktop";
 in {
   options.ysomic.applications.defaults = {
     enable = lib.mkEnableOption "Default application configuration";
@@ -40,8 +59,40 @@ in {
 
     pdfReader = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.kdePackages.okular;
+      default = pkgs.zathura;
       description = "Default PDF reader";
+    };
+
+    webImages = lib.mkOption {
+      type = lib.types.package;
+      default = cfg.browser;
+      description = "Default viewer for web images (gif, svg, webp)";
+    };
+
+    imageViewer = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.imv;
+      description = "Default image viewer (jpg, png, bmp)";
+    };
+
+    videoPlayer = lib.mkOption {
+      type = lib.types.package;
+      default = (
+        if config.programs.mpv.enable
+        then config.programs.mpv.finalPackage
+        else pkgs.vlc
+      );
+      description = "Default video player";
+    };
+
+    audioPlayer = lib.mkOption {
+      type = lib.types.package;
+      default = (
+        if config.programs.mpv.enable
+        then config.programs.mpv.finalPackage
+        else pkgs.vlc
+      );
+      description = "Default audio player";
     };
 
     # Additional options
@@ -62,32 +113,74 @@ in {
       home.packages = [
         cfg.browser
         cfg.pdfReader
+        cfg.webImages
+        cfg.imageViewer
+        cfg.videoPlayer
+        cfg.audioPlayer
       ];
 
       xdg.mimeApps = {
         enable = true;
         defaultApplications = lib.mkMerge [
+          # Web browser associations
           {
-            "x-scheme-handler/http" = [(getDesktopFile cfg.browser.pname)];
-            "x-scheme-handler/https" = [(getDesktopFile cfg.browser.pname)];
-            "x-scheme-handler/chrome" = [(getDesktopFile cfg.browser.pname)];
-            "text/html" = [(getDesktopFile cfg.browser.pname)];
-            "application/x-extension-htm" = [(getDesktopFile cfg.browser.pname)];
-            "application/x-extension-html" = [(getDesktopFile cfg.browser.pname)];
-            "application/x-extension-shtml" = [(getDesktopFile cfg.browser.pname)];
-            "application/xhtml+xml" = [(getDesktopFile cfg.browser.pname)];
-            "application/x-extension-xhtml" = [(getDesktopFile cfg.browser.pname)];
-            "application/x-extension-xht" = [(getDesktopFile cfg.browser.pname)];
+            "x-scheme-handler/http" = [(getDesktopFile cfg.browser)];
+            "x-scheme-handler/https" = [(getDesktopFile cfg.browser)];
+            "x-scheme-handler/chrome" = [(getDesktopFile cfg.browser)];
+            "text/html" = [(getDesktopFile cfg.browser)];
+            "application/x-extension-htm" = [(getDesktopFile cfg.browser)];
+            "application/x-extension-html" = [(getDesktopFile cfg.browser)];
+            "application/x-extension-shtml" = [(getDesktopFile cfg.browser)];
+            "application/xhtml+xml" = [(getDesktopFile cfg.browser)];
+            "application/x-extension-xhtml" = [(getDesktopFile cfg.browser)];
+            "application/x-extension-xht" = [(getDesktopFile cfg.browser)];
           }
+          # PDF associations
           {
             "application/pdf" = [
-              (getDesktopFile cfg.pdfReader.pname)
-              (getDesktopFile cfg.browser.pname)
+              (getDesktopFile cfg.pdfReader)
+              (getDesktopFile cfg.browser)
             ];
           }
+          # File manager associations
           {
-            "inode/directory" = [(getDesktopFile fileManagerPackage.pname)];
-            "application/x-compressed-tar" = [(getDesktopFile fileManagerPackage.pname)];
+            "inode/directory" = [(getDesktopFile fileManagerPackage)];
+            "application/x-compressed-tar" = [(getDesktopFile fileManagerPackage)];
+          }
+          # Web image associations
+          {
+            "image/gif" = [(getDesktopFile cfg.webImages)];
+            "image/svg+xml" = [(getDesktopFile cfg.webImages)];
+            "image/webp" = [(getDesktopFile cfg.webImages)];
+          }
+          # Regular image associations
+          {
+            "image/jpeg" = [(getDesktopFile cfg.imageViewer)];
+            "image/jpg" = [(getDesktopFile cfg.imageViewer)];
+            "image/png" = [(getDesktopFile cfg.imageViewer)];
+            "image/bmp" = [(getDesktopFile cfg.imageViewer)];
+            "image/tiff" = [(getDesktopFile cfg.imageViewer)];
+          }
+          # Video associations
+          {
+            "video/mp4" = [(getDesktopFile cfg.videoPlayer)];
+            "video/mpeg" = [(getDesktopFile cfg.videoPlayer)];
+            "video/webm" = [(getDesktopFile cfg.videoPlayer)];
+            "video/ogg" = [(getDesktopFile cfg.videoPlayer)];
+            "video/quicktime" = [(getDesktopFile cfg.videoPlayer)]; # .mov
+            "video/x-matroska" = [(getDesktopFile cfg.videoPlayer)]; # .mkv
+            "video/x-msvideo" = [(getDesktopFile cfg.videoPlayer)]; #.avi
+          }
+          # Audio associations
+          {
+            "audio/mpeg" = [(getDesktopFile cfg.audioPlayer)];
+            "audio/mp3" = [(getDesktopFile cfg.audioPlayer)];
+            "audio/mp4" = [(getDesktopFile cfg.audioPlayer)]; #.m4a
+            "audio/webm" = [(getDesktopFile cfg.audioPlayer)];
+            "audio/aac" = [(getDesktopFile cfg.audioPlayer)];
+            "audio/ogg" = [(getDesktopFile cfg.audioPlayer)];
+            "audio/flac" = [(getDesktopFile cfg.audioPlayer)];
+            "audio/wav" = [(getDesktopFile cfg.audioPlayer)];
           }
           cfg.associations
         ];

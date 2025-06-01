@@ -10,6 +10,8 @@ in {
     optional.fixes.discord
     optional.programs.copyq
     optional.programs.zen
+    optional.programs.mpv
+    optional.programs.dev
   ];
 
   home = {
