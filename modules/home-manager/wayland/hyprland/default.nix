@@ -302,6 +302,12 @@ in {
     })
 
     (lib.mkIf (cfg.enable && cfg.autoStart) {
+      programs.fish.interactiveShellInit = ''
+        if [ "$(tty)" = "/dev/tty1" ]; then
+          Hyprland
+        end
+      '';
+
       programs.bash.profileExtra = ''
         if [ "$(tty)" = "/dev/tty1" ]; then
           Hyprland
