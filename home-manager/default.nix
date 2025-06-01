@@ -12,7 +12,12 @@
       hostname,
     }:
       homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = import inputs.nixpkgs {
+          system = "x86_64-linux";
+          overlays = [
+            inputs.nur.overlays.default
+          ];
+        };
 
         extraSpecialArgs = {
           inherit inputs self user hostname;

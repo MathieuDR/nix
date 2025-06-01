@@ -18,6 +18,11 @@
         modules = [
           inputs.espanso-fix.nixosModules.espanso-capdacoverride
           inputs.agenix.nixosModules.default
+          {
+            nixpkgs.overlays = [
+              inputs.nur.overlays.default
+            ];
+          }
           self.nixosModules.default
           config.nixos.shared
           ./${hostname}

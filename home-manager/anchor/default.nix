@@ -9,6 +9,7 @@ in {
     optional.theming.spotify
     optional.fixes.discord
     optional.programs.copyq
+    optional.programs.zen
   ];
 
   home = {
