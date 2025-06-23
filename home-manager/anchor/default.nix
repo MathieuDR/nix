@@ -12,6 +12,7 @@ in {
     optional.programs.zen
     optional.programs.mpv
     optional.programs.dev
+    optional.programs._3d
   ];
 
   home = {

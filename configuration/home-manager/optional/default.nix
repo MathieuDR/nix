@@ -11,6 +11,7 @@
   };
 
   programs = {
+    _3d = import ./programs/3d.nix;
     copyq = import ./programs/copyq.nix;
     dev = import ./programs/dev.nix;
     zen = import ./programs/zen.nix;
