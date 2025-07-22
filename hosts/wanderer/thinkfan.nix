@@ -5,7 +5,7 @@
   '';
 
   services.thinkfan = {
-    enable = true;
+    enable = false;
 
     # sensors = [
     #   {

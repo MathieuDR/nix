@@ -7,7 +7,7 @@ in {
     ./thinkfan.nix
     optional.programs.onepassword
     optional.programs.docker
-    optional.power-management
+    # optional.power-management
     optional.wake-up
   ];
 }

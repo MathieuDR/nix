@@ -104,6 +104,10 @@ in {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland = {
+        plugins = [
+          inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
+        ];
+
         package = inputs.hyprland.packages."${pkgs.system}".hyprland;
         enable = true;
 
