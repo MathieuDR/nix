@@ -17,7 +17,6 @@ in {
 
     enabledExtensions = with spicePkgs.extensions; [
       history
-      #skipStats # Currently broken
       trashbin
       fullAppDisplay
       shuffle # shuffle+ (special characters are sanitized out of ext names)
