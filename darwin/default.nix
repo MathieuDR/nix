@@ -4,49 +4,56 @@
   ...
 }: {
   flake.darwinConfigurations = let
-    # shorten paths
-    inherit (inputs.darwin.lib) darwinSystem;
+    inherit (inputs.nix-darwin.lib) darwinSystem;
     config = import "${self}/configuration";
 
     mkDarwin = {
       hostname,
       user,
-      system,
-    }:
+      system ? "aarch64-darwin",
+      alias ? null,
+    }: let
+      configName =
+        if alias != null
+        then alias
+        else hostname;
+    in
       darwinSystem {
         inherit system;
         specialArgs = {
           inherit inputs self hostname user;
+          alias = configName;
         };
         modules = [
           {
             nixpkgs.overlays = [
               self.overlays.default
+              inputs.nur.overlays.default
             ];
           }
 
-          self.darwinModules.default or {}
-          config.darwin.shared or {}
-          ./${hostname}
+          config.darwin.shared
+          ./${configName}
 
-          # home manager integration
-          inputs.home-manager.darwinModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {
-              inherit inputs self user hostname;
-              darwinConfig = config; # Pass Darwin config to home-manager
-            };
-            home-manager.users.${user} = import "${self}/home-manager/${hostname}";
+            # Basic Darwin configuration
+            # Set Git commit hash for darwin-version
+            system.configurationRevision = self.rev or self.dirtyRev or null;
+
+            # Used for backwards compatibility
+            system.stateVersion = 6;
+
+            # The platform the configuration will be used on
+            nixpkgs.hostPlatform = system;
           }
         ];
       };
   in {
-    imposter = mkDarwin {
-      hostname = "imposter";
+    "7mind-JJ9C5X225D" = mkDarwin {
+      hostname = "7mind-JJ9C5X225D";
       user = "thieu";
       system = "aarch64-darwin";
+      alias = "imposter";
     };
   };
 }
