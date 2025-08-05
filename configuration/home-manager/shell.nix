@@ -96,6 +96,10 @@
         	echo "Successfully checked out to and pushed $1"
         }
 
+        function open(){
+          xdg-open "$@"
+        }
+
         function docker-compose() {
           command docker compose
         }

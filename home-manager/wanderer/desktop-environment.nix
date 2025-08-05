@@ -16,7 +16,7 @@ in {
 
     power.menu = {
       suspend = true;
-      tlpControl = true;
+      # tlpControl = true;
     };
 
     wayland = {

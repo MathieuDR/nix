@@ -17,8 +17,6 @@ in {
 
     enabledExtensions = with spicePkgs.extensions; [
       history
-      # skipStats
-      # trashbin
       fullAppDisplay
       shuffle
       hidePodcasts

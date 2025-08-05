@@ -86,6 +86,7 @@
         ./hosts
         ./home-manager
         ./modules
+        ./overlays
         ./pkgs
         ./pre-commit-hooks.nix
       ];

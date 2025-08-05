@@ -23,6 +23,9 @@
   # Letting it on when it's closed but with external screen on
   services.logind.lidSwitchDocked = "ignore";
 
+  # For dev reasons
+  networking.enableIPv6 = false;
+
   # AMD
   # https://wiki.nixos.org/wiki/AMD_GPU
 

@@ -16,6 +16,12 @@
           inherit inputs self hostname user;
         };
         modules = [
+          {
+            nixpkgs.overlays = [
+              self.overlays.default
+            ];
+          }
+
           inputs.espanso-fix.nixosModules.espanso-capdacoverride
           inputs.agenix.nixosModules.default
           {

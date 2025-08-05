@@ -57,10 +57,8 @@ in {
             margin-left = 8;
             margin-right = 0;
             modules-left = [
-              # "hyprland/window"
             ];
             modules-center = [
-              # "mpris"
               "clock"
             ];
             modules-right =
@@ -102,25 +100,6 @@ in {
                 "cpu"
                 "disk"
               ];
-            };
-
-            mpris = {
-              format = "{player_icon} {dynamic}";
-              format-paused = "{status_icon} {dynamic}";
-              format-stopped = "";
-
-              dynamic-order = ["title" "artist"];
-
-              player-icons = {
-                default = "▶";
-                spotify = "󰝚 ";
-              };
-
-              status-icons = {
-                paused = "";
-              };
-
-              tooltip = false;
             };
 
             systemd-failed-units = {

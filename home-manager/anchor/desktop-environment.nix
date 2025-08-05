@@ -2,7 +2,6 @@
   self,
   pkgs,
   config,
-  inputs,
   ...
 }: let
   wallpaper = "${self}/data/wallpapers/firewatch.jpg";
@@ -41,10 +40,6 @@ in {
   };
 
   wayland.windowManager.hyprland = {
-    plugins = [
-      inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
-    ];
-
     settings = {
       # exec-once = [
       #   "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
