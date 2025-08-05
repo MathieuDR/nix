@@ -1,4 +1,8 @@
-{self, ...}: let
+{
+  self,
+  user,
+  ...
+}: let
   optional = (import "${self}/configuration").home-manager.optional;
 in {
   imports = [
@@ -8,5 +12,8 @@ in {
     # optional.programs.dev
   ];
 
-  home.stateVersion = "25.05";
+  home = {
+    username = user;
+    stateVersion = "25.05";
+  };
 }
