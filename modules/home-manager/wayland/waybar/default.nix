@@ -59,7 +59,6 @@ in {
             modules-left = [
             ];
             modules-center = [
-              # "mpris"
               "clock"
             ];
             modules-right =

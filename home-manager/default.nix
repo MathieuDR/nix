@@ -14,8 +14,11 @@
       homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
           system = "x86_64-linux";
-          overlays = [self.overlays.default];
           config.allowUnfree = true;
+          overlays = [
+            self.overlays.default
+            inputs.nur.overlays.default
+          ];
         };
 
         extraSpecialArgs = {

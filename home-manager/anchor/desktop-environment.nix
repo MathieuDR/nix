@@ -9,7 +9,7 @@ in {
   ysomic = {
     applications.defaults = {
       enable = true;
-      browser = pkgs.floorp;
+      browser = config.programs.zen-browser.finalPackage;
       pdfReader = pkgs.zathura;
       terminal = "kitty";
       fileManager = "thunar";
@@ -25,7 +25,7 @@ in {
           init = [
             "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
             "${config.programs.spicetify.spicedSpotify}/bin/spotify"
-            "${pkgs.floorp}/bin/floorp"
+            "${config.programs.zen-browser.finalPackage}/bin/zen"
             "${pkgs.kitty}/bin/kitty"
           ];
 

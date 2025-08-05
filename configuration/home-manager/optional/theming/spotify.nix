@@ -17,9 +17,8 @@ in {
 
     enabledExtensions = with spicePkgs.extensions; [
       history
-      trashbin
       fullAppDisplay
-      shuffle # shuffle+ (special characters are sanitized out of ext names)
+      shuffle
       hidePodcasts
     ];
   };
