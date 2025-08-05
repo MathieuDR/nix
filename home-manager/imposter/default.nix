@@ -14,7 +14,7 @@ in {
 
   home = {
     username = user;
-    homeDirectory = "/home/${user}";
+    homeDirectory = "/Users/${user}";
     stateVersion = "25.05";
   };
 }
