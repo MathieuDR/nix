@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./linux.nix
+    ./files.nix
     ./shell.nix
     ./security.nix
     ./syncthing.nix

@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  config,
+  isDarwin,
+  lib,
+  ...
+}: {
   services.syncthing = {
     enable = true;
 
@@ -49,11 +54,21 @@
     };
   };
 
-  systemd.user.tmpfiles.rules = [
+  # Linux: Use systemd tmpfiles
+  systemd.user.tmpfiles.rules = lib.mkIf (!isDarwin) [
     # d /path/to/directory MODE USER GROUP AGE ARGUMENT
     # 700: Read/Write/Execute for owner, none for group / others
     "d ${config.home.homeDirectory}/secrets 0700 ${config.home.username} users - -"
     "d ${config.home.homeDirectory}/secrets/shared 0700 ${config.home.username} users - -"
     "d ${config.home.homeDirectory}/secrets/backup-versions 0700 ${config.home.username} users - -"
   ];
+
+  # macOS: Use home.activation to create directories
+  home.activation = lib.mkIf isDarwin {
+    createSecretsDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      $DRY_RUN_CMD mkdir -p -m 700 "${config.home.homeDirectory}/secrets"
+      $DRY_RUN_CMD mkdir -p -m 700 "${config.home.homeDirectory}/secrets/shared"
+      $DRY_RUN_CMD mkdir -p -m 700 "${config.home.homeDirectory}/secrets/backup-versions"
+    '';
+  };
 }
