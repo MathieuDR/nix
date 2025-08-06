@@ -32,7 +32,6 @@
         vscode
 
         # nixvim package
-        (inputs.yvim.packages.x86_64-linux.default)
 
         # cli tools
         csvkit
@@ -77,6 +76,8 @@
       ]
       ++ lib.optionals (!isDarwin) [
         # Linux-only packages
+
+        (inputs.yvim.packages.x86_64-linux.default)
 
         # fonts
         nerd-fonts.jetbrains-mono
