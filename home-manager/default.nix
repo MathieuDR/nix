@@ -51,7 +51,7 @@
           self.homeManagerModules.default
           inputs.agenix.homeManagerModules.default
           inputs.catppuccin.homeModules.catppuccin
-          #config.home-manager.shared disabled for now on darwin until all modules are compatible
+          config.home-manager.shared
           ./${configName}
         ];
       };
