@@ -28,14 +28,6 @@
     packages = with pkgs;
       [
         # Cross-platform packages
-        # fonts
-        nerd-fonts.jetbrains-mono
-        noto-fonts-emoji
-        roboto
-        ubuntu_font_family
-        ubuntu-sans
-        ubuntu-classic
-
         # dev
         vscode
 
@@ -85,6 +77,14 @@
       ]
       ++ lib.optionals (!isDarwin) [
         # Linux-only packages
+
+        # fonts
+        nerd-fonts.jetbrains-mono
+        noto-fonts-emoji
+        roboto
+        ubuntu_font_family
+        ubuntu-sans
+        ubuntu-classic
 
         # cli tools
         killall
