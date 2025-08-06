@@ -19,7 +19,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
 
-  fonts.fontconfig.enable = !isDarwin;
+  fonts.fontconfig.enable = false;
   home = {
     sessionVariables = {
       EDITOR = "nvim";
