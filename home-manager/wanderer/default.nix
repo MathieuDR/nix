@@ -13,6 +13,8 @@ in {
   ];
 
   home = {
+    username = "thieu";
+    homeDirectory = "/home/thieu";
     stateVersion = "24.11";
   };
 }
