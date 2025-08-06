@@ -3,67 +3,14 @@
   pkgs,
   ...
 }: let
-  accent = "mauve";
-  flavor = "mocha";
   cursorSize = 24;
   cursorPackage = pkgs.catppuccin-cursors.mochaMauve;
   cursorName = "catppuccin-mocha-mauve-cursors";
 in {
   catppuccin = {
     enable = true;
-    accent = accent;
-    flavor = flavor;
-
-    waybar = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    rofi = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    kitty = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    k9s = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    fzf = {
-      enable = true;
-      flavor = flavor;
-    };
-
-    kvantum = {
-      apply = true;
-      accent = accent;
-      flavor = flavor;
-      enable = true;
-    };
-
-    # Deprecated soon
-    gtk = {
-      enable = true;
-      accent = accent;
-      flavor = flavor;
-      icon = {
-        enable = true;
-        accent = accent;
-        flavor = flavor;
-      };
-      size = "standard";
-      tweaks = ["rimless" "normal"];
-    };
-
-    dunst = {
-      enable = true;
-      flavor = flavor;
-    };
+    accent = "mauve";
+    flavor = "mocha";
   };
 
   home.pointerCursor = {
@@ -86,43 +33,54 @@ in {
     };
   };
 
-  # Do we still need this?
-  xdg.configFile = let
-    gtk4Dir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
-  in {
-    "gtk-4.0/assets".source = "${gtk4Dir}/assets";
-    "gtk-4.0/gtk.css".source = "${gtk4Dir}/gtk.css";
-    "gtk-4.0/gtk-dark.css".source = "${gtk4Dir}/gtk-dark.css";
-  };
-
   gtk = {
     enable = true;
     font = {
       name = "JetBrainsMono Nerd Font";
     };
 
-    # cursorTheme = {
-    #   package = cursorPackage;
-    #   size = cursorSize;
-    #   name = cursorName;
-    # };
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
 
     # theme = {
-    #   name = "Catppuccin-Mocha-Standard-Mauve-Dark";
-    #   package = let
+    #   name = "catppucin-mocha-mauve-standard+default";
+    #   package = pkgs.catppuccin-gtk.override {
     #     size = "standard";
     #     tweaks = ["rimless" "normal"];
-    #   in
-    #     pkgs.catppuccin-gtk.override {
-    #       inherit size tweaks;
-    #       accents = [accent];
-    #       variant = flavor;
-    #     };
+    #     accents = ["mauve"];
+    #     variant = "mocha";
+    #   };
     # };
-    #
+
     # iconTheme = {
     #   name = "Papirus-Dark";
-    #   package = pkgs.catppuccin-papirus-folders.override {inherit accent flavor;};
+    #   package = pkgs.catppuccin-papirus-folders.override {
+    #     accent = "mauve";
+    #     flavor = "mocha";
+    #   };
     # };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
+  # Ensure GTK4 theming works
+  # xdg.configFile = {
+  #   "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
+  #   "gtk-4.0/gtk.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
+  #   "gtk-4.0/gtk-dark.css".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
+  # };
 }
