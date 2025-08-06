@@ -16,5 +16,6 @@
     dev = import ./programs/dev.nix;
     zen = import ./programs/zen.nix;
     mpv = import ./programs/mpv.nix;
+    signal = import ./programs/signal.nix;
   };
 }

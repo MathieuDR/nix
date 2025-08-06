@@ -10,7 +10,6 @@
     ./shell.nix
     ./security.nix
     ./syncthing.nix
-    ./signal.nix
     ./espanso.nix
     ./scripts
   ];
