@@ -8,12 +8,12 @@
   ...
 }: {
   imports = [
-    ./files.nix
-    ./shell.nix
-    ./security.nix
-    ./syncthing.nix
-    ./espanso.nix
-    ./scripts
+    # ./files.nix
+    # ./shell.nix
+    # ./security.nix
+    # ./syncthing.nix
+    # ./espanso.nix
+    # ./scripts
   ];
 
   nixpkgs.config.allowUnfree = true;
