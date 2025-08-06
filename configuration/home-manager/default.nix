@@ -21,9 +21,6 @@
 
   fonts.fontconfig.enable = true;
   home = {
-    username = "thieu";
-    homeDirectory = "/home/thieu";
-
     sessionVariables = {
       EDITOR = "nvim";
     };
