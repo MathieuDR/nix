@@ -12,6 +12,8 @@ in {
     optional.programs.dev
   ];
 
+  ysomic.applications.rofi.enable = true;
+
   home = {
     username = "thieu";
     homeDirectory = "/home/thieu";

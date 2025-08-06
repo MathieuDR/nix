@@ -29,6 +29,10 @@
       else throw "Package ${app} has no pname, mainProgram, or name attribute";
   in "${desktopName}.desktop";
 in {
+  imports = [
+    ./rofi.nix
+  ];
+
   options.ysomic.applications.defaults = {
     enable = lib.mkEnableOption "Default application configuration";
 

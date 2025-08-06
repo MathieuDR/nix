@@ -22,4 +22,5 @@ in {
   };
 
   ysomic.hardware.nvidia.enable = true;
+  ysomic.applications.rofi.enable = true;
 }
