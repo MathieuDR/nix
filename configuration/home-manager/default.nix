@@ -3,6 +3,8 @@
   pkgs,
   inputs,
   hostname,
+  isDarwin,
+  lib,
   ...
 }: {
   imports = [
@@ -23,81 +25,94 @@
       EDITOR = "nvim";
     };
 
-    packages = with pkgs; [
-      # fonts
-      nerd-fonts.jetbrains-mono
-      noto-fonts-emoji
-      roboto
-      ubuntu_font_family
-      ubuntu-sans
-      ubuntu-classic
+    packages = with pkgs;
+      [
+        # Cross-platform packages
+        # fonts
+        nerd-fonts.jetbrains-mono
+        noto-fonts-emoji
+        roboto
+        ubuntu_font_family
+        ubuntu-sans
+        ubuntu-classic
 
-      #dev
-      vscode
+        # dev
+        vscode
 
-      #nixvim package
-      (inputs.yvim.packages.x86_64-linux.default)
+        # nixvim package
+        (inputs.yvim.packages.x86_64-linux.default)
 
-      #cli
-      csvkit
-      bat
-      bottom
-      du-dust
-      mosh
-      fd
-      fx
-      killall
-      procs
-      yq
-      tree
-      just
-      zip
-      unzip
-      gotop
-      imv
-      img2pdf
-      imagemagick
-      dnsutils
-      nmap
-      rsync
-      rclone
-      file
+        # cli tools
+        csvkit
+        bat
+        bottom
+        du-dust
+        mosh
+        fd
+        fx
+        procs
+        yq
+        tree
+        just
+        zip
+        unzip
+        gotop
+        img2pdf
+        imagemagick
+        dnsutils
+        nmap
+        rsync
+        rclone
+        file
 
-      #Productive programs
-      obsidian
-      libreoffice
-      pkgs.kdePackages.okular
-      zathura
-      simple-scan
+        # productive programs
+        zathura
 
-      #Social programs
-      slack
-      betterdiscordctl
-      discord
-      # whatsapp-for-linux
-      tutanota-desktop
-      element-desktop
+        # social programs
+        slack
+        discord
+        element-desktop
 
-      #Common programs
-      floorp
-      ungoogled-chromium
-      firefox
-      keepassxc
-      calibre
-      # calibre-web
-      gzip
-      filezilla
-      file-roller
-      kooha
+        # common programs
+        floorp
+        firefox
+        keepassxc
+        gzip
 
-      #Necessary
-      blueman
-      pavucontrol
+        # custom packages
+        self.packages.${pkgs.system}.highlight-exporter
+        self.packages.${pkgs.system}.zeit
+      ]
+      ++ lib.optionals (!isDarwin) [
+        # Linux-only packages
 
-      #Custom
-      self.packages.${pkgs.system}.highlight-exporter
-      self.packages.${pkgs.system}.zeit
-    ];
+        # cli tools
+        killall
+        imv
+
+        # productive programs
+        obsidian
+        libreoffice
+        pkgs.kdePackages.okular
+        simple-scan
+
+        # social programs
+        betterdiscordctl
+        tutanota-desktop
+
+        # common programs
+        ungoogled-chromium
+        filezilla
+        file-roller
+        kooha
+
+        # system utilities
+        blueman
+        pavucontrol
+      ]
+      ++ lib.optionals isDarwin [
+        # macOS-only packages
+      ];
   };
 
   xdg.configFile."${hostname}" = {
