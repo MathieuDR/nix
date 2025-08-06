@@ -1,4 +1,8 @@
-{self, ...}: let
+{
+  self,
+  pkgs,
+  ...
+}: let
   optional = (import "${self}/configuration").home-manager.optional;
 in {
   imports = [
@@ -20,6 +24,10 @@ in {
     username = "thieu";
     homeDirectory = "/home/thieu";
     stateVersion = "23.11"; # Please read the comment before changing.
+
+    packages = with pkgs; [
+      calibre
+    ];
   };
 
   ysomic.hardware.nvidia.enable = true;
