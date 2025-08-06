@@ -9,6 +9,7 @@ in {
     optional.theming.spotify
     optional.fixes.discord
     optional.programs.copyq
+    optional.programs.signal
     optional.programs.zen
     optional.programs.mpv
     optional.programs.dev

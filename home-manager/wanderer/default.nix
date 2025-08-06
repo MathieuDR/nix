@@ -10,6 +10,7 @@ in {
     # optional.fixes.discord
     optional.programs.copyq
     optional.programs.dev
+    optional.programs.signal
   ];
 
   ysomic.applications.rofi.enable = true;
