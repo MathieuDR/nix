@@ -28,6 +28,9 @@
       then extractBaseName name
       else throw "Package ${app} has no pname, mainProgram, or name attribute";
   in "${desktopName}.desktop";
+
+  # Helper function to conditionally include packages
+  optionalPackages = packages: lib.flatten (lib.mapAttrsToList (name: pkg: lib.optional cfg.apps.${name}.enable pkg) packages);
 in {
   imports = [
     ./rofi.nix
@@ -41,6 +44,65 @@ in {
       type = lib.types.bool;
       default = true;
       description = "Enables mime types";
+    };
+
+    # App enable/disable options
+    apps = {
+      browser = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable browser installation and configuration";
+        };
+      };
+
+      terminal = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable terminal installation and configuration";
+        };
+      };
+
+      pdfReader = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable PDF reader installation and configuration";
+        };
+      };
+
+      webImages = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable web images viewer installation and configuration";
+        };
+      };
+
+      imageViewer = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable image viewer installation and configuration";
+        };
+      };
+
+      videoPlayer = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable video player installation and configuration";
+        };
+      };
+
+      audioPlayer = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Enable audio player installation and configuration";
+        };
+      };
     };
 
     # Helpers for other modules
@@ -121,29 +183,36 @@ in {
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
-      home.packages = [
-        cfg.browser
-        cfg.pdfReader
-        cfg.webImages
-        cfg.imageViewer
-        cfg.videoPlayer
-        cfg.audioPlayer
-      ];
-
-      # Export environment variables
-      home.sessionVariables = {
-        BROWSER = lib.getExe cfg.browser;
-        TERMINAL = lib.getExe terminalPackage;
-        FILE_MANAGER = lib.getExe fileManagerPackage;
+      home.packages = optionalPackages {
+        browser = cfg.browser;
+        pdfReader = cfg.pdfReader;
+        webImages = cfg.webImages;
+        imageViewer = cfg.imageViewer;
+        videoPlayer = cfg.videoPlayer;
+        audioPlayer = cfg.audioPlayer;
       };
+
+      # Export environment variables (only if apps are enabled)
+      home.sessionVariables = lib.mkMerge [
+        (lib.mkIf cfg.apps.browser.enable {
+          BROWSER = lib.getExe cfg.browser;
+        })
+        (lib.mkIf cfg.apps.terminal.enable {
+          TERMINAL = lib.getExe terminalPackage;
+        })
+        #TODO:We probably want to change this
+        # {
+        #   FILE_MANAGER = lib.getExe fileManagerPackage;
+        # }
+      ];
     }
 
     (lib.mkIf (cfg.mimeApps) {
       xdg.mimeApps = {
         enable = true;
         defaultApplications = lib.mkMerge [
-          # Web browser associations
-          {
+          # Web browser associations (only if browser is enabled)
+          (lib.mkIf cfg.apps.browser.enable {
             "x-scheme-handler/http" = [(getDesktopFile cfg.browser)];
             "x-scheme-handler/https" = [(getDesktopFile cfg.browser)];
             "x-scheme-handler/chrome" = [(getDesktopFile cfg.browser)];
@@ -154,35 +223,36 @@ in {
             "application/xhtml+xml" = [(getDesktopFile cfg.browser)];
             "application/x-extension-xhtml" = [(getDesktopFile cfg.browser)];
             "application/x-extension-xht" = [(getDesktopFile cfg.browser)];
-          }
-          # PDF associations
-          {
-            "application/pdf" = [
-              (getDesktopFile cfg.pdfReader)
-              (getDesktopFile cfg.browser)
-            ];
-          }
+          })
+          # PDF associations (only if PDF reader is enabled)
+          (lib.mkIf cfg.apps.pdfReader.enable {
+            "application/pdf" =
+              [
+                (getDesktopFile cfg.pdfReader)
+              ]
+              ++ lib.optional cfg.apps.browser.enable (getDesktopFile cfg.browser);
+          })
           # File manager associations
           {
             "inode/directory" = [(getDesktopFile fileManagerPackage)];
             "application/x-compressed-tar" = [(getDesktopFile fileManagerPackage)];
           }
-          # Web image associations
-          {
+          # Web image associations (only if web images viewer is enabled)
+          (lib.mkIf cfg.apps.webImages.enable {
             "image/gif" = [(getDesktopFile cfg.webImages)];
             "image/svg+xml" = [(getDesktopFile cfg.webImages)];
             "image/webp" = [(getDesktopFile cfg.webImages)];
-          }
-          # Regular image associations
-          {
+          })
+          # Regular image associations (only if image viewer is enabled)
+          (lib.mkIf cfg.apps.imageViewer.enable {
             "image/jpeg" = [(getDesktopFile cfg.imageViewer)];
             "image/jpg" = [(getDesktopFile cfg.imageViewer)];
             "image/png" = [(getDesktopFile cfg.imageViewer)];
             "image/bmp" = [(getDesktopFile cfg.imageViewer)];
             "image/tiff" = [(getDesktopFile cfg.imageViewer)];
-          }
-          # Video associations
-          {
+          })
+          # Video associations (only if video player is enabled)
+          (lib.mkIf cfg.apps.videoPlayer.enable {
             "video/mp4" = [(getDesktopFile cfg.videoPlayer)];
             "video/mpeg" = [(getDesktopFile cfg.videoPlayer)];
             "video/webm" = [(getDesktopFile cfg.videoPlayer)];
@@ -190,9 +260,9 @@ in {
             "video/quicktime" = [(getDesktopFile cfg.videoPlayer)]; # .mov
             "video/x-matroska" = [(getDesktopFile cfg.videoPlayer)]; # .mkv
             "video/x-msvideo" = [(getDesktopFile cfg.videoPlayer)]; #.avi
-          }
-          # Audio associations
-          {
+          })
+          # Audio associations (only if audio player is enabled)
+          (lib.mkIf cfg.apps.audioPlayer.enable {
             "audio/mpeg" = [(getDesktopFile cfg.audioPlayer)];
             "audio/mp3" = [(getDesktopFile cfg.audioPlayer)];
             "audio/mp4" = [(getDesktopFile cfg.audioPlayer)]; #.m4a
@@ -201,14 +271,14 @@ in {
             "audio/ogg" = [(getDesktopFile cfg.audioPlayer)];
             "audio/flac" = [(getDesktopFile cfg.audioPlayer)];
             "audio/wav" = [(getDesktopFile cfg.audioPlayer)];
-          }
+          })
           cfg.associations
         ];
       };
     })
 
-    ## TERMINALS
-    (lib.mkIf (cfg.terminal == "kitty") {
+    ## TERMINALS (only if terminal is enabled)
+    (lib.mkIf (cfg.apps.terminal.enable && cfg.terminal == "kitty") {
       xdg.desktopEntries = {
         kitty-safe = {
           name = "Kitty (Safe Mode)";
