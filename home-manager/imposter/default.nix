@@ -2,7 +2,6 @@
   self,
   user,
   config,
-  pkgs,
   ...
 }: let
   optional = (import "${self}/configuration").home-manager.optional;
@@ -10,6 +9,7 @@ in {
   imports = [
     optional.programs.zen
     optional.programs.dev
+    optional.theming.general
   ];
 
   ysomic = {
