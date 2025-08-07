@@ -22,6 +22,7 @@ in {
   ysomic = {
     applications.defaults = {
       enable = true;
+      mimeApps = false;
       browser = config.programs.zen-browser.finalPackage;
       pdfReader = pkgs.zathura;
       terminal = "kitty";

@@ -37,6 +37,12 @@ in {
   options.ysomic.applications.defaults = {
     enable = lib.mkEnableOption "Default application configuration";
 
+    mimeApps = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enables mime types";
+    };
+
     # Helpers for other modules
     supported.terminals = lib.mkOption {
       type = lib.types.attrs;
@@ -124,6 +130,15 @@ in {
         cfg.audioPlayer
       ];
 
+      # Export environment variables
+      home.sessionVariables = {
+        BROWSER = lib.getExe cfg.browser;
+        TERMINAL = lib.getExe terminalPackage;
+        FILE_MANAGER = lib.getExe fileManagerPackage;
+      };
+    }
+
+    (lib.mkIf (cfg.mimeApps) {
       xdg.mimeApps = {
         enable = true;
         defaultApplications = lib.mkMerge [
@@ -190,14 +205,7 @@ in {
           cfg.associations
         ];
       };
-
-      # Export environment variables
-      home.sessionVariables = {
-        BROWSER = lib.getExe cfg.browser;
-        TERMINAL = lib.getExe terminalPackage;
-        FILE_MANAGER = lib.getExe fileManagerPackage;
-      };
-    }
+    })
 
     ## TERMINALS
     (lib.mkIf (cfg.terminal == "kitty") {
