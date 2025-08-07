@@ -7,26 +7,20 @@
 }: let
   optional = (import "${self}/configuration").home-manager.optional;
 in {
-  # imports = [
-  # optional.theming.general
-  # optional.theming.spotify
-  # optional.programs.copyq
-  # optional.programs.dev
-  # ];
-
   imports = [
     optional.programs.zen
     optional.programs.dev
   ];
 
   ysomic = {
-    applications.defaults = {
-      enable = true;
-      mimeApps = false;
-      browser = config.programs.zen-browser.finalPackage;
-      pdfReader = pkgs.zathura;
-      terminal = "kitty";
-      fileManager = "thunar";
+    applications = {
+      browser = {
+        enable = true;
+        setAsDefault = false;
+        package = config.programs.zen-browser.finalPackage;
+      };
+
+      terminal.enable = true;
     };
   };
 
