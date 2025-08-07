@@ -31,6 +31,7 @@
 in {
   imports = [
     ./rofi.nix
+    ./espanso.nix
   ];
 
   options.ysomic.applications.defaults = {
