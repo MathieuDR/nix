@@ -11,7 +11,7 @@
     ./files.nix
     ./shell.nix
     # ./security.nix
-    # ./syncthing.nix
+    ./syncthing.nix
     # ./scripts
   ];
 

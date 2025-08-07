@@ -6,7 +6,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       _espanso-wayland-orig = prev.espanso-wayland;
-      espanso-wayland = pkgs.callPackage ./overrides/espanso.nix {
+      espanso-wayland = pkgs.callPackage ./../../overrides/espanso.nix {
         capDacOverrideWrapperDir = "${nixosConfig.security.wrapperDir}";
         espanso = prev.espanso-wayland;
       };
