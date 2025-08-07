@@ -1,6 +1,8 @@
 {
   self,
   user,
+  config,
+  pkgs,
   ...
 }: let
   optional = (import "${self}/configuration").home-manager.optional;
@@ -11,6 +13,21 @@ in {
   # optional.programs.copyq
   # optional.programs.dev
   # ];
+
+  imports = [
+    optional.programs.zen
+    optional.programs.dev
+  ];
+
+  ysomic = {
+    applications.defaults = {
+      enable = true;
+      browser = config.programs.zen-browser.finalPackage;
+      pdfReader = pkgs.zathura;
+      terminal = "kitty";
+      fileManager = "thunar";
+    };
+  };
 
   home = {
     username = user;

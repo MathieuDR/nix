@@ -12,7 +12,7 @@
     ./shell.nix
     ./security.nix
     ./syncthing.nix
-    # ./scripts
+    ./scripts
   ];
 
   ysomic.applications.espanso.enable = true;
