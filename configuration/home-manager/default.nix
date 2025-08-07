@@ -19,7 +19,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
 
-  fonts.fontconfig.enable = false;
+  fonts.fontconfig.enable = true;
   home = {
     sessionVariables = {
       EDITOR = "nvim";
@@ -28,10 +28,17 @@
     packages = with pkgs;
       [
         # Cross-platform packages
-        # dev
-        vscode
+        # fonts
+        nerd-fonts.jetbrains-mono
+        noto-fonts-emoji
+        roboto
+        ubuntu_font_family
+        ubuntu-sans
+        ubuntu-classic
 
-        # nixvim package
+        # dev
+        (inputs.yvim.packages.${pkgs.system}.default)
+        vscode
 
         # cli tools
         csvkit
@@ -76,17 +83,6 @@
       ]
       ++ lib.optionals (!isDarwin) [
         # Linux-only packages
-
-        (inputs.yvim.packages.x86_64-linux.default)
-
-        # fonts
-        nerd-fonts.jetbrains-mono
-        noto-fonts-emoji
-        roboto
-        ubuntu_font_family
-        ubuntu-sans
-        ubuntu-classic
-
         # cli tools
         killall
         imv
