@@ -8,11 +8,11 @@
   ...
 }: {
   imports = [
-    # ./files.nix
-    # ./shell.nix
+    ./files.nix
+    ./shell.nix
     # ./security.nix
-    # ./syncthing.nix
-    # ./espanso.nix
+    ./syncthing.nix
+    ./espanso.nix
     # ./scripts
   ];
 
