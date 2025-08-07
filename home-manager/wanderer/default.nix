@@ -11,6 +11,7 @@ in {
     optional.programs.copyq
     optional.programs.dev
     optional.programs.signal
+    optional.programs.wayland-espanso
   ];
 
   ysomic.applications.rofi.enable = true;

@@ -18,6 +18,7 @@ in {
     optional.programs.mpv
     optional.programs.dev
     optional.programs._3d
+    optional.programs.wayland-espanso
   ];
 
   home = {
