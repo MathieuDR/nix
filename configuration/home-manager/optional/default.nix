@@ -3,6 +3,7 @@
 
   theming = {
     general = import ./theming/general.nix;
+    linux = import ./theming/linux.nix;
     spotify = import ./theming/spotify.nix;
   };
 

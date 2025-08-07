@@ -6,6 +6,7 @@ in {
     ./monitors.nix
 
     optional.theming.general
+    optional.theming.linux
     optional.theming.spotify
     # optional.fixes.discord
     optional.programs.copyq
