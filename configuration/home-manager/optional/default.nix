@@ -17,5 +17,6 @@
     zen = import ./programs/zen.nix;
     mpv = import ./programs/mpv.nix;
     signal = import ./programs/signal.nix;
+    wayland-espanso = import ./programs/wayland-espanso.nix;
   };
 }

@@ -12,9 +12,10 @@
     ./shell.nix
     # ./security.nix
     ./syncthing.nix
-    ./espanso.nix
     # ./scripts
   ];
+
+  ysomic.applications.espanso.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
