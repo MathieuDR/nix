@@ -51,7 +51,7 @@ in {
     enableBashIntegration = true;
     pinentry.package =
       if isDarwin
-      then pkgs.pinentry-mac
+      then pkgs.pinentry_mac
       else pkgs.pinentry-gnome3;
 
     extraConfig = ''
