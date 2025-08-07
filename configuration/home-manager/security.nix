@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  isDarwin,
   ...
 }: let
   secretsDir = "${self}/data/secrets";
@@ -48,7 +49,10 @@ in {
     # 8 hours
     maxCacheTtl = 28800;
     enableBashIntegration = true;
-    pinentry.package = pkgs.pinentry-gnome3;
+    pinentry.package =
+      if isDarwin
+      then pkgs.pinentry-mac
+      else pkgs.pinentry-gnome3;
 
     extraConfig = ''
       allow-emacs-pinentry
