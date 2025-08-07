@@ -10,7 +10,7 @@
   imports = [
     ./files.nix
     ./shell.nix
-    # ./security.nix
+    ./security.nix
     ./syncthing.nix
     # ./scripts
   ];
