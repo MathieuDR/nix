@@ -104,10 +104,6 @@ in {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland = {
-        plugins = [
-          inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
-        ];
-
         package = inputs.hyprland.packages."${pkgs.system}".hyprland;
         enable = true;
 
@@ -229,10 +225,10 @@ in {
             "$mainMod SHIFT, l, movewindow, r"
 
             # workspaces
-            "$mainMod_CTRL, down, split:workspace, +1"
-            "$mainMod_CTRL, up, split:workspace, -1"
-            "$mainMod_SHIFT, down, split:movetoworkspace, +1"
-            "$mainMod_SHIFT, up, split:movetoworkspace, -1"
+            "$mainMod_CTRL, down, workspace, r+1"
+            "$mainMod_CTRL, up, workspace, r-1"
+            "$mainMod_SHIFT, down, movetoworkspace, r+1"
+            "$mainMod_SHIFT, up, movetoworkspace, r-1"
 
             # utilities
             ", Print, exec, grimblast save area - | swappy -f -"

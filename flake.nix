@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -70,11 +70,6 @@
     highlight-exporter = {
       url = "github:MathieuDR/readdeck-highlight-exporter";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland";
     };
   };
 
