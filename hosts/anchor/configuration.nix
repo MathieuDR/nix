@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    # kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     binfmt.emulatedSystems = ["aarch64-linux"];
     loader = {
       efi.canTouchEfiVariables = true;

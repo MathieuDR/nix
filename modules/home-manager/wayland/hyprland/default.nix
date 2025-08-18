@@ -240,7 +240,7 @@ in {
             "$mainMod CTRL, mouse:272, resizewindow"
           ];
 
-          windowrulev2 = [
+          windowrule = [
             #copyq
             "float, class:(com.github.hluk.copyq)"
             "size 400 400, class:(com.github.hluk.copyq)"

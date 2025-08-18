@@ -196,6 +196,35 @@ in {
 
     ## TERMINALS
     (lib.mkIf (cfg.terminal == "kitty") {
+      xdg.desktopEntries = {
+        kitty-safe = {
+          name = "Kitty (Safe Mode)";
+          comment = "Terminal without bash profile";
+          exec = "kitty bash --noprofile --norc";
+          icon = "kitty";
+          terminal = false;
+          categories = ["System" "TerminalEmulator"];
+        };
+
+        kitty-sh = {
+          name = "Kitty (Basic Shell)";
+          comment = "Terminal with basic POSIX shell";
+          exec = "kitty sh";
+          icon = "kitty";
+          terminal = false;
+          categories = ["System" "TerminalEmulator"];
+        };
+
+        kitty-emergency = {
+          name = "Kitty (Emergency Terminal)";
+          comment = "Clean environment for system recovery";
+          exec = "kitty env -i bash --noprofile --norc";
+          icon = "applications-system";
+          terminal = false;
+          categories = ["System"];
+        };
+      };
+
       programs.kitty = {
         enable = true;
         font.name = "JetBrainsMono Nerd Font";
