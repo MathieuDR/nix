@@ -15,7 +15,7 @@
           id = "shared-secrets";
           label = "Shared Secrets";
           type = "sendreceive";
-          devices = ["anchor" "wanderer" "mobile"];
+          devices = ["anchor" "wanderer" "mobile" "imposter"];
           versioning = {
             type = "staggered";
             fsPath = "${config.home.homeDirectory}/secrets/backup-versions";
@@ -43,6 +43,11 @@
         "mobile" = {
           name = "mobile";
           id = "WT572IB-2LCXROQ-RKPC5CC-2GDP2KW-47EDGGP-KWCUJCE-XQBVUCB-3DNHLAS";
+        };
+
+        "imposter" = {
+          name = "imposter";
+          id = "HP4TW4P-PE6PJHT-J53MIOZ-6M4RADW-CXXJDAS-SEXRM3V-PFXOSGI-2GVRDQB";
         };
       };
 
