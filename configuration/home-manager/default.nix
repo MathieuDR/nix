@@ -75,7 +75,6 @@
         # common programs
         floorp
         firefox
-        keepassxc
         gzip
 
         # custom packages
@@ -103,6 +102,7 @@
         filezilla
         file-roller
         kooha
+        keepassxc
 
         # system utilities
         blueman

@@ -40,7 +40,8 @@ in {
       plugins = cfg.plugins;
     };
 
-    home.packages = cfg.extraPackages;
+    #TODO: Where is this from?
+    # home.packages = cfg.extraPackages;
 
     ysomic.power.menu = mkIf cfg.powerMenu.enable {
       enable = true;

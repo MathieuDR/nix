@@ -13,5 +13,5 @@
     })
   ];
 
-  ysomic.applications.espanse.package = pkgs.espanso-wayland;
+  ysomic.applications.espanso.package = pkgs.espanso-wayland;
 }

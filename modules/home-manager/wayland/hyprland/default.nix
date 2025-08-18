@@ -7,7 +7,7 @@
 }: let
   cfg = config.ysomic.wayland.hyprland;
   nvidia = config.ysomic.hardware.nvidia;
-  defaultsCfg = config.ysomic.applications.defaults;
+  defaultsCfg = config.ysomic.applications;
 
   formatScript = script:
     if builtins.isList script
@@ -193,9 +193,10 @@ in {
 
           bind = [
             # program shortcuts
-            "$mainMod, b, exec, ${lib.getExe defaultsCfg.browser}"
-            "$mainMod, t, exec, ${lib.getExe defaultsCfg.supported.terminals.${defaultsCfg.terminal}}"
-            "$mainMod, f, exec, ${lib.getExe defaultsCfg.supported.fileManagers.${defaultsCfg.fileManager}}"
+            "$mainMod, b, exec, ${lib.getExe defaultsCfg.browser.package}"
+            #TODO: Fix supported stuff
+            "$mainMod, t, exec, ${lib.getExe pkgs.kitty}"
+            "$mainMod, f, exec, ${lib.getExe defaultsCfg.defaults.supported.fileManagers.${defaultsCfg.defaults.fileManager}}"
             "$mainMod, s, exec, rofi-systemd"
             "$mainMod, e, fullscreen"
             "$mainMod, SLASH, exec, rofi -modes combi,calc -show combi -combi-modes window,drun"
@@ -240,7 +241,7 @@ in {
             "$mainMod CTRL, mouse:272, resizewindow"
           ];
 
-          windowrule = [
+          windowrulev2 = [
             #copyq
             "float, class:(com.github.hluk.copyq)"
             "size 400 400, class:(com.github.hluk.copyq)"
