@@ -2,10 +2,6 @@
   description = "ySomic's NixOS flake";
 
   inputs = {
-    #TODO: What is this?
-    # global, so they can be `.follow`ed
-    # systems.url = "github:nix-systems/default-linux";
-
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,14 +62,21 @@
       url = "github:MathieuDR/readdeck-highlight-exporter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # DARWIN
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+      systems = ["x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
       imports = [
         ./hosts
+        ./darwin
         ./home-manager
         ./modules
         ./overlays

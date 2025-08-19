@@ -3,6 +3,7 @@
 
   theming = {
     general = import ./theming/general.nix;
+    linux = import ./theming/linux.nix;
     spotify = import ./theming/spotify.nix;
   };
 
@@ -16,5 +17,7 @@
     dev = import ./programs/dev.nix;
     zen = import ./programs/zen.nix;
     mpv = import ./programs/mpv.nix;
+    signal = import ./programs/signal.nix;
+    wayland-espanso = import ./programs/wayland-espanso.nix;
   };
 }

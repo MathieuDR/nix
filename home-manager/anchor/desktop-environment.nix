@@ -7,12 +7,15 @@
   wallpaper = "${self}/data/wallpapers/firewatch.jpg";
 in {
   ysomic = {
-    applications.defaults = {
-      enable = true;
-      browser = config.programs.zen-browser.finalPackage;
-      pdfReader = pkgs.zathura;
-      terminal = "kitty";
-      fileManager = "thunar";
+    applications = {
+      browser = {
+        enable = true;
+        package = config.programs.zen-browser.finalPackage;
+      };
+
+      defaults.fileManager = "thunar";
+      pdfReader.enable = true;
+      terminal.enable = true;
     };
 
     wayland = {
