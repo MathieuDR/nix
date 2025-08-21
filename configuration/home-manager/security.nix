@@ -27,7 +27,7 @@ in {
     secrets = {
       "user/gpg" = {
         file = "${secretsDir}/user/gpg.age";
-        path = "${config.home.homeDirectory}/secrets/gpg/common.gpg.temp";
+        path = "${config.home.homeDirectory}/secrets/gpg/common.gpg";
       };
     };
   };

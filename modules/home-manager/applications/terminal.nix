@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  isDarwin,
   ...
 }:
 with lib; let
@@ -105,6 +106,11 @@ in {
             symbol_map = "U+1F300-U+1F9FF Noto Color Emoji";
             font_features = "none";
           }
+          # (mkIf isDarwin {
+          #   kitty_mod = "super+shift";
+          #   "map cmd+r" = "no_op"; # Disable cmd+r
+          #   "map ctrl+r" = "start_resizing_window"; # Remap to ctrl+r
+          # })
           cfg.kitty.extraSettings
         ];
       };

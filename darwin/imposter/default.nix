@@ -1,9 +1,6 @@
 {
   inputs,
-  self,
-  hostname,
   user,
-  alias,
   ...
 }: {
   # Host-specific Darwin configuration
