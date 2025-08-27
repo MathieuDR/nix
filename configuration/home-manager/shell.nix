@@ -130,6 +130,7 @@
   };
 
   home.sessionVariables = {
+    SHELL = "${pkgs.bash}/bin/bash";
     ZEIT_DB = "${config.xdg.dataHome}/zeit.db";
   };
 }

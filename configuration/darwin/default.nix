@@ -29,6 +29,7 @@
       "claude"
       "notion"
       "signal"
+      "obs"
     ];
   };
 }
