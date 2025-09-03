@@ -153,7 +153,7 @@ in {
 
           animations = {
             enabled = true;
-            first_launch_animation = true;
+            # first_launch_animation = false;
             bezier = [
               "wind, 0.05, 0.09, 0.1, 1.05"
               "winIn, 0.1, 1.1, 0.1, 1.1"
