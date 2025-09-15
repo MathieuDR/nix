@@ -73,7 +73,6 @@
         element-desktop
 
         # common programs
-        floorp
         firefox
         gzip
 
@@ -103,6 +102,7 @@
         file-roller
         kooha
         keepassxc
+        floorp
 
         # system utilities
         blueman
