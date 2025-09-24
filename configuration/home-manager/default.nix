@@ -91,6 +91,7 @@
         libreoffice
         pkgs.kdePackages.okular
         simple-scan
+        easyeffects
 
         # social programs
         betterdiscordctl

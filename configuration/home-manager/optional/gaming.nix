@@ -3,6 +3,7 @@
     packages = with pkgs; [
       mangohud
       protonup
+      runelite
       # (prismlauncher.override {jdks = [jdk8];})
     ];
 

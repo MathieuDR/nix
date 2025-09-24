@@ -6,8 +6,8 @@
 }: let
   catppuccin-css = pkgs.fetchgit {
     url = "https://github.com/catppuccin/zen-browser";
-    rev = "1596467f1d178c38e95ebc0413e4419750d7849b";
-    hash = "sha256-+kHI03zA7o0aoYKg3VFOejVNSXKfx9nAnayfJ5WFDHU=";
+    rev = "e171e2a1d94ed70f39ff0ac452aef335f8b233c9";
+    hash = "sha256-v4Gg2oyITMV/KWCy+gWrmCcmYLRUyMV1HiYSeFjVOuI=";
     sparseCheckout = [
       "themes/Latte/Mauve"
       "themes/Mocha/Mauve"
@@ -179,6 +179,10 @@ in {
           /* Catppuccin theme */
           ${builtins.readFile "${catppuccin-css}/themes/Latte/Mauve/userChrome.css"}
           ${builtins.readFile "${catppuccin-css}/themes/Mocha/Mauve/userChrome.css"}
+
+          #contentAreaContextMenu menu, menuitem, menupopup {
+            color: #c6d0f5 !important;
+          }
         '';
 
         userContent = ''
