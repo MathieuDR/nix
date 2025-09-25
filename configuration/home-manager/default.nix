@@ -41,28 +41,40 @@
         (inputs.yvim.packages.${pkgs.system}.default)
         vscode
 
-        # cli tools
-        csvkit
-        bat
-        bottom
-        du-dust
-        mosh
-        fd
-        fx
-        procs
-        yq
-        tree
-        just
+        # cli tools - text processing
+        sd # modern sed replacement for text substitution
+        bat # cat with syntax highlighting and git integration
+        jq # json processor
+        jnv # interactive JSON viewer and processor
+        yq # YAML/JSON/XML processor
+        csvkit # suite of CSV manipulation tools
+        file # determine file type
+
+        # cli tools - file operations
+        eza # modern ls replacement
+        fd # modern find replacement
+        tree # display directory structure
+        rsync # file synchronization
+        rclone # cloud storage sync
         zip
         unzip
-        gotop
-        img2pdf
-        imagemagick
-        dnsutils
-        nmap
-        rsync
-        rclone
-        file
+
+        # cli tools - system monitoring
+        bottom # modern top/htop replacement
+        du-dust # modern du replacement showing disk usage
+        gotop # terminal-based graphical activity monitor
+        procs # modern ps replacement
+
+        # cli tools - network/system
+        dnsutils # DNS tools (dig, nslookup, etc)
+        nmap # network discovery and security auditing
+
+        # cli tools - build/automation
+        just # command runner, modern make alternative
+
+        # cli tools - media
+        img2pdf # convert images to PDF
+        imagemagick # image manipulation toolkit
 
         # productive programs
         zathura
