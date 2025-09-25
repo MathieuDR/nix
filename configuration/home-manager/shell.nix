@@ -10,16 +10,31 @@
     direnv = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
       nix-direnv.enable = true;
     };
 
     oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
       settings = builtins.fromJSON (builtins.readFile "${self}/data/.ysomic.omp.json");
     };
 
     jq.enable = true;
+    fd.enable = true;
+    #TODO: Can give bat actual theme. Lets look at that
+    bat.enable = true;
+    bottom.enable = true;
+    #TODO: Can do more, can set remotes!
+    rclone.enable = true;
+    eza = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      #TODO: needs to be 'yaml'
+      theme = builtins.fromYAML (builtins.readFile "${self}/data/config/eza.theme.yml");
+    };
     ripgrep.enable = true;
     gh.enable = true;
     fzf.enable = true;
@@ -46,9 +61,11 @@
       };
     };
 
+    #NOTE: Trying Eza for a bit.
     lsd = {
-      enable = true;
+      enable = false;
       enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     zoxide = {
@@ -58,6 +75,11 @@
       ];
       # We're doing this solo to put it at the end
       enableBashIntegration = false;
+      enableFishIntegration = true;
+    };
+
+    fish = {
+      enable = true;
     };
 
     bash = {
