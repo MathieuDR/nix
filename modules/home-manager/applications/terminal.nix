@@ -107,7 +107,8 @@ in {
             font_features = "none";
           }
           (mkIf isDarwin {
-            shell = "/bin/bash";
+            shell = "/Users/thieu/.nix-profile/bin/bash";
+            # shell = "bash";
           })
           cfg.kitty.extraSettings
         ];

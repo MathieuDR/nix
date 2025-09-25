@@ -2,7 +2,6 @@
   _file = ./default.nix;
   imports = [
     ./aerospace.nix
-    ./karabiner.nix
   ];
 
   # Necessary for using flakes on this system
