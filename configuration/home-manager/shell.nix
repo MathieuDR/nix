@@ -10,7 +10,8 @@
     direnv = {
       enable = true;
       enableBashIntegration = true;
-      enableFishIntegration = true;
+      # Readonly, set multiple times?
+      # enableFishIntegration = true;
       nix-direnv.enable = true;
     };
 
@@ -33,7 +34,9 @@
       enableBashIntegration = true;
       enableFishIntegration = true;
       #TODO: needs to be 'yaml'
-      theme = builtins.fromYAML (builtins.readFile "${self}/data/config/eza.theme.yml");
+      #https://github.com/eza-community/eza-themes/blob/main/themes/catppuccin.yml
+      #yq -j . eza.theme.yml | eza.theme.json
+      theme = builtins.fromJSON (builtins.readFile "${self}/data/config/eza.theme.json");
     };
     ripgrep.enable = true;
     gh.enable = true;
