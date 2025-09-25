@@ -8,4 +8,8 @@
     shared = import ./home-manager;
     optional = import ./home-manager/optional;
   };
+
+  darwin = {
+    shared = import ./darwin;
+  };
 }
