@@ -103,7 +103,7 @@
         file-roller
         kooha
         keepassxc
-        floorp
+        floorp-bin
 
         # system utilities
         blueman

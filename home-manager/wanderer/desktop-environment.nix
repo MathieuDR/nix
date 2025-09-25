@@ -8,7 +8,7 @@ in {
   ysomic = {
     applications.defaults = {
       enable = true;
-      browser = pkgs.floorp;
+      browser = pkgs.floorp-bin;
       pdfReader = pkgs.zathura;
       terminal = "kitty";
       fileManager = "thunar";

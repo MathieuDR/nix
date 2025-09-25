@@ -12,7 +12,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.rofi-wayland;
+      default = pkgs.rofi;
       description = "The rofi package to use";
     };
 

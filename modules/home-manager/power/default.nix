@@ -13,8 +13,8 @@ in {
 
     launcherPackage = mkOption {
       type = types.package;
-      default = pkgs.rofi-wayland;
-      description = "The menu package to use (e.g. rofi-wayland, wofi)";
+      default = pkgs.rofi;
+      description = "The menu package to use (e.g. rofi, wofi)";
     };
 
     tlpControl = mkOption {

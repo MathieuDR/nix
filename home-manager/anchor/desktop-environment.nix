@@ -47,7 +47,7 @@ in {
       # exec-once = [
       #   "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
       #   "${pkgs.spotify}/bin/spotify"
-      #   "${pkgs.floorp}/bin/floorp"
+      #   "${pkgs.floorp-bin}/bin/floorp"
       #   "${pkgs.kitty}/bin/kitty"
       # ];
 

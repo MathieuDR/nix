@@ -21,7 +21,7 @@ pkgs.writeShellScriptBin "rofi-systemd" ''
 
   term=''${ROFI_SYSTEMD_TERM-"${pkgs.kitty}/bin/kitty -e"}
   default_action=''${ROFI_SYSTEMD_DEFAULT_ACTION-"list_actions"}
-  rofi_command=''${ROFI_SYSTEMD_ROFI_COMMAND-"${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p"}
+  rofi_command=''${ROFI_SYSTEMD_ROFI_COMMAND-"${pkgs.rofi}/bin/rofi -dmenu -i -p"}
   truncate_length=''${ROFI_SYSTEMD_TRUNCATE_LENGTH-60}
   files_jquery_columns=''${ROFI_SYSTEMD_FILES_JQ_COLUMNS-'(.[0] + " " + .[1])'}
   running_jquery_columns=''${ROFI_SYSTEMD_RUNNING_JQ_COLUMNS-'(.[0] + " " + .[3])'}

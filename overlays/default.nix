@@ -4,10 +4,8 @@
   ...
 }: {
   flake.overlays = {
-    # floorp = import ./floorp.nix;
     # Convenience overlay that combines all overlays
     default = inputs.nixpkgs.lib.composeManyExtensions [
-      # self.overlays.floorp
       # Add other overlays here
     ];
   };

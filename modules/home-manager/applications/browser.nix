@@ -32,7 +32,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.floorp;
+      default = pkgs.floorp-bin;
       description = "Browser package to use";
     };
 
