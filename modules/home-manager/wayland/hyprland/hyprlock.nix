@@ -6,6 +6,8 @@
   cfg = config.ysomic.wayland.hyprland.hyprlock;
 in {
   options.ysomic.wayland.hyprland.hyprlock = {
+    enable = lib.mkEnableOption "Hyprlock";
+
     monitor = lib.mkOption {
       type = lib.types.string;
       default = "";

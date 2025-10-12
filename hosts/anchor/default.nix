@@ -4,9 +4,10 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
+
+    optional.hardware.nvidia
+
     optional.gaming
-    optional.programs.onepassword
     optional.programs.docker
-    optional.wake-up
   ];
 }

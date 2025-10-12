@@ -1,4 +1,5 @@
 {
+  user,
   self,
   pkgs,
   ...
@@ -7,6 +8,8 @@
 in {
   imports = [
     ./desktop-environment.nix
+    optional.hardware.nvidia
+    optional.bootstrapped
 
     optional.gaming
     optional.theming.general
@@ -23,7 +26,7 @@ in {
   ];
 
   home = {
-    username = "thieu";
+    username = user;
     homeDirectory = "/home/thieu";
     stateVersion = "23.11"; # Please read the comment before changing.
 
@@ -32,6 +35,5 @@ in {
     ];
   };
 
-  ysomic.hardware.nvidia.enable = true;
   ysomic.applications.rofi.enable = true;
 }

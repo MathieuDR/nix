@@ -1,4 +1,4 @@
-{...}: {
+{user, ...}: {
   allowedUnfree = [
     "steam"
     "steam-original"

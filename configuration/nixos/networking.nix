@@ -19,7 +19,9 @@ in {
 
     networkmanager.enable = true;
 
+    #TODO: We can use either wireless or networkmanager.
     wireless = {
+      enable = false;
       networks.BeeConnected.pskRaw = "ext:psk_home";
       secretsFile = config.age.secrets.networks.path;
     };

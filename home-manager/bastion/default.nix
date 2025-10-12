@@ -1,4 +1,5 @@
 {
+  user,
   self,
   pkgs,
   ...
@@ -23,9 +24,9 @@ in {
   ];
 
   home = {
-    username = "thieu";
+    username = user;
     homeDirectory = "/home/thieu";
-    stateVersion = "23.11"; # Please read the comment before changing.
+    stateVersion = "25.11";
 
     packages = with pkgs; [
       calibre

@@ -6,7 +6,6 @@
   ...
 }: let
   cfg = config.ysomic.wayland.hyprland;
-  nvidia = config.ysomic.hardware.nvidia;
   defaultsCfg = config.ysomic.applications;
 
   formatScript = script:
@@ -36,7 +35,8 @@ in {
   ];
 
   options.ysomic.wayland.hyprland = {
-    # Enable in shared module
+    enable = lib.mkEnableOption "Hyprland";
+
     wallpaper = lib.mkOption {
       type = lib.types.path;
       description = "Path to wallpaper image";
@@ -290,15 +290,6 @@ in {
 
       services.dunst = {
         enable = true;
-      };
-    })
-
-    (lib.mkIf (cfg.enable && nvidia.enable) {
-      wayland.windowManager.hyprland.settings = {
-        env = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        ];
       };
     })
 
