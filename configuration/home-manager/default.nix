@@ -78,6 +78,7 @@
 
         # productive programs
         zathura
+        popsicle
 
         # social programs
         slack
