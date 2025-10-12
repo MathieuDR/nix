@@ -294,13 +294,6 @@ in {
       };
     })
 
-    # If using zsh:
-    # programs.zsh.profileExtra = ''
-    #   if [ "$(tty)" = "/dev/tty1" ]; then
-    #     exec uwsm start hyprland-uwsm.desktop
-    #   fi
-    # '';
-
     (lib.mkIf (cfg.enable && cfg.autoStart) {
       programs.bash.profileExtra = ''
         if [ "$(tty)" = "/dev/tty1" ]; then
