@@ -1,6 +1,7 @@
 {
   self,
   pkgs,
+  config,
   isDarwin,
   ...
 }: let
@@ -15,6 +16,15 @@ in {
         trust = "ultimate";
       }
     ];
+  };
+  age = {
+    identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
+    secrets = {
+      "user/gpg" = {
+        file = "${secretsDir}/user/gpg.age";
+        path = "${config.home.homeDirectory}/secrets/gpg/common.gpg";
+      };
+    };
   };
 
   services.gpg-agent = {

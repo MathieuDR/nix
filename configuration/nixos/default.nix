@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ./hyprland.nix
     ./networking.nix
     ./common-packages.nix
     ./security.nix
