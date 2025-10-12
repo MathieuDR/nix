@@ -17,6 +17,8 @@ in {
   networking = {
     hostName = hostname;
 
+    networkmanager.enable = true;
+
     wireless = {
       networks.BeeConnected.pskRaw = "ext:psk_home";
       secretsFile = config.age.secrets.networks.path;

@@ -17,12 +17,6 @@ in {
       description = "The menu package to use (e.g. rofi, wofi)";
     };
 
-    tlpControl = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Whether to show TLP battery control options";
-    };
-
     suspend = mkOption {
       type = types.bool;
       default = false;
@@ -40,8 +34,6 @@ in {
         ${optionalString config.ysomic.wayland.hyprland.enable "menuItems+=(\"Quit Hyprland\")"}
         ${optionalString config.ysomic.wayland.hyprland.hyprlock.enable "menuItems+=(\"Lock Hyprland\")"}
         ${optionalString cfg.suspend "menuItems+=(\"Suspend\")"}
-        ${optionalString cfg.tlpControl "menuItems+=(\"Battery: Full Charge Mode\")"}
-        ${optionalString cfg.tlpControl "menuItems+=(\"Battery: Docked Mode\")"}
 
         # Convert array to newline-separated string for rofi
         menuString=$(printf "%s\n" "''${menuItems[@]}")
@@ -65,12 +57,6 @@ in {
           "Shutdown")
             poweroff -p
             ;;
-          "Battery: Full Charge Mode")
-            pkexec tlp setcharge 95 100 BAT0
-            ;;
-          "Battery: Docked Mode")
-            pkexec tlp setcharge 60 80 BAT0
-            ;;
         esac
       '';
       readOnly = true;
@@ -79,12 +65,5 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [cfg.package];
-
-    assertions = [
-      {
-        assertion = !cfg.tlpControl || nixosConfig.services.tlp.enable;
-        message = "TLP must be enabled (services.tlp.enable = true) when using battery control options";
-      }
-    ];
   };
 }
