@@ -5,9 +5,10 @@
     enable32Bit = true;
   };
 
-  # Might be detrimental to performance
   ## Boot
-  # boot.initrd.kernelModules = ["amdgpu"]; # Load amdgpu driver before boot
+  ## Need this, otherwise hyprland crashes (Drivers not ready)
+  # Load amdgpu driver before boot
+  boot.initrd.kernelModules = ["amdgpu"];
 
   ## Enable AMD overclocking
   # boot.kernelModules = ["amdgpu"];
