@@ -31,10 +31,6 @@ in {
             "${config.programs.zen-browser.finalPackage}/bin/zen"
             "${pkgs.kitty}/bin/kitty"
           ];
-
-          # postInit = ''
-          #   # hyprctl dispatch workspace 4 &
-          # '';
         };
       };
 
@@ -44,32 +40,11 @@ in {
 
   wayland.windowManager.hyprland = {
     settings = {
-      # exec-once = [
-      #   "${pkgs.discord}/bin/discord --in-progress-gpu --use-gl=desktop"
-      #   "${pkgs.spotify}/bin/spotify"
-      #   "${pkgs.floorp-bin}/bin/floorp"
-      #   "${pkgs.kitty}/bin/kitty"
-      # ];
-
-      # bind = [
-      # ];
-
-      # workspace = [
-      #   "name:1, monitor:DP-1, persistent:true"
-      #   "name:2, monitor:DP-2, persistent:true"
-      #   "name:3, monitor:DP-1, persistent:true"
-      #   "name:4, monitor:DP-2, persistent:true"
-      #   "name:5, monitor:DP-1, persistent:true"
-      #   "name:6, monitor:DP-2, persistent:true"
-      #   "name:7, monitor:DP-1, persistent:true"
-      #   "name:8, monitor:DP-2, persistent:true"
-      # ];
-
       monitor = [
         # Left screen
-        "DP-1, 2560x1440, 0x0, 1"
+        "DP-3, 2560x1440, 0x0, 1"
         # Main screen
-        "DP-2, 2560x1440@165, 2560x0, 1"
+        "DP-1, 2560x1440@165, 2560x0, 1"
       ];
     };
   };

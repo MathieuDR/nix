@@ -1,5 +1,6 @@
 {
   gaming = import ./gaming.nix;
+  stresstests = import ./stresstests.nix;
 
   bootstrapped = import ./bootstrapped;
 

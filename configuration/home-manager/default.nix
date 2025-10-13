@@ -63,6 +63,7 @@
         du-dust # modern du replacement showing disk usage
         gotop # terminal-based graphical activity monitor
         procs # modern ps replacement
+        lm_sensors
 
         # cli tools - network/system
         dnsutils # DNS tools (dig, nslookup, etc)

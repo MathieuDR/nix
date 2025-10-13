@@ -5,7 +5,7 @@ in {
     ./hardware-configuration.nix
     ./configuration.nix
     optional.hardware.amd
-    # optional.gaming
+    optional.gaming
     # optional.programs.onepassword
     # optional.programs.docker
     # optional.wake-up

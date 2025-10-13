@@ -57,13 +57,13 @@ in {
       };
 
       flavor = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         default = "mocha";
         description = "Catppuccin flavor for theming";
       };
 
       accent = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         default = "mauve";
         description = "Catppuccin accent colour for theming";
       };

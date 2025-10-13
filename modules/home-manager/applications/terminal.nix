@@ -26,7 +26,7 @@ in {
     kitty = {
       fontSize = mkOption {
         type = types.int;
-        default = 12;
+        default = 10;
         description = "Font size for kitty";
       };
 

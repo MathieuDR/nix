@@ -9,18 +9,20 @@ in {
   imports = [
     ./desktop-environment.nix
 
-    # optional.gaming
-    # optional.theming.general
-    # optional.theming.linux
-    # optional.theming.spotify
-    # optional.fixes.discord
-    # optional.programs.copyq
-    # optional.programs.signal
-    # optional.programs.zen
+    optional.gaming
+    optional.bootstrapped
+    optional.stresstests
+    optional.theming.general
+    optional.theming.linux
+    optional.theming.spotify
+    optional.fixes.discord
+    optional.programs.copyq
+    optional.programs.signal
+    optional.programs.zen
     # optional.programs.mpv
-    # optional.programs.dev
-    # optional.programs._3d
-    # optional.programs.wayland-espanso
+    optional.programs.dev
+    optional.programs._3d
+    optional.programs.wayland-espanso
   ];
 
   home = {

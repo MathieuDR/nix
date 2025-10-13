@@ -15,7 +15,7 @@
           id = "shared-secrets";
           label = "Shared Secrets";
           type = "sendreceive";
-          devices = ["anchor" "mobile" "imposter"];
+          devices = ["anchor" "mobile" "imposter" "bastion"];
           versioning = {
             type = "staggered";
             fsPath = "${config.home.homeDirectory}/secrets/backup-versions";
@@ -33,6 +33,11 @@
         "anchor" = {
           name = "anchor";
           id = "QUED2XA-4E3KEYW-IXGOYIT-3YBTXEV-5XTH43E-IUNCXP6-7KQBAQ6-IO4R6QH";
+        };
+
+        "bastion" = {
+          name = "bastion";
+          id = "POE5SHE-34YJMHG-Q7FATME-7YYUVPH-SL2P4ZZ-45SHHN3-A3XBRWD-6GPTJQZ";
         };
 
         "mobile" = {
