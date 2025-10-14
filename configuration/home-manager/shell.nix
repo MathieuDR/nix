@@ -75,6 +75,30 @@
           	git fetch && git pull
           }
 
+          function gsw() {
+            local branch_flag=""
+
+            case "$\{1:-\}" in
+              a|all)
+                branch_flag="-a"
+                ;;
+              r|remote)
+                branch_flag="-r"
+                ;;
+              *)
+                branch_flag=""
+                ;;
+            esac
+
+            git branch $branch_flag --color=always | \
+              grep -v HEAD | \
+              sed 's/remotes\/origin\//> /' | \
+              sed 's/^[[:space:]]*//' | \
+              sort -u | \
+              fzf --ansi --preview 'git log --oneline --graph --date=short --color=always -20 {}' | \
+              xargs git switch
+          }
+
           function gnb() {
           	if [ -z "$1" ]; then
           	  echo "Usage: gnb <branch_name>"
@@ -124,6 +148,7 @@
 
         (lib.mkIf isDarwin ''
           eval "$(/opt/homebrew/bin/brew shellenv)"
+          export EDITOR=nvim
         '')
       ];
     };
