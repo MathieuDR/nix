@@ -7,6 +7,7 @@
     ./sound.nix
     ./user.nix
     ./auto-cleanup.nix
+    ./maintenance.nix
   ];
 
   boot.loader.systemd-boot.configurationLimit = 15;

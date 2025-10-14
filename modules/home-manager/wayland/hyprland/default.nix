@@ -105,6 +105,7 @@ in {
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland = {
         package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
         enable = true;
 
         settings = {
@@ -293,10 +294,17 @@ in {
       };
     })
 
+    # If using zsh:
+    # programs.zsh.profileExtra = ''
+    #   if [ "$(tty)" = "/dev/tty1" ]; then
+    #     exec uwsm start hyprland-uwsm.desktop
+    #   fi
+    # '';
+
     (lib.mkIf (cfg.enable && cfg.autoStart) {
       programs.bash.profileExtra = ''
         if [ "$(tty)" = "/dev/tty1" ]; then
-          Hyprland
+          exec uwsm start hyprland-uwsm.desktop
         fi
       '';
     })
