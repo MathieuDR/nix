@@ -92,8 +92,8 @@
           fish_title = {
             description = "Set terminal title with smart path formatting";
             body = ''
-              # Get the current command
-              set -l command_name (status current-command)
+              # $argv[1] contains the entire command line as a string
+              set -l cmd_line $argv[1]
 
               # Get current directory
               set -l current_dir (pwd)
@@ -105,14 +105,8 @@
               # Determine how many parent directories to show
               set -l formatted_path
 
-              # Check if we're at root
-              if test "$current_dir" = "/"
-                set formatted_path "/"
-              # Check if we're at /home
-              else if test "$current_dir" = "/home"
-                set formatted_path "/home"
               # Check if we're exactly at home directory
-              else if test "$current_dir" = "$HOME"
+              if test "$current_dir" = "$HOME"
                 set formatted_path "~"
               # Check if we're one level deep in home (~/foo)
               else if string match -q "$HOME/*" $current_dir
@@ -128,30 +122,29 @@
                   set formatted_path "~/../"(string join "/" $rel_parts[-2..-1])
                 end
               else
-                # Not in home, show last 2 components from root
-                if test $num_parts -le 2
+                # Not in home, show last 3 components from root
+                if test $num_parts -le 3
                   set formatted_path (string join "/" $path_parts)
                 else
-                  set formatted_path (string join "/" $path_parts[-2..-1])
+                  set formatted_path "../"(string join "/" $path_parts[-2..-1])
                 end
               end
 
-              # Get first argument if it exists (for commands like nvim)
-              set -l first_arg ""
-              if test (count $argv) -gt 0
-                set first_arg $argv[1]
-              end
+              # Build the title based on command line
+              if test -n "$cmd_line"
+                # Split command line into parts
+                set -l cmd_parts (string split " " $cmd_line)
 
-              # Build the title
-              if test -n "$first_arg"
-                # Command with argument
-                echo "$command_name $formatted_path"
-              else if test "$command_name" = "fish"
-                # Just show directory when in fish prompt
-                echo "$formatted_path"
+                if test (count $cmd_parts) -gt 1
+                  # Command with arguments - show command and first arg
+                  echo "$cmd_parts[1] $cmd_parts[2]"
+                else
+                  # Command without arguments - show command with path
+                  echo "$cmd_parts[1] $formatted_path"
+                end
               else
-                # Command without argument
-                echo "$command_name $formatted_path"
+                # No command (at prompt) - just show path
+                echo "$formatted_path"
               end
             '';
           };
