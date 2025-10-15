@@ -1,9 +1,11 @@
 {
   gaming = import ./gaming.nix;
-  power-management = import ./power-management.nix;
-  wake-up = import ./wake-up.nix;
+  hyprlock = import ./hyprlock.nix;
+  hardware = {
+    nvidia = import ./hardware/nvidia.nix;
+    amd = import ./hardware/amd.nix;
+  };
   programs = {
-    onepassword = import ./programs/1password.nix;
     docker = import ./programs/docker.nix;
   };
 }

@@ -6,6 +6,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      # Scanner & lp for scanning!
       "scanner"
       "lp"
     ];

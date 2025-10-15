@@ -40,8 +40,8 @@
       user = "thieu";
     };
 
-    wanderer = mkSystem {
-      hostname = "wanderer";
+    bastion = mkSystem {
+      hostname = "bastion";
       user = "thieu";
     };
   };

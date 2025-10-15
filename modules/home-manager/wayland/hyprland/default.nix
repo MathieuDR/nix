@@ -6,7 +6,6 @@
   ...
 }: let
   cfg = config.ysomic.wayland.hyprland;
-  nvidia = config.ysomic.hardware.nvidia;
   defaultsCfg = config.ysomic.applications;
 
   formatScript = script:
@@ -36,7 +35,8 @@ in {
   ];
 
   options.ysomic.wayland.hyprland = {
-    # Enable in shared module
+    enable = lib.mkEnableOption "Hyprland";
+
     wallpaper = lib.mkOption {
       type = lib.types.path;
       description = "Path to wallpaper image";
@@ -57,13 +57,13 @@ in {
       };
 
       flavor = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         default = "mocha";
         description = "Catppuccin flavor for theming";
       };
 
       accent = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         default = "mauve";
         description = "Catppuccin accent colour for theming";
       };
@@ -105,6 +105,7 @@ in {
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland = {
         package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
         enable = true;
 
         settings = {
@@ -293,19 +294,10 @@ in {
       };
     })
 
-    (lib.mkIf (cfg.enable && nvidia.enable) {
-      wayland.windowManager.hyprland.settings = {
-        env = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        ];
-      };
-    })
-
     (lib.mkIf (cfg.enable && cfg.autoStart) {
       programs.bash.profileExtra = ''
         if [ "$(tty)" = "/dev/tty1" ]; then
-          Hyprland
+          exec uwsm start hyprland-uwsm.desktop
         fi
       '';
     })

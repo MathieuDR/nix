@@ -60,8 +60,9 @@
       hostname = "anchor";
       user = "thieu";
     };
-    "thieu@wanderer" = mkHome {
-      hostname = "wanderer";
+
+    "thieu@bastion" = mkHome {
+      hostname = "bastion";
       user = "thieu";
     };
 

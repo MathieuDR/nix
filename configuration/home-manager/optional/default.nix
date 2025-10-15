@@ -1,5 +1,12 @@
 {
   gaming = import ./gaming.nix;
+  stresstests = import ./stresstests.nix;
+
+  bootstrapped = import ./bootstrapped;
+
+  hardware = {
+    nvidia = import ./hardware/nvidia.nix;
+  };
 
   theming = {
     general = import ./theming/general.nix;

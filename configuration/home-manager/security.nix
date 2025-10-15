@@ -1,37 +1,13 @@
 {
   self,
-  config,
-  lib,
   pkgs,
+  config,
   isDarwin,
   ...
 }: let
   secretsDir = "${self}/data/secrets";
   commonPub = "${secretsDir}/public_keys/gpg.pub";
-  gpgKeys = ["user/gpg"];
-
-  assertions = [
-    {
-      assertion = lib.all (key: lib.hasAttr key config.age.secrets) gpgKeys;
-      message = let
-        # Find which keys are missing
-        missingKeys = lib.filter (key: !(lib.hasAttr key config.age.secrets)) gpgKeys;
-      in "The following GPG keys are in gpgKeys but not in age.secrets: ${toString missingKeys}";
-    }
-  ];
 in {
-  inherit assertions;
-
-  age = {
-    identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
-    secrets = {
-      "user/gpg" = {
-        file = "${secretsDir}/user/gpg.age";
-        path = "${config.home.homeDirectory}/secrets/gpg/common.gpg";
-      };
-    };
-  };
-
   programs.gpg = {
     enable = true;
     publicKeys = [
@@ -40,6 +16,15 @@ in {
         trust = "ultimate";
       }
     ];
+  };
+  age = {
+    identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
+    secrets = {
+      "user/gpg" = {
+        file = "${secretsDir}/user/gpg.age";
+        path = "${config.home.homeDirectory}/secrets/gpg/common.gpg";
+      };
+    };
   };
 
   services.gpg-agent = {

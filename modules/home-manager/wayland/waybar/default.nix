@@ -108,7 +108,7 @@ in {
               # format-ok = "✓";
               system = true;
               user = true;
-              on-click = "kitty --hold -e systemctl list-units --state=failed --all";
+              on-click = "kitty --hold -e sh -c 'systemctl list-units --state=failed,degraded --all --no-pager; systemctl --user list-units --state=failed,degraded --all --no-pager'";
             };
 
             clock = {

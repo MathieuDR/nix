@@ -4,10 +4,10 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./configuration.nix
-    ./thinkfan.nix
-    optional.programs.onepassword
-    optional.programs.docker
-    # optional.power-management
-    optional.wake-up
+    optional.hardware.amd
+    optional.gaming
+    # optional.programs.onepassword
+    # optional.programs.docker
+    # optional.wake-up
   ];
 }

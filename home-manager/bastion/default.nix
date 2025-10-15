@@ -8,10 +8,10 @@
 in {
   imports = [
     ./desktop-environment.nix
-    optional.hardware.nvidia
-    optional.bootstrapped
 
     optional.gaming
+    optional.bootstrapped
+    optional.stresstests
     optional.theming.general
     optional.theming.linux
     optional.theming.spotify
@@ -19,7 +19,7 @@ in {
     optional.programs.copyq
     optional.programs.signal
     optional.programs.zen
-    optional.programs.mpv
+    # optional.programs.mpv
     optional.programs.dev
     optional.programs._3d
     optional.programs.wayland-espanso
@@ -28,7 +28,7 @@ in {
   home = {
     username = user;
     homeDirectory = "/home/thieu";
-    stateVersion = "23.11"; # Please read the comment before changing.
+    stateVersion = "25.11";
 
     packages = with pkgs; [
       calibre

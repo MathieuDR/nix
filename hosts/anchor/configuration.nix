@@ -25,18 +25,6 @@
     };
   };
 
-  ysomic.hardware.nvidia.enable = true;
   ysomic.applications.defaults.fileManager = "thunar";
-  ysomic.wayland.hyprland = {
-    enable = true;
-    hyprlock.enable = false;
-  };
-
-  networking = {
-    wireless = {
-      enable = true;
-    };
-  };
-
   system.stateVersion = "24.11";
 }

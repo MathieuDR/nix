@@ -25,8 +25,6 @@ in {
   };
 
   home = {
-    username = user;
     homeDirectory = "/Users/${user}";
-    stateVersion = "25.05";
   };
 }

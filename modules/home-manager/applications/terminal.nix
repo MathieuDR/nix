@@ -26,7 +26,7 @@ in {
     kitty = {
       fontSize = mkOption {
         type = types.int;
-        default = 12;
+        default = 10;
         description = "Font size for kitty";
       };
 
@@ -58,40 +58,41 @@ in {
     }
 
     (mkIf (cfg.type == "kitty") {
-      # xdg.desktopEntries = {
-      #   kitty-safe = {
-      #     name = "Kitty (Safe Mode)";
-      #     comment = "Terminal without bash profile";
-      #     exec = "kitty bash --noprofile --norc";
-      #     icon = "kitty";
-      #     terminal = false;
-      #     categories = ["System" "TerminalEmulator"];
-      #   };
-      #
-      #   kitty-sh = {
-      #     name = "Kitty (Basic Shell)";
-      #     comment = "Terminal with basic POSIX shell";
-      #     exec = "kitty sh";
-      #     icon = "kitty";
-      #     terminal = false;
-      #     categories = ["System" "TerminalEmulator"];
-      #   };
-      #
-      #   kitty-emergency = {
-      #     name = "Kitty (Emergency Terminal)";
-      #     comment = "Clean environment for system recovery";
-      #     exec = "kitty env -i bash --noprofile --norc";
-      #     icon = "applications-system";
-      #     terminal = false;
-      #     categories = ["System"];
-      #   };
-      # };
-      #
+      xdg.desktopEntries = {
+        kitty-safe = {
+          name = "Kitty (Safe Mode)";
+          comment = "Terminal without bash profile";
+          exec = "kitty bash --noprofile --norc";
+          icon = "kitty";
+          terminal = false;
+          categories = ["System" "TerminalEmulator"];
+        };
+
+        kitty-sh = {
+          name = "Kitty (Basic Shell)";
+          comment = "Terminal with basic POSIX shell";
+          exec = "kitty sh";
+          icon = "kitty";
+          terminal = false;
+          categories = ["System" "TerminalEmulator"];
+        };
+
+        kitty-emergency = {
+          name = "Kitty (Emergency Terminal)";
+          comment = "Clean environment for system recovery";
+          exec = "kitty env -i bash --noprofile --norc";
+          icon = "applications-system";
+          terminal = false;
+          categories = ["System"];
+        };
+      };
+
       programs.kitty = {
         enable = true;
         font.name = cfg.kitty.fontName;
         font.size = cfg.kitty.fontSize;
         shellIntegration.enableBashIntegration = true;
+        shellIntegration.enableFishIntegration = true;
         settings = mkMerge [
           {
             window_title = "{title} - Kitty";

@@ -6,8 +6,10 @@
   cfg = config.ysomic.wayland.hyprland.hyprlock;
 in {
   options.ysomic.wayland.hyprland.hyprlock = {
+    enable = lib.mkEnableOption "Hyprlock";
+
     monitor = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "";
       description = "The monitor to show the lockscreen on, if empty it will display on all monitors.";
       example = "DP-2";

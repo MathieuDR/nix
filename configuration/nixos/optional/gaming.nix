@@ -1,4 +1,4 @@
-{...}: {
+{user, ...}: {
   allowedUnfree = [
     "steam"
     "steam-original"
@@ -11,5 +11,19 @@
     gamescopeSession.enable = true;
   };
 
-  programs.gamemode.enable = true;
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+    settings = {
+      general = {
+        renice = 10;
+      };
+    };
+  };
+
+  users.users.${user} = {
+    extraGroups = [
+      "gamemode"
+    ];
+  };
 }
