@@ -38,7 +38,7 @@ in {
       DisablePocket = true;
       DisableSetDesktopBackground = true;
       DontCheckDefaultBrowser = true;
-      DefaultDownloadDirectory = "\${home}/downloads";
+      # DefaultDownloadDirectory = "${config.home.homeDirectory}/downloads";
       PasswordManagerEnabled = false;
       DisableFormHistory = true;
       DisableFirefoxStudies = true;
@@ -52,6 +52,9 @@ in {
 
         # Browser settings
         settings = {
+          # Enable userChrome.css and userContent.css
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
           # Language and region
           "general.useragent.locale" = "en-GB";
           "browser.search.region" = "DE";
@@ -60,7 +63,11 @@ in {
           "browser.search.defaultenginename" = "ddg";
 
           # Downloads
-          "browser.download.dir" = "\${home}/downloads";
+          # We now use XDG stuff!
+          # "browser.download.dir" = "${config.home.homeDirectory}/downloads";
+          # "browser.download.folderList" = 2;
+          # # 0=Desktop dir, 1=Downloads / system dir, 2=Custom
+          # "browser.download.useDownloadDir" = true;
 
           "privacy.trackingprotection.enabled" = true;
           "privacy.trackingprotection.socialtracking.enabled" = true;

@@ -4,37 +4,96 @@
   isDarwin,
   lib,
   ...
-}: {
-  systemd.user.tmpfiles.rules = lib.mkIf (!isDarwin) [
-    # d /path/to/directory MODE USER GROUP AGE ARGUMENT
-    "d ${config.home.homeDirectory}/downloads 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/development 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/development/sources 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/development/courses 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/development/sources/sevenmind 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/pictures 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/pictures/screenshots 0755 ${config.home.username} users - -"
-    "d ${config.home.homeDirectory}/notes 0755 ${config.home.username} users - -"
+}: let
+  customDirs = {
+    development = "${config.home.homeDirectory}/development";
+    developmentSources = "${config.home.homeDirectory}/development/sources";
+    developmentCourses = "${config.home.homeDirectory}/development/courses";
+    screenshots = "${config.home.homeDirectory}/pictures/screenshots";
+    notes = "${config.home.homeDirectory}/notes";
+    drakkenheim = "${config.home.homeDirectory}/notes/drakkenheim";
+    obsidian = "${config.home.homeDirectory}/notes/obsidian";
+  };
+
+  customDirsList = lib.attrValues customDirs;
+
+  repos = [
+    {
+      url = "https://github.com/MathieuDR/nix";
+      dir = "development/sources/nixos";
+    }
+    {
+      url = "https://github.com/MathieuDR/nixvim";
+      dir = "development/sources/nixvim";
+    }
+    {
+      url = "https://github.com/MathieuDR/nix-dock";
+      dir = "development/sources/nix-dock";
+    }
+    {
+      url = "https://github.com/MathieuDR/homeserver";
+      dir = "development/sources/homeserver";
+    }
+    {
+      url = "https://github.com/MathieuDR/Obsidian";
+      dir = "notes/obsidian";
+    }
+    {
+      url = "https://github.com/MathieuDR/drakkenheim-notes";
+      dir = "notes/drakkenheim";
+    }
   ];
 
-  home.activation = lib.mkIf isDarwin {
-    createDevelopmentDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/downloads"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/development"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/development/sources"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/development/courses"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/development/sources/sevenmind"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/pictures"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/pictures/screenshots"
-      $DRY_RUN_CMD mkdir -p -m 755 "${config.home.homeDirectory}/notes"
-    '';
-  };
+  # Clones or pulls with dry run support
+  syncRepo = repo: ''
+    if [ -d "${config.home.homeDirectory}/${repo.dir}" ]; then
+      $VERBOSE_ECHO "Pulling ${repo.url} in ${repo.dir}"
+      $DRY_RUN_CMD ${pkgs.git}/bin/git -C "${config.home.homeDirectory}/${repo.dir}" pull
+    else
+      $VERBOSE_ECHO "Cloning ${repo.url} to ${repo.dir}"
+      $DRY_RUN_CMD ${pkgs.git}/bin/git clone ${repo.url} "${config.home.homeDirectory}/${repo.dir}"
+    fi
+  '';
+in {
+  xdg = {
+    userDirs = {
+      enable = true;
+      createDirectories = true;
 
-  # Linux only: XDG mime applications (not applicable to macOS)
-  xdg.mimeApps = lib.mkIf (!isDarwin) {
-    enable = true;
-    defaultApplications = {
-      "x-scheme-handler/io.element.desktop" = ["${pkgs.element-desktop.pname}.desktop"];
+      desktop = "${config.home.homeDirectory}/desktop";
+      documents = "${config.home.homeDirectory}/documents";
+      download = "${config.home.homeDirectory}/downloads";
+      music = "${config.home.homeDirectory}/music";
+      pictures = "${config.home.homeDirectory}/pictures";
+      videos = "${config.home.homeDirectory}/videos";
+      templates = "${config.home.homeDirectory}/templates";
+      publicShare = "${config.home.homeDirectory}/public";
+    };
+
+    mimeApps = lib.mkIf (!isDarwin) {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/io.element.desktop" = ["${pkgs.element-desktop.pname}.desktop"];
+      };
     };
   };
+
+  systemd.user.tmpfiles.rules = lib.mkIf (!isDarwin) (
+    map (dir: "d ${dir} 0755 ${config.home.username} users - -") customDirsList
+  );
+
+  home.activation = lib.mkMerge [
+    (lib.mkIf isDarwin {
+      createCustomDirs = lib.hm.dag.entryAfter ["writeBoundary"] (
+        lib.concatStringsSep "\n" (
+          map (dir: "$DRY_RUN_CMD mkdir -p -m 755 \"${dir}\"") customDirsList
+        )
+      );
+    })
+    {
+      syncRepos = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        ${lib.concatMapStringsSep "\n" syncRepo repos}
+      '';
+    }
+  ];
 }
