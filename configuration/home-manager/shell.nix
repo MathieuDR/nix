@@ -31,7 +31,7 @@
     rclone.enable = true;
     eza = {
       enable = true;
-      enableBashIntegration = true;
+      enableBashIntegration = false;
       enableFishIntegration = true;
       #TODO: needs to be 'yaml'
       #https://github.com/eza-community/eza-themes/blob/main/themes/catppuccin.yml
@@ -67,7 +67,7 @@
     #NOTE: Trying Eza for a bit.
     lsd = {
       enable = false;
-      enableBashIntegration = true;
+      enableBashIntegration = false;
       enableFishIntegration = true;
     };
 
@@ -83,6 +83,99 @@
 
     fish = {
       enable = true;
+      interactiveShellInit = ''
+        set fish_greeting # Disable greeting
+      '';
+
+      functions =
+        {
+          gfp = {
+            description = "Git fetch and pull";
+            body = ''
+              git fetch && git pull
+            '';
+          };
+
+          gsw = {
+            description = "Interactively switch git branches with fzf";
+            argumentNames = ["scope"];
+            body = ''
+              set -l branch_flag ""
+
+              # Parse the scope argument (all/a, remote/r, or default local)
+              switch "$argv[1]"
+                case a all
+                  set branch_flag "-a"
+                case r remote
+                  set branch_flag "-r"
+                case '*'
+                  set branch_flag ""
+              end
+
+              # List branches, format them, and use fzf to select
+              git branch $branch_flag --color=always | \
+                grep -v HEAD | \
+                sed 's/remotes\/origin\//> /' | \
+                sed 's/^[[:space:]]*//' | \
+                sort -u | \
+                fzf --ansi --preview 'git log --oneline --graph --date=short --color=always -20 {}' | \
+                xargs git switch
+            '';
+          };
+
+          gnb = {
+            description = "Create new git branch and push to origin";
+            argumentNames = ["branch_name"];
+            body = ''
+              if test -z "$argv[1]"
+                echo "Usage: gnb <branch_name>"
+                return 1
+              end
+
+              git checkout -b $argv[1]
+              or begin
+                echo "Failed to checkout to branch $argv[1]"
+                return 1
+              end
+
+              git push -u origin $argv[1]
+              or begin
+                echo "Failed to push the branch $argv[1] to origin"
+                return 1
+              end
+
+              echo "Successfully checked out to and pushed $argv[1]"
+            '';
+          };
+        }
+        // (lib.optionalAttrs (!isDarwin) {
+          open = {
+            description = "Open files with default application";
+            body = ''
+              xdg-open $argv
+            '';
+          };
+        });
+
+      # Fish abbreviations
+      shellAbbrs = {
+        # Vim-style exits
+        ":qa" = "exit";
+        ":wq" = "exit";
+        ":q" = "exit";
+
+        # Git shortcuts that expand to full commands
+        g = "git";
+        gs = "git status";
+        gd = "git diff";
+        ga = "git add";
+        gc = "git commit";
+        gca = "git commit --amend";
+        gco = "git checkout";
+        gl = "git log --oneline --graph --decorate";
+        gp = "git push";
+        # gpu = "git push -u origin HEAD";
+      };
     };
 
     bash = {
@@ -90,14 +183,50 @@
       historySize = 2500;
       historyControl = ["ignoredups" "erasedups"];
 
+      # Use interactiveShellInit for fish exec - only runs in interactive shells
+      # https://wiki.nixos.org/wiki/Fish#Setting_fish_as_default_shell
+      # https://github.com/NixOS/nixpkgs/blob/7e297ddff44a3cc93673bb38d0374df8d0ad73e4/nixos/modules/programs/bash/bash.nix#L204
       initExtra = lib.mkOrder 2000 ''
-        eval "$(${pkgs.zoxide}/bin/zoxide init bash --cmd cd)"
+        # We don't need zoxide anymore in bash.
+        # eval "$(${pkgs.zoxide}/bin/zoxide init bash --cmd cd)"
+
+        if [ -n "$PS1" ]; then
+          if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+          then
+            shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+            exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+          fi
+        fi
       '';
 
       bashrcExtra = lib.mkMerge [
         ''
           function gfp() {
           	git fetch && git pull
+          }
+
+          function gsw() {
+            local branch_flag=""
+
+            case "$\{1:-\}" in
+              a|all)
+                branch_flag="-a"
+                ;;
+              r|remote)
+                branch_flag="-r"
+                ;;
+              *)
+                branch_flag=""
+                ;;
+            esac
+
+            git branch $branch_flag --color=always | \
+              grep -v HEAD | \
+              sed 's/remotes\/origin\//> /' | \
+              sed 's/^[[:space:]]*//' | \
+              sort -u | \
+              fzf --ansi --preview 'git log --oneline --graph --date=short --color=always -20 {}' | \
+              xargs git switch
           }
 
           function gnb() {
