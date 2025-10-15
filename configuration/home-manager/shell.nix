@@ -89,6 +89,73 @@
 
       functions =
         {
+          fish_title = {
+            description = "Set terminal title with smart path formatting";
+            body = ''
+              # Get the current command
+              set -l command_name (status current-command)
+
+              # Get current directory
+              set -l current_dir (pwd)
+
+              # Split path into components first
+              set -l path_parts (string split "/" $current_dir)
+              set -l num_parts (count $path_parts)
+
+              # Determine how many parent directories to show
+              set -l formatted_path
+
+              # Check if we're at root
+              if test "$current_dir" = "/"
+                set formatted_path "/"
+              # Check if we're at /home
+              else if test "$current_dir" = "/home"
+                set formatted_path "/home"
+              # Check if we're exactly at home directory
+              else if test "$current_dir" = "$HOME"
+                set formatted_path "~"
+              # Check if we're one level deep in home (~/foo)
+              else if string match -q "$HOME/*" $current_dir
+                set -l rel_path (string replace "$HOME/" "" $current_dir)
+                set -l rel_parts (string split "/" $rel_path)
+                set -l rel_count (count $rel_parts)
+
+                if test $rel_count -le 2
+                  # ~/foo or ~/foo/bar - show as is
+                  set formatted_path "~/"(string join "/" $rel_parts)
+                else
+                  # ~/foo/bar/baz or deeper - show as ~/../bar/baz (last 2 components)
+                  set formatted_path "~/../"(string join "/" $rel_parts[-2..-1])
+                end
+              else
+                # Not in home, show last 2 components from root
+                if test $num_parts -le 2
+                  set formatted_path (string join "/" $path_parts)
+                else
+                  set formatted_path (string join "/" $path_parts[-2..-1])
+                end
+              end
+
+              # Get first argument if it exists (for commands like nvim)
+              set -l first_arg ""
+              if test (count $argv) -gt 0
+                set first_arg $argv[1]
+              end
+
+              # Build the title
+              if test -n "$first_arg"
+                # Command with argument
+                echo "$command_name $formatted_path"
+              else if test "$command_name" = "fish"
+                # Just show directory when in fish prompt
+                echo "$formatted_path"
+              else
+                # Command without argument
+                echo "$command_name $formatted_path"
+              end
+            '';
+          };
+
           gfp = {
             description = "Git fetch and pull";
             body = ''

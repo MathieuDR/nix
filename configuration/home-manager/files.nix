@@ -44,12 +44,8 @@
     }
   ];
 
-  # Clones or pulls with dry run support
-  syncRepo = repo: ''
-    if [ -d "${config.home.homeDirectory}/${repo.dir}" ]; then
-      $VERBOSE_ECHO "Pulling ${repo.url} in ${repo.dir}"
-      $DRY_RUN_CMD ${pkgs.git}/bin/git -C "${config.home.homeDirectory}/${repo.dir}" pull
-    else
+  cloneRepos = repo: ''
+    if [ ! -d "${config.home.homeDirectory}/${repo.dir}" ]; then
       $VERBOSE_ECHO "Cloning ${repo.url} to ${repo.dir}"
       $DRY_RUN_CMD ${pkgs.git}/bin/git clone ${repo.url} "${config.home.homeDirectory}/${repo.dir}"
     fi
@@ -91,8 +87,8 @@ in {
       );
     })
     {
-      syncRepos = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        ${lib.concatMapStringsSep "\n" syncRepo repos}
+      cloneRepos = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        ${lib.concatMapStringsSep "\n" cloneRepos repos}
       '';
     }
   ];
