@@ -111,8 +111,6 @@
                       set branch_flag "-r"
               end
 
-              echo $branch_flag
-
               # List branches, format them, and use fzf to select
               git branch $branch_flag --color=always | \
                 grep -v HEAD | \
@@ -178,9 +176,10 @@
         gco = "git checkout";
         gl = "git log --oneline --graph --decorate";
         gp = "git push";
-        pr = "gh pr new";
-        vpw = "gh pr view --web";
         # gpu = "git push -u origin HEAD";
+        gpr = "gh pr new";
+        gvpr = "gh pr view --web";
+        grc = "git rebase --continue";
       };
     };
 
