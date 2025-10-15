@@ -99,23 +99,24 @@
           gsw = {
             description = "Interactively switch git branches with fzf";
             argumentNames = ["scope"];
+            #NOTE:
+            # We do not set branch_flag as "", otherwise fish will expand it. If we don't set it, it won't be expanded.
+            # Strange...
             body = ''
-              set -l branch_flag ""
-
-              # Parse the scope argument (all/a, remote/r, or default local)
-              switch "$argv[1]"
-                case a all
-                  set branch_flag "-a"
-                case r remote
-                  set branch_flag "-r"
-                case '*'
-                  set branch_flag ""
+              # Parse the scope argument (all/a, remote/r
+              switch $argv[1]
+                  case a all
+                      set branch_flag "-a"
+                  case r remote
+                      set branch_flag "-r"
               end
+
+              echo $branch_flag
 
               # List branches, format them, and use fzf to select
               git branch $branch_flag --color=always | \
                 grep -v HEAD | \
-                sed 's/remotes\/origin\//> /' | \
+                sed 's/\(remotes\/\)\?origin\//> /' | \
                 sed 's/^[[:space:]]*//' | \
                 sort -u | \
                 fzf --ansi --preview 'git log --oneline --graph --date=short --color=always -20 {}' | \
@@ -169,6 +170,7 @@
         gs = "git status";
         gd = "git diff";
         ga = "git add";
+        gap = "git add -p";
         gc = "git commit";
         gca = "git commit --amend";
         gco = "git checkout";
@@ -222,7 +224,7 @@
 
             git branch $branch_flag --color=always | \
               grep -v HEAD | \
-              sed 's/remotes\/origin\//> /' | \
+              sed 's/\(remotes\/\)\?origin\//> /' | \
               sed 's/^[[:space:]]*//' | \
               sort -u | \
               fzf --ansi --preview 'git log --oneline --graph --date=short --color=always -20 {}' | \
