@@ -9,6 +9,7 @@
 }: {
   imports = [
     ./files.nix
+    ./navi.nix
     ./shell.nix
     ./security.nix
     ./scripts
