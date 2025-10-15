@@ -176,6 +176,8 @@
         gco = "git checkout";
         gl = "git log --oneline --graph --decorate";
         gp = "git push";
+        pr = "gh pr new";
+        vpw = "gh pr view --web";
         # gpu = "git push -u origin HEAD";
       };
     };
