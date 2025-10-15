@@ -57,63 +57,67 @@ in {
       };
     }
 
-    (mkIf (cfg.type == "kitty") {
-      xdg.desktopEntries = {
-        kitty-safe = {
-          name = "Kitty (Safe Mode)";
-          comment = "Terminal without bash profile";
-          exec = "kitty bash --noprofile --norc";
-          icon = "kitty";
-          terminal = false;
-          categories = ["System" "TerminalEmulator"];
-        };
+    (mkIf (cfg.type == "kitty") (mkMerge [
+      (mkIf (!isDarwin) {
+        xdg.desktopEntries = {
+          kitty-safe = {
+            name = "Kitty (Safe Mode)";
+            comment = "Terminal without bash profile";
+            exec = "kitty bash --noprofile --norc";
+            icon = "kitty";
+            terminal = false;
+            categories = ["System" "TerminalEmulator"];
+          };
 
-        kitty-sh = {
-          name = "Kitty (Basic Shell)";
-          comment = "Terminal with basic POSIX shell";
-          exec = "kitty sh";
-          icon = "kitty";
-          terminal = false;
-          categories = ["System" "TerminalEmulator"];
-        };
+          kitty-sh = {
+            name = "Kitty (Basic Shell)";
+            comment = "Terminal with basic POSIX shell";
+            exec = "kitty sh";
+            icon = "kitty";
+            terminal = false;
+            categories = ["System" "TerminalEmulator"];
+          };
 
-        kitty-emergency = {
-          name = "Kitty (Emergency Terminal)";
-          comment = "Clean environment for system recovery";
-          exec = "kitty env -i bash --noprofile --norc";
-          icon = "applications-system";
-          terminal = false;
-          categories = ["System"];
+          kitty-emergency = {
+            name = "Kitty (Emergency Terminal)";
+            comment = "Clean environment for system recovery";
+            exec = "kitty env -i bash --noprofile --norc";
+            icon = "applications-system";
+            terminal = false;
+            categories = ["System"];
+          };
         };
-      };
+      })
 
-      programs.kitty = {
-        enable = true;
-        font.name = cfg.kitty.fontName;
-        font.size = cfg.kitty.fontSize;
-        shellIntegration.enableBashIntegration = true;
-        shellIntegration.enableFishIntegration = true;
-        settings = mkMerge [
-          {
-            window_title = "{title} - Kitty";
-            tab_bar_min_tabs = 1;
-            tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
-            tab_bar_edge = "bottom";
-            tab_bar_style = "powerline";
-            tab_powerline_style = "slanted";
-            enable_audio_bell = false;
-            scrollback_lines = cfg.kitty.scrollbackLines;
-            disable_ligatures = "never";
-            symbol_map = "U+1F300-U+1F9FF Noto Color Emoji";
-            font_features = "none";
-          }
-          (mkIf isDarwin {
-            shell = "/Users/thieu/.nix-profile/bin/bash";
-            # shell = "bash";
-          })
-          cfg.kitty.extraSettings
-        ];
-      };
-    })
+      {
+        programs.kitty = {
+          enable = true;
+          font.name = cfg.kitty.fontName;
+          font.size = cfg.kitty.fontSize;
+          shellIntegration.enableBashIntegration = true;
+          shellIntegration.enableFishIntegration = true;
+          settings = mkMerge [
+            {
+              window_title = "{title} - Kitty";
+              tab_bar_min_tabs = 1;
+              tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
+              tab_bar_edge = "bottom";
+              tab_bar_style = "powerline";
+              tab_powerline_style = "slanted";
+              enable_audio_bell = false;
+              scrollback_lines = cfg.kitty.scrollbackLines;
+              disable_ligatures = "never";
+              symbol_map = "U+1F300-U+1F9FF Noto Color Emoji";
+              font_features = "none";
+            }
+            (mkIf isDarwin {
+              shell = "/Users/thieu/.nix-profile/bin/bash";
+              # shell = "bash";
+            })
+            cfg.kitty.extraSettings
+          ];
+        };
+      }
+    ]))
   ]);
 }
