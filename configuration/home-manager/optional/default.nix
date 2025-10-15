@@ -8,12 +8,6 @@
     nvidia = import ./hardware/nvidia.nix;
   };
 
-  bootstrapped = import ./bootstrapped;
-
-  hardware = {
-    nvidia = import ./hardware/nvidia.nix;
-  };
-
   theming = {
     general = import ./theming/general.nix;
     linux = import ./theming/linux.nix;
