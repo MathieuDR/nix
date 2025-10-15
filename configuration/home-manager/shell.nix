@@ -169,6 +169,7 @@
         g = "git";
         gs = "git status";
         gswm = "git switch main";
+        gswt = "git switch -";
         gd = "git diff";
         ga = "git add";
         gap = "git add -p";
