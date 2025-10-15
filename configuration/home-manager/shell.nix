@@ -168,6 +168,7 @@
         # Git shortcuts that expand to full commands
         g = "git";
         gs = "git status";
+        gswm = "git switch main";
         gd = "git diff";
         ga = "git add";
         gap = "git add -p";
