@@ -192,18 +192,30 @@
       # Use interactiveShellInit for fish exec - only runs in interactive shells
       # https://wiki.nixos.org/wiki/Fish#Setting_fish_as_default_shell
       # https://github.com/NixOS/nixpkgs/blob/7e297ddff44a3cc93673bb38d0374df8d0ad73e4/nixos/modules/programs/bash/bash.nix#L204
-      initExtra = lib.mkOrder 2000 ''
-        # We don't need zoxide anymore in bash.
-        # eval "$(${pkgs.zoxide}/bin/zoxide init bash --cmd cd)"
-
-        if [ -n "$PS1" ]; then
-          if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-          then
-            shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-            exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      initExtra = lib.mkOrder 2000 (
+        if isDarwin
+        then ''
+          if [ -n "$PS1" ]; then
+            if [[ $(ps -o command= -p "$PPID" | awk '{print $1}') != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+            then
+              shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+              exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+            fi
           fi
-        fi
-      '';
+        ''
+        else ''
+          # We don't need zoxide anymore in bash.
+          # eval "$(${pkgs.zoxide}/bin/zoxide init bash --cmd cd)"
+
+          if [ -n "$PS1" ]; then
+            if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+            then
+              shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+              exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+            fi
+          fi
+        ''
+      );
 
       bashrcExtra = lib.mkMerge [
         ''
@@ -291,7 +303,8 @@
   };
 
   home.sessionVariables = {
-    SHELL = "${pkgs.bash}/bin/bash";
+    SHELL = "${pkgs.fish}/bin/fish";
+    # SHELL = "${pkgs.bash}/bin/bash";
     ZEIT_DB = "${config.xdg.dataHome}/zeit.db";
   };
 }

@@ -47,4 +47,13 @@
       enableKeyMapping = false;
     };
   };
+
+  # Feels risky
+  # users = {
+  #   # knownUsers = [user];
+  #
+  #   users."${user}" = {
+  #     shell = pkgs.fish;
+  #   };
+  # };
 }

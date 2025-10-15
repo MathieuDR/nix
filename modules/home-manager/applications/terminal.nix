@@ -110,10 +110,6 @@ in {
               symbol_map = "U+1F300-U+1F9FF Noto Color Emoji";
               font_features = "none";
             }
-            (mkIf isDarwin {
-              shell = "/Users/thieu/.nix-profile/bin/bash";
-              # shell = "bash";
-            })
             cfg.kitty.extraSettings
           ];
         };
