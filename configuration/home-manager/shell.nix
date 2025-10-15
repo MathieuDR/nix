@@ -92,7 +92,7 @@
           gfp = {
             description = "Git fetch and pull";
             body = ''
-              git fetch && git pull
+              git fetch --prune && git pull
             '';
           };
 
