@@ -7,6 +7,7 @@
   optional = (import "${self}/configuration").home-manager.optional;
 in {
   imports = [
+    optional.bootstrapped
     optional.programs.zen
     optional.programs.dev
     optional.theming.general
