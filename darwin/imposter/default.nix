@@ -1,4 +1,5 @@
 {
+  pkgs,
   inputs,
   user,
   ...
@@ -6,6 +7,7 @@
   # Host-specific Darwin configuration
   environment.systemPackages = [
     inputs.home-manager.packages.aarch64-darwin.default
+    pkgs.fish
   ];
 
   system = {
@@ -48,6 +50,15 @@
     };
   };
 
+  # environment.etc."shells" = {
+  #   text = ''
+  #     /bin/bash
+  #     /bin/sh
+  #     /bin/zsh
+  #     ${pkgs.fish}/bin/fish
+  #   '';
+  # };
+  #
   # Feels risky
   # users = {
   #   # knownUsers = [user];

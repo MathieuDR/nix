@@ -51,7 +51,7 @@
     fi
   '';
 in {
-  xdg = {
+  xdg = lib.mkIf (!isDarwin) {
     userDirs = {
       enable = true;
       createDirectories = true;
@@ -66,7 +66,7 @@ in {
       publicShare = "${config.home.homeDirectory}/public";
     };
 
-    mimeApps = lib.mkIf (!isDarwin) {
+    mimeApps = {
       enable = true;
       defaultApplications = {
         "x-scheme-handler/io.element.desktop" = ["${pkgs.element-desktop.pname}.desktop"];
