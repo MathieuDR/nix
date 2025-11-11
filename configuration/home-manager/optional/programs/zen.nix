@@ -54,6 +54,8 @@ in {
           # Enable userChrome.css and userContent.css
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
+          "media.hardwaremediakeys.enabled" = false;
+
           # Language and region
           "general.useragent.locale" = "en-GB";
           "browser.search.region" = "DE";

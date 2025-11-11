@@ -1,7 +1,7 @@
 {...}: {
   # For emulating aarch64
-  # Needed for ?? CA / caddy?
-  # binfmt.emulatedSystems = ["aarch64-linux"];
+  # Needed for raspberry pi / home server!
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

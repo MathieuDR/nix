@@ -17,7 +17,10 @@ in {
   networking = {
     hostName = hostname;
 
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
 
     #TODO: We can use either wireless or networkmanager.
     wireless = {

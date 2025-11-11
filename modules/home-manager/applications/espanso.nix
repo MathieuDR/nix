@@ -64,6 +64,10 @@ in {
               replace = "mathieu@deraedt.dev";
             }
             {
+              trigger = ";@y";
+              replace = "ysomic@gmail.com";
+            }
+            {
               trigger = ";@g";
               replace = "mathieuderaedt@gmail.com";
             }
