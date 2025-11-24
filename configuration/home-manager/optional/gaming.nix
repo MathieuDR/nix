@@ -2,7 +2,7 @@
   home = {
     packages = with pkgs; [
       mangohud
-      protonup
+      protonup-ng
       runelite
       # (prismlauncher.override {jdks = [jdk8];})
     ];

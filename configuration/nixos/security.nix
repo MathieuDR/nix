@@ -34,4 +34,13 @@
   };
 
   age.identityPaths = ["/etc/${hostname}/agenix_${hostname}_system"];
+
+  environment.systemPackages = [
+    pkgs.clamav
+  ];
+
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+  };
 }

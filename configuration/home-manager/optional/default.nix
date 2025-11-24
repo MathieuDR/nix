@@ -24,6 +24,7 @@
     dev = import ./programs/dev.nix;
     zen = import ./programs/zen.nix;
     mpv = import ./programs/mpv.nix;
+    imv = import ./programs/imv.nix;
     signal = import ./programs/signal.nix;
     wayland-espanso = import ./programs/wayland-espanso.nix;
   };

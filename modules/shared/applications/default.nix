@@ -27,6 +27,7 @@
       default = with pkgs.xfce; [
         thunar-archive-plugin
         thunar-volman
+        tumbler
       ];
       description = "Plugins to enable for the filemanager, for example Thunar";
     };

@@ -19,7 +19,8 @@
     amdgpu_top # Tool for AMDGPU Usage
 
     ## Tools ##
-    glxinfo # OpenGL info
+    # glxinfo # OpenGL info
+    mesa-demos # OpenGL Info (glxinfo)
     #vulkan-tools # Khronos official Vulkan Tools and Utilities
     #clinfo # Print information about available OpenCL platforms and devices
     #libva-utils # Collection of utilities and examples for VA-API

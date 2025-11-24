@@ -33,10 +33,11 @@
       enable = true;
       enableBashIntegration = false;
       enableFishIntegration = true;
-      #TODO: needs to be 'yaml'
+      #NOTE: I think this can be disabled (the theme) as nix catpuccin does this.
+      #NOTE: needs to be 'yaml'
       #https://github.com/eza-community/eza-themes/blob/main/themes/catppuccin.yml
       #yq -j . eza.theme.yml | eza.theme.json
-      theme = builtins.fromJSON (builtins.readFile "${self}/data/config/eza.theme.json");
+      # theme = lib.mkForce (builtins.fromJSON (builtins.readFile "${self}/data/config/eza.theme.json"));
     };
     ripgrep.enable = true;
     gh.enable = true;
@@ -44,21 +45,28 @@
 
     git = {
       enable = true;
-      userName = "MathieuDR";
-      userEmail = "mathieu@deraedt.dev";
-      signing = {
-        key = "BB1B6AEC733F6F80";
-        signByDefault = true;
-      };
+      settings = {
+        user = {
+          name = "MathieuDR";
+          email = "mathieu@deraedt.dev";
+        };
 
-      extraConfig = {
+        #NOTE: Does this work?
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
         pull.rebase = true;
       };
 
-      difftastic = {
-        enable = true;
+      signing = {
+        key = "BB1B6AEC733F6F80";
+        signByDefault = true;
+      };
+    };
+
+    difftastic = {
+      enable = true;
+      git.enable = true;
+      options = {
         display = "side-by-side";
         background = "dark";
       };

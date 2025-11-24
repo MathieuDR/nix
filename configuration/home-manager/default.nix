@@ -31,9 +31,8 @@
         # Cross-platform packages
         # fonts
         nerd-fonts.jetbrains-mono
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         roboto
-        ubuntu_font_family
         ubuntu-sans
         ubuntu-classic
 
@@ -51,7 +50,7 @@
         file # determine file type
 
         # cli tools - file operations
-        eza # modern ls replacement
+        # eza # modern ls replacement
         fd # modern find replacement
         tree # display directory structure
         rsync # file synchronization
@@ -61,7 +60,7 @@
 
         # cli tools - system monitoring
         bottom # modern top/htop replacement
-        du-dust # modern du replacement showing disk usage
+        dust # modern du replacement showing disk usage
         gotop # terminal-based graphical activity monitor
         procs # modern ps replacement
 
@@ -96,7 +95,7 @@
         # Linux-only packages
         # cli tools
         killall
-        imv
+        # imv # Using homemanager
 
         # productive programs
         obsidian

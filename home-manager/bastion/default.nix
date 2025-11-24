@@ -19,6 +19,7 @@ in {
     optional.programs.copyq
     optional.programs.signal
     optional.programs.zen
+    optional.programs.imv
     # optional.programs.mpv
     optional.programs.dev
     optional.programs._3d
@@ -36,4 +37,5 @@ in {
   };
 
   ysomic.applications.rofi.enable = true;
+  ysomic.applications.imageViewer = true;
 }
