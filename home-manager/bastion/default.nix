@@ -37,5 +37,5 @@ in {
   };
 
   ysomic.applications.rofi.enable = true;
-  ysomic.applications.imageViewer = true;
+  ysomic.applications.imageViewer.enable = true;
 }
