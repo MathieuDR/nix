@@ -91,9 +91,16 @@
 
     fish = {
       enable = true;
-      interactiveShellInit = ''
-        set fish_greeting # Disable greeting
-      '';
+      interactiveShellInit = lib.mkMerge [
+        ''
+          set fish_greeting # Disable greeting
+        ''
+
+        (lib.mkIf isDarwin ''
+          # Add Homebrew to PATH on macOS
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+        '')
+      ];
 
       functions =
         {
