@@ -44,10 +44,7 @@ hm host:
 
 # Rebuild Darwin system
 darwin:
-    #!/usr/bin/env bash
-    cmd="darwin-rebuild switch --flake '.#7mind-JJ9C5X225D'"
-    echo "Executing: $cmd"
-    eval "$cmd"
+    sudo darwin-rebuild switch --flake '.#7mind-JJ9C5X225D'
 
 # Update flake inputs
 update target="all":
