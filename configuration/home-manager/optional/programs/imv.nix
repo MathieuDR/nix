@@ -15,7 +15,9 @@
         j = "next";
         k = "prev";
 
-        d = "exec rm '$imv_current_file'; close";
+        # Mark for deletion (adds DEL_ prefix)
+        d = "exec mv \"$imv_current_file\" \"$(dirname \"$imv_current_file\")/DEL_$(basename \"$imv_current_file\")\"; close";
+        s = "exec mv \"$imv_current_file\" \"$(dirname \"$imv_current_file\")/SELECTED_$(basename \"$imv_current_file\")\"; close";
       };
     };
   };
