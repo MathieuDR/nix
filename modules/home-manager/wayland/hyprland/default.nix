@@ -242,21 +242,20 @@ in {
             "$mainMod CTRL, mouse:272, resizewindow"
           ];
 
-          windowrulev2 = [
+          windowrule = [
             #copyq
-            "float, class:(com.github.hluk.copyq)"
-            "size 400 400, class:(com.github.hluk.copyq)"
+            "float on, match:class com.github.hluk.copyq"
+            "size 400 400, match:class com.github.hluk.copyq"
 
-            # Sharing floorp
-            "float, class:(floorp), title:(Floorp — Sharing Indicator)"
-            "suppressevent fullscreen maximize activate activatefocus, class:(floorp), title:(Floorp — Sharing Indicator)"
-            "size 55 32, class:(floorp), title:(Floorp — Sharing Indicator)"
-            "move 5 1400, class:(floorp), title:(Floorp — Sharing Indicator)"
+            # Sharing zen-twilight
+            "float on, match:class zen-twilight, match:title Sharing Indicator — Zen Twilight"
+            "suppress_event fullscreen maximize activate activatefocus, match:class zen-twilight, match:title Sharing Indicator — Zen Twilight"
+            "size 55 32, match:class zen-twilight, match:title Sharing Indicator — Zen Twilight"
+            "move 5 1400, match:class zen-twilight, match:title Sharing Indicator — Zen Twilight"
 
             # Videos
-            "opaque, class:(floorp), title:(YouTube)"
-            "opaque, class:(floorp), title:(Prime Video)"
-            "opaque, class:(Nomifactory.*)"
+            "opaque on, match:class zen-twilight, match:title YouTube"
+            "opaque on, match:class zen-twilight, match:title Prime Video"
           ];
         };
       };

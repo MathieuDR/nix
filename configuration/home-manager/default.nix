@@ -114,7 +114,7 @@
         file-roller
         kooha
         keepassxc
-        floorp-bin
+        # floorp-bin
         popsicle
 
         # system utilities
