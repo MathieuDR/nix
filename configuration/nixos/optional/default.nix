@@ -7,5 +7,6 @@
   };
   programs = {
     docker = import ./programs/docker.nix;
+    podman = import ./programs/podman.nix;
   };
 }

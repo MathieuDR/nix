@@ -7,7 +7,7 @@ in {
     optional.hardware.amd
     optional.gaming
     # optional.programs.onepassword
-    # optional.programs.docker
+    optional.programs.podman
     # optional.wake-up
   ];
 }
