@@ -8,6 +8,8 @@
   security.pki.certificates = [
     # HPI Certificate
     (builtins.readFile "${self}/data/secrets/certificates/hpi_ca.crt")
+    # Firesfrout
+    (builtins.readFile "${self}/data/secrets/certificates/firesprout.crt")
   ];
 
   # GNOME keyring service (gcr = GNOME Crypto), needed for pinentry.gnome3
