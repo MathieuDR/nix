@@ -5,5 +5,6 @@
     ./wayland/hyprland
     ./wayland/waybar
     ./power
+    ./maintenance
   ];
 }

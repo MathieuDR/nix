@@ -38,4 +38,17 @@ in {
 
   ysomic.applications.rofi.enable = true;
   ysomic.applications.imageViewer.enable = true;
+
+  maintenance.healthchecks = {
+    enable = true;
+    addresses = [
+      "firesprout.home.deraedt.dev"
+      "hpi.home.deraedt.dev"
+      "mathieu.deraedt.dev"
+      "drakkenheim.deraedt.dev"
+      "www.7mind.de"
+    ];
+    notifications.enable = true;
+    interval = "30sec";
+  };
 }
