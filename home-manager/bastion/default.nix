@@ -49,6 +49,5 @@ in {
       "www.7mind.de"
     ];
     notifications.enable = true;
-    interval = "30sec";
   };
 }
