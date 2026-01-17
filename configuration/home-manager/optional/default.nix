@@ -27,5 +27,6 @@
     imv = import ./programs/imv.nix;
     signal = import ./programs/signal.nix;
     wayland-espanso = import ./programs/wayland-espanso.nix;
+    wine = import ./programs/wine.nix;
   };
 }

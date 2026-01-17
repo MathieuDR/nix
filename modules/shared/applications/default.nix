@@ -9,7 +9,7 @@
       type = lib.types.attrs;
       internal = true;
       default = {
-        "thunar" = pkgs.xfce.thunar;
+        "thunar" = pkgs.thunar;
       };
     };
 
@@ -24,7 +24,7 @@
 
     fileManagerPlugins = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = with pkgs.xfce; [
+      default = with pkgs; [
         thunar-archive-plugin
         thunar-volman
         tumbler

@@ -22,7 +22,7 @@
             ];
           }
 
-          inputs.espanso-fix.nixosModules.espanso-capdacoverride
+          # inputs.espanso-fix.nixosModules.espanso-capdacoverride
           inputs.agenix.nixosModules.default
           {
             nixpkgs.overlays = [

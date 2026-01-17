@@ -15,6 +15,9 @@
   # GNOME keyring service (gcr = GNOME Crypto), needed for pinentry.gnome3
   services.dbus.packages = [pkgs.gcr];
 
+  # Enable gnome-keyring daemon for secrets storage
+  services.gnome.gnome-keyring.enable = true;
+
   # Polkit, basically asks for passwords on privilege escalation
   # Eg popsicle, 1 password etc.
   security.polkit.enable = true;

@@ -31,16 +31,18 @@ in {
     homeDirectory = "/home/thieu";
     stateVersion = "25.11";
 
-    packages = with pkgs; [
-      calibre
+    packages = [
+      pkgs.calibre
+      self.packages.${pkgs.system}.castersoundboard
     ];
   };
 
   ysomic.applications.rofi.enable = true;
   ysomic.applications.imageViewer.enable = true;
 
+  # Server broken anyway
   maintenance.healthchecks = {
-    enable = true;
+    enable = false;
     addresses = [
       "firesprout.home.deraedt.dev"
       "hpi.home.deraedt.dev"
