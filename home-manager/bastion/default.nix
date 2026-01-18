@@ -20,7 +20,7 @@ in {
     optional.programs.signal
     optional.programs.zen
     optional.programs.imv
-    # optional.programs.mpv
+    optional.programs.wine
     optional.programs.dev
     optional.programs._3d
     optional.programs.wayland-espanso
@@ -34,6 +34,7 @@ in {
     packages = [
       pkgs.calibre
       self.packages.${pkgs.system}.castersoundboard
+      self.packages.${pkgs.system}.dungeondraft
     ];
   };
 

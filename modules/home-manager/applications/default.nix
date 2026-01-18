@@ -7,5 +7,6 @@
     ./pdf-reader.nix
     ./media-player.nix
     ./image-viewer.nix
+    ./thunar.nix
   ];
 }

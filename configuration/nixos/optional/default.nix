@@ -4,6 +4,7 @@
   hardware = {
     nvidia = import ./hardware/nvidia.nix;
     amd = import ./hardware/amd.nix;
+    wine = import ./hardware/wine.nix;
   };
   programs = {
     docker = import ./programs/docker.nix;

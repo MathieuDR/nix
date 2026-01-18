@@ -5,9 +5,8 @@ in {
     ./hardware-configuration.nix
     ./configuration.nix
     optional.hardware.amd
+    optional.hardware.wine
     optional.gaming
-    # optional.programs.onepassword
     optional.programs.podman
-    # optional.wake-up
   ];
 }
