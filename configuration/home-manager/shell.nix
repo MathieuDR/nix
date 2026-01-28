@@ -246,7 +246,10 @@
         gd = "git diff";
         ga = "git add";
         gap = "git add -p";
-        gc = "git commit";
+        gc = {
+          expansion = "git commit -m \"%\"";
+          setCursor = true;
+        };
         gca = "git commit --amend";
         gco = "git checkout";
         gl = "git log --oneline --graph --decorate";
