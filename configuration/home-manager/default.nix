@@ -80,7 +80,9 @@
 
         # social programs
         slack
+        mumble
         discord
+        stoat-desktop
         element-desktop
 
         # common programs

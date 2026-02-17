@@ -6,7 +6,7 @@
   flake.overlays = {
     # Convenience overlay that combines all overlays
     default = inputs.nixpkgs.lib.composeManyExtensions [
-      # Add other overlays here
+      (import ./stoat.nix {inherit inputs;})
     ];
   };
 
