@@ -281,11 +281,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1747139283,
-        "narHash": "sha256-Tac2FpGjCAwuqSxj04ALtTmoFGUei/JAleoZG2/XorE=",
+        "lastModified": 1771435385,
+        "narHash": "sha256-r4soDVlzn3usUvjfpqPdDBd9BcOt+LUbCiigWWBD5sM=",
         "owner": "MathieuDR",
         "repo": "readdeck-highlight-exporter",
-        "rev": "2b17b100b3739d5490bb544b9155a47c7f7624a7",
+        "rev": "5e0d7641e3cddb2ba8cedfd7a776d6c687a62031",
         "type": "github"
       },
       "original": {
