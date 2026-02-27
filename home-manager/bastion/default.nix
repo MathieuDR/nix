@@ -24,6 +24,7 @@ in {
     optional.programs.dev
     optional.programs._3d
     optional.programs.wayland-espanso
+    optional.transcriber
   ];
 
   home = {
