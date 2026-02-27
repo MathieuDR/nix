@@ -1,8 +1,8 @@
 {
   gaming = import ./gaming.nix;
   stresstests = import ./stresstests.nix;
-
   bootstrapped = import ./bootstrapped;
+  transcriber = import ./transcriber.nix;
 
   hardware = {
     nvidia = import ./hardware/nvidia.nix;
