@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   # So I can rename files
   processingDelay = 15;
 
@@ -27,12 +31,13 @@
 
   initialPrompt = "Personal voice memos and fleeting notes from a software engineer. Topics include software engineering with terms like ${builtins.concatStringsSep ", " promptKeywords}, and hobbies like Dungeons and Dragons.";
 
+  memosDir = "${config.home.homeDirectory}/recordings/memos";
   transcribeScript = pkgs.writeShellScript "transcribe-memo" ''
         set -euo pipefail
 
         INPUT_FILE="$1"
-        MEMOS_DIR="$HOME/recordings/memos"
-        ARCHIVE_DIR="$HOME/recordings/memos/archive"
+        MEMOS_DIR="${memosDir}"
+        ARCHIVE_DIR="${memosDir}/archive"
         NOTES_DIR="$HOME/notes/obsidian/fleeting"
 
         mkdir -p "$ARCHIVE_DIR" "$NOTES_DIR"
@@ -141,7 +146,7 @@
 
   watchScript = pkgs.writeShellScript "watch-memos" ''
     set -euo pipefail
-    MEMOS_DIR="$HOME/recordings/memos"
+    MEMOS_DIR="${memosDir}"
 
     echo "Watching $MEMOS_DIR for new voice memos..."
 
@@ -188,6 +193,23 @@ in {
       jq
       libnotify
     ];
+  };
+
+  # Syncthing has to be enabled for the following
+  services.syncthing.settings.folders = {
+    "recordings" = {
+      enable = true;
+      path = memosDir;
+      id = "ncp43-9drkl";
+      label = "Recordings";
+      type = "sendreceive";
+      devices = ["wanderer" "bastion"];
+      ignorePatterns = ["/archive" "/.tmp" "/.trash"];
+      versioning = {
+        type = "trashcan";
+        params.cleanoutDays = "14";
+      };
+    };
   };
 
   systemd.user.services.memo-transcriber = {
