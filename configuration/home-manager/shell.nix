@@ -164,6 +164,57 @@
             '';
           };
 
+          frontmatter = {
+            description = "Extract YAML frontmatter from a markdown file";
+            argumentNames = ["file"];
+            body = ''
+              if test -z "$argv[1]"
+                echo "Usage: frontmatter <file.md>"
+                return 1
+              end
+              sed -n '1,/^---$/{ /^---$/d; p }' $argv[1]
+            '';
+          };
+
+          multi_frontmatter = {
+            description = "Aggregate frontmatter from markdown files. Accepts piped files or a directory path.";
+            body = ''
+              set -l recursive false
+              set -l dir ""
+
+              for arg in $argv
+                switch $arg
+                  case -r --recursive
+                    set recursive true
+                  case '*'
+                    set dir $arg
+                end
+              end
+
+              set -l files
+              if not isatty stdin
+                while read -l line
+                  set -a files $line
+                end
+              else if test -n "$dir"
+                if $recursive
+                  set files (${pkgs.fd}/bin/fd --type f '\.md$' $dir)
+                else
+                  set files (${pkgs.fd}/bin/fd --type f '\.md$' --max-depth 1 $dir)
+                end
+              else
+                echo "Usage: multi_frontmatter [-r] [dir_path]"
+                echo "       fd '\.md\$' | multi_frontmatter"
+                return 1
+              end
+
+              for f in $files
+                frontmatter $f
+                echo "---"
+              end | ${pkgs.yq-go}/bin/yq ea '[.]'
+            '';
+          };
+
           gfp = {
             description = "Git fetch and pull";
             body = ''
@@ -259,6 +310,9 @@
         gpr = "gh pr new";
         gvpr = "gh pr view --web";
         grc = "git rebase --continue";
+
+        # Obsidian / markdown files
+        ntags = "fd -e md | multi_frontmatter | yq ea '.[].tags[]' | grep -v -e '^slip$' -e '^zettelkasten$' -e '^thought$' -e '^knowledge$' -e '^distilled$' -e '^permanent$' | sort | uniq -c | sort -rn";
       };
     };
 

@@ -45,7 +45,7 @@
         bat # cat with syntax highlighting and git integration
         jq # json processor
         jnv # interactive JSON viewer and processor
-        yq # YAML/JSON/XML processor
+        yq-go # YAML/JSON/XML processor
         csvkit # suite of CSV manipulation tools
         file # determine file type
 
