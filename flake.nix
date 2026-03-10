@@ -59,6 +59,11 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    fleeter = {
+      url = "git+https://codeberg.org/MathieuDR/fleeter.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     highlight-exporter = {
       url = "github:MathieuDR/readdeck-highlight-exporter";
       inputs.nixpkgs.follows = "nixpkgs";

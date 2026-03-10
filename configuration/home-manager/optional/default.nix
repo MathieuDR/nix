@@ -3,6 +3,7 @@
   stresstests = import ./stresstests.nix;
   bootstrapped = import ./bootstrapped;
   transcriber = import ./transcriber.nix;
+  ccalibration = import ./ccallibration.nix;
 
   hardware = {
     nvidia = import ./hardware/nvidia.nix;

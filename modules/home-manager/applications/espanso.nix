@@ -18,6 +18,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    systemd.user.services.espanso = {
+      Unit = {
+        After = ["graphical-session.target"];
+        PartOf = ["graphical-session.target"];
+      };
+    };
+
     services.espanso = {
       enable = true;
       package = cfg.package;
@@ -72,7 +79,7 @@ in {
               replace = "mathieuderaedt@gmail.com";
             }
             {
-              trigger = ";@7";
+              trigger = ";@s";
               replace = "mathieu@7mind.de";
             }
             {

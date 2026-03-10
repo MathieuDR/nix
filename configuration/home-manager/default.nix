@@ -39,6 +39,7 @@
         # dev
         (inputs.yvim.packages.${pkgs.system}.default)
         vscode
+        forgejo-cli
 
         # cli tools - text processing
         sd # modern sed replacement for text substitution
@@ -91,6 +92,7 @@
 
         # custom packages
         self.packages.${pkgs.system}.highlight-exporter
+        self.packages.${pkgs.system}.fleeter
         self.packages.${pkgs.system}.zeit
       ]
       ++ lib.optionals (!isDarwin) [

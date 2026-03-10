@@ -53,6 +53,9 @@ update target="all":
         all)
             nix flake update
             ;;
+        fleeter|fleet)
+            nix flake lock --update-input fleeter
+            ;;
         yvim)
             nix flake lock --update-input yvim
             ;;

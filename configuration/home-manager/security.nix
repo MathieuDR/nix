@@ -17,6 +17,7 @@ in {
       }
     ];
   };
+
   age = {
     identityPaths = ["${config.home.homeDirectory}/.config/agenix/agenix-key"];
     secrets = {

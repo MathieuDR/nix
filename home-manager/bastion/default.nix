@@ -25,6 +25,7 @@ in {
     optional.programs._3d
     optional.programs.wayland-espanso
     optional.transcriber
+    optional.ccalibration
   ];
 
   home = {
