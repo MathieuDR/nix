@@ -12,7 +12,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.espanso;
+      default = pkgs.espanso-wayland;
       description = "The espanso package to use";
     };
   };
@@ -23,6 +23,9 @@ in {
         After = ["graphical-session.target"];
         PartOf = ["graphical-session.target"];
       };
+      Service = {
+        ExecStart = lib.mkForce "/run/wrappers/bin/espanso daemon";
+      };
     };
 
     services.espanso = {
@@ -32,6 +35,9 @@ in {
       configs = {
         default = {
           show_notifications = false;
+          keyboard_layout.layout = "us";
+          backend = "auto";
+          pre_paste_delay = 300;
         };
       };
 
@@ -99,6 +105,7 @@ in {
             }
             {
               trigger = ";mfg";
+              force_mode = "clipboard";
               replace = ''
                 Mit freundlichen Grüßen
                 Mathieu De Raedt
@@ -106,6 +113,7 @@ in {
             }
             {
               trigger = ";mvg";
+              force_mode = "clipboard";
               replace = ''
                 Met vriendelijke groeten
                 Mathieu De Raedt
@@ -113,6 +121,7 @@ in {
             }
             {
               trigger = ";kr";
+              force_mode = "clipboard";
               replace = ''
                 Kind Regards
                 Mathieu De Raedt

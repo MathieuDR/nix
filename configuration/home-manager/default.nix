@@ -15,8 +15,6 @@
     ./scripts
   ];
 
-  ysomic.applications.espanso.enable = true;
-
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
 
@@ -107,6 +105,7 @@
         pkgs.kdePackages.okular
         simple-scan
         easyeffects
+        claude-desktop-fhs
 
         # social programs
         betterdiscordctl

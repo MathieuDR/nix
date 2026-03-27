@@ -7,6 +7,7 @@
     # Convenience overlay that combines all overlays
     default = inputs.nixpkgs.lib.composeManyExtensions [
       (import ./stoat.nix {inherit inputs;})
+      inputs.claude-desktop.overlays.default
     ];
   };
 

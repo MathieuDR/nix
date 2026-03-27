@@ -107,6 +107,7 @@
           fish_title = {
             description = "Set terminal title with smart path formatting";
             body = ''
+              # Set terminal title with smart path formatting
               # $argv[1] contains the entire command line as a string
               set -l cmd_line $argv[1]
 
@@ -131,17 +132,17 @@
 
                 if test $rel_count -le 2
                   # ~/foo or ~/foo/bar - show as is
-                  set formatted_path "~/"(string join "/" $rel_parts)
+                  set formatted_path "~/"(string join "/" -- $rel_parts)
                 else
                   # ~/foo/bar/baz or deeper - show as ~/../bar/baz (last 2 components)
-                  set formatted_path "~/../"(string join "/" $rel_parts[-2..-1])
+                  set formatted_path "~/../"(string join "/" -- $rel_parts[-2..-1])
                 end
               else
                 # Not in home, show last 3 components from root
                 if test $num_parts -le 3
-                  set formatted_path (string join "/" $path_parts)
+                  set formatted_path (string join "/" -- $path_parts)
                 else
-                  set formatted_path "../"(string join "/" $path_parts[-2..-1])
+                  set formatted_path "../"(string join "/" -- $path_parts[-2..-1])
                 end
               end
 

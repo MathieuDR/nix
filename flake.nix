@@ -50,6 +50,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    claude-desktop = {
+      url = "github:aaddrick/claude-desktop-debian";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Fixes
     # espanso-fix.url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
 
@@ -68,6 +73,8 @@
       url = "github:MathieuDR/readdeck-highlight-exporter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    #
 
     # DARWIN
     nix-darwin = {

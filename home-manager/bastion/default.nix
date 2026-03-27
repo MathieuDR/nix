@@ -23,7 +23,6 @@ in {
     optional.programs.wine
     optional.programs.dev
     optional.programs._3d
-    optional.programs.wayland-espanso
     optional.transcriber
     optional.ccalibration
   ];
@@ -40,6 +39,8 @@ in {
     ];
   };
 
+  ysomic.applications.espanso.enable = true;
+  ysomic.applications.espanso.package = pkgs.espanso-wayland;
   ysomic.applications.rofi.enable = true;
   ysomic.applications.imageViewer.enable = true;
 
@@ -51,7 +52,6 @@ in {
       "hpi.home.deraedt.dev"
       "mathieu.deraedt.dev"
       "drakkenheim.deraedt.dev"
-      "www.7mind.de"
     ];
     notifications.enable = true;
   };
