@@ -21,10 +21,10 @@
       command = lib.getExe pkgs.thunar;
     };
     launcher = {
-      package = pkgs.rofi;
-      command = lib.getExe pkgs.rofi;
-      drunCommand = "${lib.getExe pkgs.rofi} -show drun";
-      windowCommand = "${lib.getExe pkgs.rofi} -show window";
+      package = config.programs.rofi.finalPackage;
+      command = lib.getExe config.programs.rofi.finalPackage;
+      drunCommand = "${lib.getExe config.programs.rofi.finalPackage} -show drun";
+      windowCommand = "${lib.getExe config.programs.rofi.finalPackage} -show window";
     };
   };
 
