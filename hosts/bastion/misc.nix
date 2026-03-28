@@ -17,8 +17,8 @@
       command = "${config.programs.zen-browser.finalPackage}/bin/zen";
     };
     fileManager = {
-      package = pkgs.xfce.thunar;
-      command = lib.getExe pkgs.xfce.thunar;
+      package = pkgs.thunar;
+      command = lib.getExe pkgs.thunar;
     };
     launcher = {
       package = pkgs.rofi;
@@ -35,8 +35,8 @@
 
     packages = [
       pkgs.calibre
-      inputs.self.packages.${pkgs.system}.castersoundboard
-      inputs.self.packages.${pkgs.system}.dungeondraft
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.castersoundboard
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.dungeondraft
     ];
   };
 

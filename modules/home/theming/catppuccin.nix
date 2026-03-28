@@ -1,6 +1,6 @@
 {inputs, ...}: {
   flake.modules.homeManager.catppuccin = {pkgs, ...}: let
-    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
     cursorSize = 24;
     cursorPackage = pkgs.catppuccin-cursors.mochaMauve;
     cursorName = "catppuccin-mocha-mauve-cursors";

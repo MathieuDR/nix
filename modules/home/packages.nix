@@ -54,9 +54,9 @@
       gzip
 
       # custom packages
-      inputs.self.packages.${pkgs.system}.highlight-exporter
-      inputs.self.packages.${pkgs.system}.fleeter
-      inputs.self.packages.${pkgs.system}.zeit
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.highlight-exporter
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.fleeter
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.zeit
 
       # Linux-only
       killall
