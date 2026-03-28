@@ -1,9 +1,9 @@
 {...}: {
-  flake.modules.homeManager.navi = {
+  flake.modules.homeManager.navi = {config, ...}: {
     programs.navi = {
       enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
+      enableBashIntegration = config.programs.bash.enable;
+      enableFishIntegration = config.programs.fish.enable;
       settings = {
         finder.key_binding = "ctrl-g";
         cheats.paths = ["~/.config/navi/cheats"];

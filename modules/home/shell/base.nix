@@ -7,14 +7,14 @@
     programs = {
       direnv = {
         enable = true;
-        enableBashIntegration = true;
+        enableBashIntegration = config.programs.bash.enable;
         nix-direnv.enable = true;
       };
 
       oh-my-posh = {
         enable = true;
-        enableBashIntegration = true;
-        enableFishIntegration = true;
+        enableBashIntegration = config.programs.bash.enable;
+        enableFishIntegration = config.programs.fish.enable;
         settings = builtins.fromJSON (builtins.readFile "${inputs.self}/data/.ysomic.omp.json");
       };
 
@@ -26,8 +26,8 @@
 
       eza = {
         enable = true;
-        enableBashIntegration = false;
-        enableFishIntegration = true;
+        enableBashIntegration = false; # intentional
+        enableFishIntegration = config.programs.fish.enable;
       };
 
       ripgrep.enable = true;
@@ -63,8 +63,8 @@
       zoxide = {
         enable = true;
         options = ["--cmd cd"];
-        enableBashIntegration = false;
-        enableFishIntegration = true;
+        enableBashIntegration = false; # intentional, error
+        enableFishIntegration = config.programs.fish.enable;
       };
     };
 

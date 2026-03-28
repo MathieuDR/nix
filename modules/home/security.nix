@@ -28,7 +28,7 @@ in {
       enable = true;
       defaultCacheTtl = 7200; # 2 hours
       maxCacheTtl = 28800; # 8 hours
-      enableBashIntegration = true;
+      enableBashIntegration = config.programs.bash.enable;
       pinentry.package = pkgs.pinentry-gnome3;
       extraConfig = ''
         allow-emacs-pinentry
