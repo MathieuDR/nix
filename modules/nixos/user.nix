@@ -9,8 +9,6 @@
         # Scanner & lp for scanning
         "scanner"
         "lp"
-        "input"
-        "uinput"
       ];
     };
 

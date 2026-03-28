@@ -1,11 +1,5 @@
 {...}: {
   flake.modules.nixos.services = {pkgs, ...}: {
-    # Espanso text expander (system service)
-    services.espanso = {
-      enable = true;
-      package = pkgs.espanso-wayland;
-    };
-
     # SSH daemon
     services.openssh.enable = true;
 

@@ -1,4 +1,6 @@
-{inputs, ...}: {
+{inputs, ...}: let
+  nixosCfg = inputs.self.nixosConfigurations.bastion.config;
+in {
   flake.nixosConfigurations.bastion = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = with inputs.self.modules.nixos; [
@@ -8,6 +10,7 @@
       security
       sound
       hyprland
+      espanso
       services
       cleanup
       maintenance
@@ -40,7 +43,10 @@
         inputs.nur.overlays.default
       ];
     };
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      osConfig = nixosCfg;
+    };
     modules =
       (with inputs.self.modules.homeManager; [
         base
