@@ -19,7 +19,7 @@
         margin-left = 8;
         margin-right = 0;
 
-        modules-left = [];
+        modules-left = ["hyprland/window"];
         modules-center = ["clock"];
         modules-right = [
           "group/info"
@@ -68,18 +68,77 @@
           tooltip = "false";
         };
 
-        "hyprland/window" = {
-          format = "{class} >>> {title}";
-          rewrite = {
-            "floorp >>> (.*) — Ablaze Floorp" = "󰈹  $1";
-            "Slack >>> (.*) - Slack" = "  $1";
-            "discord >>> (.*) - Discord" = "  $1";
-            "kitty >>> (.*)" = "  ${config.home.username}@bastion $1";
-            "spotify >>> (.*)" = "󰝚  $1";
-            "org.keepassxc.KeePassXC >>> (.*) - KeePassXC" = "󰌾 $1";
-            "1Password >>> (.*) — 1Password" = "󰌾 $1";
-            "(?!floorp|Slack|discord|kitty|spotify|org.keepassxc.KeePassXC|1Password).* >>> (.*)" = "$1";
+        "hyprland/window" = let
+          mkRewrite = {
+            class,
+            suffix ? "",
+            icon ? "",
+            match ? null,
+            rewrite ? null,
+          }: {
+            name =
+              if match != null
+              then match
+              else "${class} >>> ${
+                if suffix == ""
+                then "(.*)"
+                else ''(.*) ${suffix}''
+              }";
+            value =
+              if rewrite != null
+              then rewrite
+              else "${icon} $1";
           };
+
+          apps = [
+            {
+              class = "zen-twilight";
+              suffix = "— Zen Twilight";
+              icon = " ";
+            }
+            {
+              class = "floorp";
+              suffix = "— Ablaze Floorp";
+              icon = "󰈹 ";
+            }
+            {
+              class = "discord";
+              suffix = "- Discord";
+              icon = " ";
+            }
+            {
+              #TODO: The hostname is hardcoded here
+              class = "kitty";
+              rewrite = "  ${config.home.username}@bastion $1";
+            }
+            {
+              class = "Claude";
+              icon = "󰚩 ";
+            }
+            {
+              class = "spotify";
+              icon = "󰝚 ";
+            }
+            {
+              class = "org.keepassxc.KeePassXC";
+              suffix = "- KeePassXC";
+              icon = "󰌾";
+            }
+            {
+              class = "1Password";
+              suffix = "— 1Password";
+              icon = "󰌾";
+            }
+          ];
+
+          rewrites =
+            builtins.listToAttrs (map mkRewrite apps)
+            // {
+              "(?!${builtins.concatStringsSep "|" (map (app: app.class) apps)}).* >>> (.*)" = "$1";
+            };
+        in {
+          format = "{class} >>> {title}";
+          rewrite = rewrites;
           separate-outputs = true;
         };
 
@@ -103,7 +162,7 @@
         };
 
         network = {
-          format-wifi = "  {signalStrength}%";
+          format-wifi = "  {signalStrength}%";
           format-ethernet = "󰀂 ";
           tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
           format-linked = "{ifname} (No IP)";
@@ -118,18 +177,21 @@
         wireplumber = {
           format = "{icon} {volume}%";
           format-muted = "󰖁";
-          format-icons.default = [" "];
+          format-icons = {
+            default = [" "];
+          };
           scroll-step = 5;
         };
 
         "custom/power" = {
-          format = " ";
+          format = " ";
           tooltip = false;
           "on-click" = "powermenu";
         };
       };
 
       style = ''
+        /* Base styles */
         * {
             border: none;
             border-radius: 0px;
@@ -143,6 +205,7 @@
             background: none;
         }
 
+        /* Parent containers basic spacing */
         .modules-left,
         .modules-center,
         .modules-right {
@@ -150,6 +213,7 @@
             padding: 0;
         }
 
+        /* All direct children of the modules get consistent margins */
         .modules-left > widget > *,
         .modules-center > widget > *,
         .modules-right > widget > * {
@@ -160,21 +224,42 @@
           margin-left: -3px;
         }
 
+        /* Target the drawer container */
         .modules-right box revealer.drawer box.horizontal {
             padding: 0 4px;
         }
 
+        /* Target the actual modules inside grouped sections */
         .modules-right box revealer.drawer widget.grouped-module label.module {
             margin: 0 3px;
             padding: 0 3px;
         }
 
+        /* Remove left margin from first widget */
+        .modules-left > widget:first-child > *,
+        .modules-center > widget:first-child > *,
+        .modules-right > widget:first-child > *,
+        .grouped-module:first-child {
+            /* margin-left: 0;
+            padding-left: 0; */
+        }
+
+        /* Remove right margin from last widget */
+        .modules-left > widget:last-child > *,
+        .modules-center > widget:last-child > *,
+        .modules-right > widget:last-child > * {
+            /* margin-right: 0;
+            padding-right: 0; */
+        }
+
+        /* All module contents get hover effects */
         .modules-left > widget > *:hover,
         .modules-center > widget > *:hover,
         .modules-right > widget > *:hover {
             color: @mauve;
         }
 
+        /* Status-specific styles that need to override the defaults */
         #battery.warning { color: @peach; }
         #battery.critical { color: @red; }
         #battery.charging { color: @green; }
