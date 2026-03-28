@@ -72,7 +72,7 @@ in {
         ccalibration
         stresstests
         healthchecks
-        hyprlock
+        # hyprlock
         slicer
       ])
       ++ [

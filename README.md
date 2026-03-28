@@ -62,6 +62,7 @@ Key rules:
 - Host assembly lives in `hosts/<name>/default.nix`, composed from aspects
 
 **Learn more:**
+- [docs/dendritic.md](docs/dendritic.md) — conventions and decisions in *this* config
 - [The dendritic pattern — NixOS Discourse](https://discourse.nixos.org/t/the-dendritic-pattern/61271)
 - [mightyiam/dendritic — pattern documentation](https://github.com/mightyiam/dendritic)
 - [vic/import-tree](https://github.com/vic/import-tree)

@@ -24,6 +24,12 @@
       bottom.enable = true;
       rclone.enable = true;
 
+      yazi = {
+        enable = true;
+        enableBashIntegration = config.programs.bash.enable;
+        enableFishIntegration = config.programs.fish.enable;
+      };
+
       eza = {
         enable = true;
         enableBashIntegration = false; # intentional
