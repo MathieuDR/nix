@@ -78,7 +78,7 @@ in {
       ++ [
         ./monitors.nix
         ./startup.nix
-        ./misc.nix
+        ./home.nix
 
         inputs.agenix.homeManagerModules.default
         inputs.catppuccin.homeModules.catppuccin

@@ -29,7 +29,7 @@
 
           decoration = {
             rounding = 7;
-            active_opacity = 0.97;
+            active_opacity = 1;
             inactive_opacity = 0.85;
             fullscreen_opacity = 1;
             shadow.enabled = true;
