@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repository has been archived and is no longer maintained.
+> Development has moved to [codeberg.org/MathieuDR/nixdots](https://codeberg.org/MathieuDR/nixdots).
+
 # ySomic's NixOS Configuration
 
 NixOS + Home Manager configuration for the `bastion` machine, structured using the [dendritic pattern](#dendritic-pattern).
