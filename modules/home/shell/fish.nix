@@ -156,6 +156,18 @@
           '';
         };
 
+        y = {
+          description = "Yazi, q to quit, Q to not change cwd";
+          body = ''
+             set tmp (mktemp -t "yazi-cwd.XXXXXX")
+            command yazi $argv --cwd-file="$tmp"
+            if read -z cwd < "$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+            	builtin cd -- "$cwd"
+            end
+            rm -f -- "$tmp"
+          '';
+        };
+
         open = {
           description = "Open files with default application";
           body = ''

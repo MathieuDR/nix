@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  wallpaper = "${inputs.self}/data/wallpapers/firewatch.jpg";
+  wallpaper = "${inputs.self}/data/wallpapers/astronaut.jpg";
 in {
   wayland.windowManager.hyprland.settings.exec-once = [
     # System tray and wallpaper daemon
