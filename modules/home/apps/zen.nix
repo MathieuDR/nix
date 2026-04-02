@@ -1,0 +1,199 @@
+{inputs, ...}: {
+  flake.modules.homeManager.zen = {
+    pkgs,
+    config,
+    ...
+  }: let
+    catppuccin-css = pkgs.fetchgit {
+      url = "https://github.com/catppuccin/zen-browser";
+      rev = "e171e2a1d94ed70f39ff0ac452aef335f8b233c9";
+      hash = "sha256-v4Gg2oyITMV/KWCy+gWrmCcmYLRUyMV1HiYSeFjVOuI=";
+      sparseCheckout = [
+        "themes/Latte/Mauve"
+        "themes/Mocha/Mauve"
+      ];
+    };
+  in {
+    imports = [inputs.zen-browser.homeModules.twilight];
+
+    home.file = {
+      "${config.programs.zen-browser.configPath}/${config.programs.zen-browser.profiles.default.path}/chrome/zen-logo-mocha.svg" = {
+        source = "${catppuccin-css}/themes/Mocha/Mauve/zen-logo-mocha.svg";
+      };
+      "${config.programs.zen-browser.configPath}/${config.programs.zen-browser.profiles.default.path}/chrome/zen-logo-latte.svg" = {
+        source = "${catppuccin-css}/themes/Latte/Mauve/zen-logo-latte.svg";
+      };
+    };
+
+    home.sessionVariables.BROWSER = "${config.programs.zen-browser.finalPackage}/bin/zen";
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "zen-twilight.desktop";
+        "x-scheme-handler/http" = "zen-twilight.desktop";
+        "x-scheme-handler/https" = "zen-twilight.desktop";
+        "x-scheme-handler/about" = "zen-twilight.desktop";
+        "x-scheme-handler/unknown" = "zen-twilight.desktop";
+      };
+    };
+
+    programs.zen-browser = {
+      enable = true;
+
+      languagePacks = ["en-GB" "en" "nl-BE" "de"];
+
+      policies = {
+        DisableAppUpdate = true;
+        DisableTelemetry = true;
+        DisablePocket = true;
+        DisableSetDesktopBackground = true;
+        DontCheckDefaultBrowser = true;
+        PasswordManagerEnabled = false;
+        DisableFormHistory = true;
+        DisableFirefoxStudies = true;
+      };
+
+      profiles.default = {
+        id = 0;
+        name = "default";
+        isDefault = true;
+
+        settings = {
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "media.hardwaremediakeys.enabled" = false;
+
+          "general.useragent.locale" = "en-GB";
+          "browser.search.region" = "DE";
+          "browser.search.isUS" = false;
+          "distribution.searchplugins.defaultLocale" = "en-GB";
+          "browser.search.defaultenginename" = "ddg";
+
+          "privacy.trackingprotection.enabled" = true;
+          "privacy.trackingprotection.socialtracking.enabled" = true;
+          "privacy.donottrackheader.enabled" = true;
+
+          "signon.rememberSignons" = false;
+          "signon.autofillForms" = false;
+          "signon.generation.enabled" = false;
+
+          "browser.formfill.enable" = false;
+          "extensions.formautofill.addresses.enabled" = false;
+          "extensions.formautofill.creditCards.enabled" = false;
+
+          "browser.tabs.loadInBackground" = true;
+          "browser.newtabpage.activity-stream.showSponsored" = false;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+
+          "devtools.theme" = "dark";
+          "devtools.toolbox.host" = "bottom";
+
+          "privacy.userContext.enabled" = true;
+          "privacy.userContext.ui.enabled" = true;
+          "extensions.autoDisableScopes" = 0;
+
+          "layout.spellcheckDefault" = 2;
+          "spellchecker.dictionary" = "en-GB,en-US,nl-BE,de-DE";
+        };
+
+        containers = {
+          personal = {
+            id = 1;
+            name = "Personal";
+            color = "blue";
+            icon = "fingerprint";
+          };
+          work = {
+            id = 2;
+            name = "Work";
+            color = "green";
+            icon = "briefcase";
+          };
+        };
+        containersForce = true;
+
+        search = {
+          enable = true;
+          force = true;
+          default = "ddg";
+        };
+
+        extensions = {
+          force = true;
+          packages = with pkgs.nur.repos.rycee.firefox-addons; [
+            ublock-origin
+            privacy-badger
+            clearurls
+            disconnect
+
+            cookie-quick-manager
+            i-dont-care-about-cookies
+
+            darkreader
+            firefox-color
+            stylus
+
+            multi-account-containers
+            vimium-c
+            new-tab-override
+            scroll_anywhere
+            tampermonkey
+
+            enhanced-github
+            downthemall
+
+            old-reddit-redirect
+            reddit-enhancement-suite
+            youtube-shorts-block
+
+            keepassxc-browser
+            readeck
+            leechblock-ng
+            beyond-20
+
+            augmented-steam
+            steam-database
+          ];
+        };
+
+        userChrome = ''
+          /* Compact tabs for more screen space */
+          #TabsToolbar {
+            margin-bottom: -1px !important;
+          }
+
+          /* Hide unnecessary UI elements */
+          #reader-mode-button,
+          #pageActionButton {
+            display: none !important;
+          }
+
+          /* Catppuccin theme */
+          ${builtins.readFile "${catppuccin-css}/themes/Latte/Mauve/userChrome.css"}
+          ${builtins.readFile "${catppuccin-css}/themes/Mocha/Mauve/userChrome.css"}
+
+          #contentAreaContextMenu menu, menuitem, menupopup {
+            color: #c6d0f5 !important;
+          }
+        '';
+
+        userContent = ''
+          /* Dark scrollbars */
+          * {
+            scrollbar-width: thin !important;
+            scrollbar-color: #4a5568 #2d3748 !important;
+          }
+
+          /* Better code highlighting in web pages */
+          pre, code {
+            font-family: "JetBrains Mono", "Fira Code", monospace !important;
+          }
+
+          /* Catppuccin theme */
+          ${builtins.readFile "${catppuccin-css}/themes/Latte/Mauve/userContent.css"}
+          ${builtins.readFile "${catppuccin-css}/themes/Mocha/Mauve/userContent.css"}
+        '';
+      };
+    };
+  };
+}

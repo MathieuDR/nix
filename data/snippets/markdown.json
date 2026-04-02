@@ -1,0 +1,13 @@
+{
+  "Book Highlights": {
+    "prefix": "hlights",
+    "body": [
+      "## ${1:Title}",
+      "### Key takeaways",
+      "### Thought-provoking insights",
+      "### General highlights",
+      "### Important references"
+    ],
+    "description": "Book highlight template"
+  }
+}

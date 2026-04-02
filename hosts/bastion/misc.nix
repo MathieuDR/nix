@@ -1,0 +1,54 @@
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}: {
+  # Host tool choices — change these to swap terminal/browser/etc.
+  custom = {
+    terminal = {
+      package = pkgs.kitty;
+      command = lib.getExe pkgs.kitty;
+      execArgs = "--hold -e";
+    };
+    browser = {
+      package = config.programs.zen-browser.finalPackage;
+      command = "${config.programs.zen-browser.finalPackage}/bin/zen";
+    };
+    fileManager = {
+      package = pkgs.thunar;
+      command = lib.getExe pkgs.thunar;
+    };
+    launcher = {
+      package = config.programs.rofi.finalPackage;
+      command = lib.getExe config.programs.rofi.finalPackage;
+      drunCommand = "${lib.getExe config.programs.rofi.finalPackage} -show drun";
+      windowCommand = "${lib.getExe config.programs.rofi.finalPackage} -show window";
+    };
+  };
+
+  home = {
+    username = "thieu";
+    homeDirectory = "/home/thieu";
+    stateVersion = "25.11";
+
+    packages = [
+      pkgs.calibre
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.castersoundboard
+      inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.dungeondraft
+    ];
+  };
+
+  # Health check monitoring (disabled — server is broken)
+  maintenance.healthchecks = {
+    enable = false;
+    addresses = [
+      "firesprout.home.deraedt.dev"
+      "hpi.home.deraedt.dev"
+      "mathieu.deraedt.dev"
+      "drakkenheim.deraedt.dev"
+    ];
+    notifications.enable = true;
+  };
+}

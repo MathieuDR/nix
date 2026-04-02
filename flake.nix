@@ -2,11 +2,6 @@
   description = "ySomic's NixOS flake";
 
   inputs = {
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs";
 
@@ -25,6 +20,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    import-tree.url = "github:vic/import-tree";
+
     flake-compat.url = "github:edolstra/flake-compat";
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
@@ -32,6 +29,11 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
       };
+    };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     catppuccin.url = "github:catppuccin/nix";
@@ -55,13 +57,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Fixes
-    # espanso-fix.url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
+    nixvim.url = "github:nix-community/nixvim";
 
-    # Custom packages / tools
-    yvim = {
-      url = "github:mathieudr/nixvim";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    lexical = {
+      url = "github:ffloyd/lexical";
+      inputs.nixpkgs.follows = "nixvim/nixpkgs";
     };
 
     fleeter = {
@@ -73,53 +73,11 @@
       url = "github:MathieuDR/readdeck-highlight-exporter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #
-
-    # DARWIN
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
-
-      imports = [
-        ./hosts
-        ./darwin
-        ./home-manager
-        ./modules
-        ./overlays
-        ./pkgs
-        ./pre-commit-hooks.nix
-      ];
-
-      perSystem = {
-        config,
-        pkgs,
-        system,
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.alejandra
-            pkgs.git
-            pkgs.just
-            pkgs.fzf
-            pkgs.nodePackages.prettier
-            (inputs.agenix.packages.${system}.default)
-          ];
-          name = "dots";
-          DIRENV_LOG_FORMAT = "";
-          shellHook = ''
-            ${config.pre-commit.installationScript}
-          '';
-        };
-
-        formatter = pkgs.alejandra;
-      };
+      systems = ["x86_64-linux"];
+      imports = [(inputs.import-tree ./modules)];
     };
 }
